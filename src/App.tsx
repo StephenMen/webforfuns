@@ -248,10 +248,7 @@ function MakingOf() {
 }
 
 // Festival laurel wreath images
-const LAUREL_CANNES = 'https://image.qwenlm.ai/generated-images/950cd4cd-6aef-4d1c-a7e3-2b5c90b49f1f/_result.png';
-const LAUREL_BERLINALE = 'https://image.qwenlm.ai/generated-images/ee826230-12a7-4b1e-8aaf-e112a1b59944/_result.png';
-const LAUREL_SUNDANCE = 'https://image.qwenlm.ai/generated-images/2f8bf4e3-aa52-4e6a-8427-51518557c085/_result.png';
-const LAUREL_IDFA = 'https://image.qwenlm.ai/generated-images/9038fe11-20ba-46da-bd67-324a54df7f47/_result.png';
+const LAUREL = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Sundance_Laurel-removebg-preview.png';
 
 // ============================================
 // SECTION 5: FESTIVALS - White background
@@ -277,16 +274,16 @@ function Festivals() {
       <div className="festivals-header">Official Selections & Awards</div>
       <div className="laurels-grid">
         <div className="laurel-item fest-item">
-          <img src={LAUREL_CANNES} alt="Cannes Film Festival" className="laurel-img" />
+          <img src={LAUREL} alt="Cannes Film Festival" className="laurel-img" />
         </div>
         <div className="laurel-item fest-item">
-          <img src={LAUREL_BERLINALE} alt="Berlinale" className="laurel-img" />
+          <img src={LAUREL} alt="Berlinale" className="laurel-img" />
         </div>
         <div className="laurel-item fest-item">
-          <img src={LAUREL_SUNDANCE} alt="Sundance Film Festival" className="laurel-img" />
+          <img src={LAUREL} alt="Sundance Film Festival" className="laurel-img" />
         </div>
         <div className="laurel-item fest-item">
-          <img src={LAUREL_IDFA} alt="IDFA Amsterdam" className="laurel-img" />
+          <img src={LAUREL} alt="IDFA Amsterdam" className="laurel-img" />
         </div>
       </div>
       <blockquote className="press-quote fest-item">
