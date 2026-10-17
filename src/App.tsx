@@ -12,7 +12,8 @@ const IMG_4 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/7989
 const IMG_5 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC05464.JPG';
 const IMG_6 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07500.JPG';
 
-// No external gun images needed - using CSS/SVG artifacts instead
+// Shattered plate asset
+const PLATE_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Shattered%20Vintage%20Blue%20Floral%20Plate.png';
 
 // ============================================
 // NAVIGATION
@@ -105,6 +106,12 @@ function GhostMountain() {
           scrollTrigger: { trigger: sectionRef.current, start: 'top 55%', end: 'top 20%', scrub: 1 }
         }
       );
+      gsap.fromTo('.gm-plate-artifact',
+        { opacity: 0, scale: 0.5, rotation: 45 },
+        { opacity: 1, scale: 1, rotation: -15, duration: 1.4, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 50%', end: 'top 15%', scrub: 1 }
+        }
+      );
       gsap.fromTo('.gm-extra-img-1',
         { opacity: 0, scale: 0.8, rotation: 15 },
         { opacity: 1, scale: 1, rotation: -8, duration: 1.2, ease: 'power3.out',
@@ -158,6 +165,9 @@ function GhostMountain() {
             <strong>1975-1979</strong><br />
             Border region<br />
             Mass graves identified
+          </div>
+          <div className="gm-plate-artifact">
+            <img src={PLATE_IMG} alt="Shattered plate" className="plate-image" />
           </div>
         </div>
       </div>
