@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // Your actual images from GitHub
-const IMG_1 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC00488.JPG';
+const IMG_1 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07512.JPG';
 const IMG_2 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC00722.JPG';
 const IMG_3 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC00914.JPG';
 const IMG_4 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC01007.JPG';
