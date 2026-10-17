@@ -90,22 +90,7 @@ function GhostMountain() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Watermark
-      gsap.fromTo('.wm-gm',
-        { x: -200, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            end: 'top 20%',
-            scrub: 1,
-          }
-        }
-      );
-
-      // Photo
+      // Photo - top right corner
       gsap.fromTo('.obj-gm-1',
         { x: 400, y: -200, rotation: 30, opacity: 0 },
         {
@@ -119,7 +104,7 @@ function GhostMountain() {
         }
       );
 
-      // Document
+      // Document - bottom left corner
       gsap.fromTo('.obj-gm-2',
         { x: -400, rotation: -20, opacity: 0 },
         {
@@ -154,28 +139,21 @@ function GhostMountain() {
   return (
     <section className="scene-stage scene-black" id="ghost-mountain" ref={sectionRef}>
       <div className="scene-content">
-        <div className="layer layer-bg">
-          <div className="watermark wm-gm" style={{ top: '20%', left: '5%' }}>PHNUM KHMOCH</div>
-        </div>
-
         <div className="layer layer-mid">
-          <div className="obj photo obj-gm-1" style={{ width: '240px', top: '15%', right: '12%' }}>
+          <div className="obj photo obj-gm-1" style={{ width: '200px', top: '10%', right: '5%' }}>
             <img src={IMG_2} alt="Ghost Mountain" />
-            <div className="photo-cap">Border Region, 1979<br />Mass grave site</div>
+            <div className="photo-cap">Border Region, 1979</div>
           </div>
 
-          <div className="obj doc obj-gm-2" style={{ width: '200px', bottom: '20%', left: '8%' }}>
-            <div className="doc-header">Historical Record</div>
-            <strong>1975-1979</strong><br /><br />
-            Thousands executed<br />
-            in border region.<br /><br />
-            <em style={{ opacity: 0.6 }}>— DC-CAM Archives</em>
-            <div className="doc-stamp">ARCHIVE</div>
+          <div className="obj doc obj-gm-2" style={{ width: '160px', bottom: '10%', left: '5%' }}>
+            <div className="doc-header">Archive</div>
+            <strong>1975-1979</strong><br />
+            Thousands executed
           </div>
         </div>
 
         <div className="layer layer-text">
-          <div className="scene-text text-gm" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '600px' }}>
+          <div className="scene-text text-gm" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '500px' }}>
             <div className="scene-date">The History</div>
             <h2 className="scene-title">Ghost Mountain</h2>
             <div className="scene-body">
@@ -199,19 +177,7 @@ function KuochMengly() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo('.wm-km',
-        { x: 300, opacity: 0 },
-        {
-          x: 0, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            end: 'top 20%',
-            scrub: 1,
-          }
-        }
-      );
-
+      // Photo - top left corner
       gsap.fromTo('.obj-km-1',
         { scale: 2.5, opacity: 0, rotation: 10 },
         {
@@ -225,6 +191,7 @@ function KuochMengly() {
         }
       );
 
+      // Document - bottom right corner
       gsap.fromTo('.obj-km-2',
         { y: -400, rotation: 180, opacity: 0 },
         {
@@ -238,10 +205,11 @@ function KuochMengly() {
         }
       );
 
+      // Text
       gsap.fromTo('.text-km',
-        { opacity: 0, x: -80 },
+        { opacity: 0, y: 50 },
         {
-          opacity: 1, x: 0,
+          opacity: 1, y: 0,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 60%',
@@ -258,28 +226,21 @@ function KuochMengly() {
   return (
     <section className="scene-stage scene-red" id="kuoch-mengly" ref={sectionRef}>
       <div className="scene-content">
-        <div className="layer layer-bg">
-          <div className="watermark wm-km" style={{ top: '25%', right: '5%' }}>TESTIMONY</div>
-        </div>
-
         <div className="layer layer-mid">
-          <div className="obj photo obj-km-1" style={{ width: '220px', top: '18%', left: '12%' }}>
+          <div className="obj photo obj-km-1" style={{ width: '180px', top: '8%', left: '5%' }}>
             <img src={IMG_3} alt="Kuoch Mengly" />
-            <div className="photo-cap">Kuoch Mengly<br />Survivor, Battambang</div>
+            <div className="photo-cap">Kuoch Mengly</div>
           </div>
 
-          <div className="obj doc obj-km-2" style={{ width: '180px', bottom: '25%', right: '10%' }}>
-            <div className="doc-header">Survivor Record</div>
-            <strong>ID: KM-1979</strong><br /><br />
-            Age: 19 at capture<br />
-            Escaped: 1979<br />
-            Status: Survivor<br /><br />
-            <div className="doc-stamp">WITNESS</div>
+          <div className="obj doc obj-km-2" style={{ width: '150px', bottom: '8%', right: '5%' }}>
+            <div className="doc-header">Record</div>
+            <strong>ID: KM-1979</strong><br />
+            Escaped: 1979
           </div>
         </div>
 
         <div className="layer layer-text">
-          <div className="scene-text text-km" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '550px' }}>
+          <div className="scene-text text-km" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '500px' }}>
             <div className="scene-date">A Survivor's Story</div>
             <h2 className="scene-title">Kuoch Mengly</h2>
             <blockquote className="scene-quote" style={{ margin: '20px 0' }}>
@@ -306,19 +267,7 @@ function MakingOf() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo('.wm-mo',
-        { y: 200, opacity: 0 },
-        {
-          y: 0, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            end: 'top 20%',
-            scrub: 1,
-          }
-        }
-      );
-
+      // Photo - top right corner
       gsap.fromTo('.obj-mo-1',
         { y: 300, rotation: -15, opacity: 0 },
         {
@@ -332,6 +281,7 @@ function MakingOf() {
         }
       );
 
+      // Document - bottom left corner
       gsap.fromTo('.obj-mo-2',
         { x: -500, rotation: 25, opacity: 0 },
         {
@@ -345,6 +295,7 @@ function MakingOf() {
         }
       );
 
+      // Text
       gsap.fromTo('.text-mo',
         { opacity: 0, y: 60 },
         {
@@ -365,28 +316,22 @@ function MakingOf() {
   return (
     <section className="scene-stage scene-green" id="making-of" ref={sectionRef}>
       <div className="scene-content">
-        <div className="layer layer-bg">
-          <div className="watermark wm-mo" style={{ bottom: '15%', left: '5%' }}>PRODUCTION</div>
-        </div>
-
         <div className="layer layer-mid">
-          <div className="obj photo obj-mo-1" style={{ width: '260px', top: '12%', right: '15%' }}>
+          <div className="obj photo obj-mo-1" style={{ width: '220px', top: '8%', right: '5%' }}>
             <img src={IMG_4} alt="Behind the scenes" />
-            <div className="photo-cap">On location<br />Cambodian border, 2023</div>
+            <div className="photo-cap">On location, 2023</div>
           </div>
 
-          <div className="obj doc obj-mo-2" style={{ width: '190px', bottom: '22%', left: '10%' }}>
-            <div className="doc-header">Production Notes</div>
-            <strong>3 Years</strong><br /><br />
-            Filming period<br />
-            Locations: 12<br />
-            Interviews: 47<br /><br />
-            <div className="doc-stamp">FILM</div>
+          <div className="obj doc obj-mo-2" style={{ width: '150px', bottom: '8%', left: '5%' }}>
+            <div className="doc-header">Notes</div>
+            <strong>3 Years</strong><br />
+            12 locations<br />
+            47 interviews
           </div>
         </div>
 
         <div className="layer layer-text">
-          <div className="scene-text text-mo" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '550px' }}>
+          <div className="scene-text text-mo" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '500px' }}>
             <div className="scene-date">Behind the Camera</div>
             <h2 className="scene-title">The Making Of</h2>
             <div className="scene-body">
@@ -499,19 +444,7 @@ function Credits() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo('.wm-cr',
-        { scale: 0.5, opacity: 0 },
-        {
-          scale: 1, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            end: 'top 20%',
-            scrub: 1,
-          }
-        }
-      );
-
+      // Photo - top left corner
       gsap.fromTo('.obj-cr-1',
         { x: -500, rotation: -10, opacity: 0 },
         {
@@ -525,6 +458,7 @@ function Credits() {
         }
       );
 
+      // Photo - bottom right corner
       gsap.fromTo('.obj-cr-2',
         { x: 500, rotation: 15, opacity: 0 },
         {
@@ -538,10 +472,11 @@ function Credits() {
         }
       );
 
+      // Text
       gsap.fromTo('.text-cr',
-        { opacity: 0, scale: 0.9 },
+        { opacity: 0, y: 50 },
         {
-          opacity: 1, scale: 1,
+          opacity: 1, y: 0,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 60%',
@@ -558,24 +493,20 @@ function Credits() {
   return (
     <section className="scene-stage scene-black" id="credits" ref={sectionRef}>
       <div className="scene-content">
-        <div className="layer layer-bg">
-          <div className="watermark wm-cr" style={{ top: '20%', left: '10%' }}>TEAM</div>
-        </div>
-
         <div className="layer layer-mid">
-          <div className="obj photo obj-cr-1" style={{ width: '200px', top: '15%', left: '10%' }}>
+          <div className="obj photo obj-cr-1" style={{ width: '160px', top: '8%', left: '5%' }}>
             <img src={IMG_5} alt="Team" />
-            <div className="photo-cap">Production team<br />On location</div>
+            <div className="photo-cap">Production team</div>
           </div>
 
-          <div className="obj photo obj-cr-2" style={{ width: '180px', bottom: '18%', right: '12%' }}>
+          <div className="obj photo obj-cr-2" style={{ width: '150px', bottom: '8%', right: '5%' }}>
             <img src={IMG_6} alt="Crew" />
-            <div className="photo-cap">Camera crew<br />Border region</div>
+            <div className="photo-cap">Camera crew</div>
           </div>
         </div>
 
         <div className="layer layer-text">
-          <div className="scene-text text-cr" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '700px' }}>
+          <div className="scene-text text-cr" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '600px' }}>
             <div className="scene-date">The Team</div>
             <h2 className="scene-title">Credits</h2>
             <div className="credits-list">

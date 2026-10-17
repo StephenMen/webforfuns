@@ -231,33 +231,13 @@ body::before {
   padding: 6px 16px;
 }
 
-/* Watermarks */
-.watermark {
-  position: absolute;
-  font-family: var(--font-print);
-  font-size: clamp(5rem, 15vw, 12rem);
-  font-weight: 700;
-  opacity: 0.03;
-  text-transform: uppercase;
-  white-space: nowrap;
-  user-select: none;
-  letter-spacing: -5px;
-  pointer-events: none;
-  will-change: transform;
-}
+/* Watermarks - removed to prevent overlap */
 
 /* Scene backgrounds */
 .scene-black { background: var(--c-black); color: var(--c-white); }
-.scene-black .watermark { color: #fff; }
-
 .scene-red { background: #3a0505; color: var(--c-white); }
-.scene-red .watermark { color: #fff; }
-
 .scene-green { background: var(--c-green); color: var(--c-white); }
-.scene-green .watermark { color: #fff; }
-
 .scene-white { background: var(--c-white); color: var(--c-black); }
-.scene-white .watermark { color: #000; }
 
 /* Scene text */
 .scene-text {
