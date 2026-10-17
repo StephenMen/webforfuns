@@ -93,9 +93,11 @@ function Scene1() {
         scrollTrigger: {
           trigger: sceneRef.current,
           start: 'top top',
-          end: '+=3000',
+          end: '+=2000',
           pin: true,
+          pinSpacing: false,
           scrub: 1,
+          anticipatePin: 1,
         }
       });
 
@@ -216,9 +218,11 @@ function Scene2() {
         scrollTrigger: {
           trigger: sceneRef.current,
           start: 'top top',
-          end: '+=3000',
+          end: '+=2000',
           pin: true,
+          pinSpacing: false,
           scrub: 1,
+          anticipatePin: 1,
         }
       });
 
@@ -329,9 +333,11 @@ function Scene3() {
         scrollTrigger: {
           trigger: sceneRef.current,
           start: 'top top',
-          end: '+=3000',
+          end: '+=2000',
           pin: true,
+          pinSpacing: false,
           scrub: 1,
+          anticipatePin: 1,
         }
       });
 
@@ -452,9 +458,11 @@ function Scene4() {
         scrollTrigger: {
           trigger: sceneRef.current,
           start: 'top top',
-          end: '+=3000',
+          end: '+=2000',
           pin: true,
+          pinSpacing: false,
           scrub: 1,
+          anticipatePin: 1,
         }
       });
 
