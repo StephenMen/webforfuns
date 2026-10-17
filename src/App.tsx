@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 // Your actual images from GitHub
 const IMG_1 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07512.JPG';
 const IMG_2 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC00722.JPG';
-const IMG_3 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC00914.JPG';
+const IMG_3 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Master-for-Web-6.jpg';
 const IMG_4 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC01007.JPG';
 const IMG_5 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC05464.JPG';
 const IMG_6 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07500.JPG';
