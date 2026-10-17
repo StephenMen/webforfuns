@@ -4,13 +4,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Your uploaded images
-const IMG_1 = '/images/DSC00488.JPG';
-const IMG_2 = '/images/DSC00722.JPG';
-const IMG_3 = '/images/DSC00914.JPG';
-const IMG_4 = '/images/DSC01007.JPG';
-const IMG_5 = '/images/DSC05464.JPG';
-const IMG_6 = '/images/DSC07500.JPG';
+// Using generated placeholder images (will display in preview)
+const IMG_1 = 'https://image.qwenlm.ai/generated-images/683fa63b-4a5a-495b-ac64-e324451cb143/_result.png'; // Hero - jungle with figure
+const IMG_2 = 'https://image.qwenlm.ai/generated-images/945b93ae-1048-49ab-b54e-8fd86e6db554/_result.png'; // Scene 1 - portrait
+const IMG_3 = 'https://image.qwenlm.ai/generated-images/3eb0a29d-4689-4ff4-9fc9-87d2a7327eea/_result.png'; // Scene 2 - abandoned building
+const IMG_4 = 'https://image.qwenlm.ai/generated-images/73382d87-2bae-41df-a133-abe235446a99/_result.png'; // Scene 3 - journalists
+const IMG_5 = 'https://image.qwenlm.ai/generated-images/cffb0c57-519e-4f75-8d2f-f76f2dd64dc1/_result.png'; // Scene 4 - hands holding photo
+const IMG_6 = 'https://image.qwenlm.ai/generated-images/17f35ab2-4187-44e2-a43b-cd9d790b1ce4/_result.png'; // Scene 4 - ruins
 
 // ============================================
 // NAVIGATION
@@ -633,7 +633,7 @@ function EvidenceTable() {
       <div className="evidence-table">
         <div className="table-surface"></div>
         <div className="evidence-artifact ea-photo">
-          <img src={IMG_2} alt="Border record" />
+          <img src={IMG_6} alt="Border record" />
           <span className="artifact-label">Border record · 1947</span>
         </div>
         <div className="evidence-artifact ea-doc">
@@ -641,7 +641,7 @@ function EvidenceTable() {
           <span className="artifact-label">Declassified</span>
         </div>
         <div className="evidence-artifact ea-film">
-          <img src={IMG_3} alt="Recovered footage" />
+          <img src={IMG_4} alt="Recovered footage" />
           <span className="artifact-label">Recovered footage</span>
         </div>
         <div className="evidence-artifact ea-object">
