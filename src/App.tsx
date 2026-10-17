@@ -30,8 +30,8 @@ const IMG_4 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/7989
 const IMG_5 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC05464.JPG';
 const IMG_6 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07500.JPG';
 
-// Shattered plate asset (transparent version)
-const PLATE_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Shattered_Vintage_Blue_Floral_Plate-removebg-preview.png';
+// Worn red checkered scarf asset
+const SCARF_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Worn_Red_Checkered_Fringed_Scarf.png';
 
 // ============================================
 // NAVIGATION
@@ -124,9 +124,9 @@ function GhostMountain() {
           scrollTrigger: { trigger: sectionRef.current, start: 'top 55%', end: 'top 20%', scrub: 1 }
         }
       );
-      gsap.fromTo('.gm-plate-artifact',
+      gsap.fromTo('.gm-scarf-artifact',
         { opacity: 0, scale: 0.5, rotation: 45 },
-        { opacity: 1, scale: 1, rotation: -15, duration: 1.4, ease: 'power3.out',
+        { opacity: 1, scale: 1, rotation: -8, duration: 1.4, ease: 'power3.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 50%', end: 'top 15%', scrub: 1 }
         }
       );
@@ -184,8 +184,8 @@ function GhostMountain() {
             Border region<br />
             Mass graves identified
           </div>
-          <div className="gm-plate-artifact">
-            <img src={PLATE_IMG} alt="Shattered plate" className="plate-image" />
+          <div className="gm-scarf-artifact">
+            <img src={SCARF_IMG} alt="Worn scarf" className="scarf-image" />
           </div>
         </div>
       </div>
@@ -463,11 +463,11 @@ function PositioningPanel() {
   }, []);
 
   useEffect(() => {
-    const plate = document.querySelector('.gm-plate-artifact') as HTMLElement;
-    if (plate) {
-      plate.style.bottom = `${platePos.bottom}px`;
-      plate.style.left = `${platePos.left}%`;
-      plate.style.transform = `rotate(${platePos.rotation}deg) scale(${platePos.scale})`;
+    const scarf = document.querySelector('.gm-scarf-artifact') as HTMLElement;
+    if (scarf) {
+      scarf.style.top = `${platePos.bottom}px`;
+      scarf.style.right = `${platePos.left}%`;
+      scarf.style.transform = `rotate(${platePos.rotation}deg) scale(${platePos.scale})`;
     }
   }, [platePos]);
 
@@ -494,7 +494,7 @@ function PositioningPanel() {
       </div>
       
       <div style={{ marginBottom: '15px' }}>
-        <div style={{ marginBottom: '5px', color: '#888' }}>Shattered Plate</div>
+        <div style={{ marginBottom: '5px', color: '#888' }}>Red Scarf</div>
         
         <label style={{ display: 'block', marginBottom: '8px' }}>
           Bottom: {platePos.bottom}px
@@ -555,8 +555,8 @@ function PositioningPanel() {
       }}>
         <div style={{ color: '#888', marginBottom: '5px' }}>Current CSS:</div>
         <code style={{ color: '#4ec9b0' }}>
-          bottom: {platePos.bottom}px;<br/>
-          left: {platePos.left}%;<br/>
+          top: {platePos.bottom}px;<br/>
+          right: {platePos.left}%;<br/>
           transform: rotate({platePos.rotation}deg)<br/>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scale({platePos.scale.toFixed(2)});
         </code>

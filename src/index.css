@@ -398,20 +398,20 @@ body::before {
   z-index: 10;
 }
 
-/* Shattered plate artifact */
-.gm-plate-artifact {
+/* Worn red scarf artifact */
+.gm-scarf-artifact {
   position: absolute;
-  top: 35%;
-  right: 15%;
-  width: 180px;
-  height: 180px;
+  top: 40%;
+  right: 10%;
+  width: 200px;
+  height: 200px;
   z-index: 5;
-  transform: rotate(-25deg) scale(1.3);
+  transform: rotate(-8deg) scale(1.2);
   filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
   pointer-events: none;
 }
 
-.plate-image {
+.scarf-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
