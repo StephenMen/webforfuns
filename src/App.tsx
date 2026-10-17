@@ -12,6 +12,10 @@ const IMG_4 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/7989
 const IMG_5 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC05464.JPG';
 const IMG_6 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07500.JPG';
 
+// Gun images for Ghost Mountain section
+const GUN_1 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/an-assault-rifle-displayed-against-a-stark-transparent-background-highlighting-its-features-and-design-intricacies-ak-47-assault-rifle-on-transparent-background-free-png.webp';
+const GUN_2 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/pngtree-toye-adeniran-ak-47-png-image_16090256.png';
+
 // ============================================
 // NAVIGATION
 // ============================================
@@ -85,6 +89,18 @@ function GhostMountain() {
           scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 1 }
         }
       );
+      gsap.fromTo('.gm-gun-1',
+        { opacity: 0, x: 150, rotation: 20 },
+        { opacity: 1, x: 0, rotation: -15, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 65%', end: 'top 28%', scrub: 1 }
+        }
+      );
+      gsap.fromTo('.gm-gun-2',
+        { opacity: 0, y: -100, rotation: -30 },
+        { opacity: 1, y: 0, rotation: 10, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 55%', end: 'top 20%', scrub: 1 }
+        }
+      );
     });
     return () => ctx.revert();
   }, []);
@@ -104,6 +120,9 @@ function GhostMountain() {
           </div>
         </div>
         <div className="editorial-right">
+          <div className="gm-gun-1">
+            <img src={GUN_1} alt="AK-47" className="gm-gun-img" />
+          </div>
           <div className="gm-image">
             <img src={IMG_2} alt="Ghost Mountain" />
           </div>
@@ -112,6 +131,9 @@ function GhostMountain() {
             <strong>1975-1979</strong><br />
             Border region<br />
             Mass graves identified
+          </div>
+          <div className="gm-gun-2">
+            <img src={GUN_2} alt="AK-47" className="gm-gun-img" />
           </div>
         </div>
       </div>
