@@ -137,6 +137,8 @@ body::before {
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .editorial-left {
@@ -242,8 +244,44 @@ body::before {
 
 /* Scene backgrounds */
 .scene-black { background: var(--c-black); color: var(--c-white); }
-.scene-red { background: #3a0505; color: var(--c-white); }
-.scene-green { background: var(--c-green); color: var(--c-white); }
+
+.scene-red { 
+  background: 
+    radial-gradient(ellipse at 20% 80%, rgba(139, 0, 0, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(80, 0, 0, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(60, 0, 0, 0.2) 0%, transparent 70%),
+    linear-gradient(135deg, #1a0000 0%, #3a0505 30%, #2a0303 60%, #1a0000 100%);
+  color: var(--c-white);
+  position: relative;
+}
+.scene-red::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 30% 70%, rgba(139, 0, 0, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 70% 30%, rgba(100, 0, 0, 0.1) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.scene-green { 
+  background: 
+    radial-gradient(ellipse at 0% 100%, rgba(10, 40, 20, 0.8) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(20, 60, 30, 0.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(15, 50, 25, 0.3) 0%, transparent 70%),
+    linear-gradient(180deg, #0a1a0f 0%, #162b20 40%, #1a3525 70%, #0d1f12 100%);
+  color: var(--c-white);
+  position: relative;
+}
+.scene-green::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(30, 80, 40, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 70%, rgba(20, 60, 30, 0.15) 0%, transparent 40%);
+  pointer-events: none;
+}
 
 /* ============================================
    FESTIVALS - White background
