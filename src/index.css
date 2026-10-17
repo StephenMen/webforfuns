@@ -401,20 +401,21 @@ body::before {
 /* Shattered plate artifact */
 .gm-plate-artifact {
   position: absolute;
-  bottom: -30px;
-  right: -20px;
-  width: 180px;
-  height: 180px;
+  bottom: -40px;
+  left: 30%;
+  width: 160px;
+  height: 160px;
   z-index: 4;
-  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));
+  transform: rotate(-15deg);
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 8px 25px rgba(0,0,0,0.6)) brightness(1.1) contrast(1.1);
+  pointer-events: none;
 }
 
 .plate-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: grayscale(30%) contrast(1.1) brightness(0.95);
-  opacity: 0.9;
 }
 
 /* Bullet casing - removed, now part of artifacts */
