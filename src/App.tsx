@@ -38,40 +38,18 @@ function Hero() {
 
   useEffect(() => {
     if (!heroRef.current) return;
-    
     const tl = gsap.timeline();
-    
-    tl.from('.hero-title', {
-      opacity: 0,
-      y: 100,
-      duration: 1.5,
-      ease: 'power4.out'
-    })
-    .from('.hero-sub', {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      ease: 'power3.out'
-    }, '-=1')
-    .from('.hero-year', {
-      opacity: 0,
-      scale: 0.8,
-      duration: 1,
-      ease: 'power3.out'
-    }, '-=0.5')
-    .from('.scroll-indicator', {
-      opacity: 0,
-      duration: 1
-    }, '-=0.5');
+    tl.from('.hero-title', { opacity: 0, y: 100, duration: 1.5, ease: 'power4.out' })
+      .from('.hero-sub', { opacity: 0, y: 50, duration: 1, ease: 'power3.out' }, '-=1')
+      .from('.hero-year', { opacity: 0, scale: 0.8, duration: 1, ease: 'power3.out' }, '-=0.5')
+      .from('.scroll-indicator', { opacity: 0, duration: 1 }, '-=0.5');
   }, []);
 
   return (
     <section className="hero" ref={heroRef}>
       <img src={IMG_1} alt="" className="hero-bg" />
       <div className="hero-content">
-        <h1 className="hero-title">
-          BLOOD BORDER
-        </h1>
+        <h1 className="hero-title">BLOOD BORDER</h1>
         <p className="hero-sub">Cambodia's Second Killing Field</p>
         <div className="hero-year">A Documentary Film</div>
       </div>
@@ -81,85 +59,59 @@ function Hero() {
 }
 
 // ============================================
-// SECTION 2: GHOST MOUNTAIN (Black with floating objects)
+// SECTION 2: GHOST MOUNTAIN - Text left, image right
 // ============================================
 function GhostMountain() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
-
     const ctx = gsap.context(() => {
-      // Photo - top right corner
-      gsap.fromTo('.obj-gm-1',
-        { x: 400, y: -200, rotation: 30, opacity: 0 },
-        {
-          x: 0, y: 0, rotation: -5, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 70%',
-            end: 'top 30%',
-            scrub: 1,
-          }
+      gsap.fromTo('.gm-text > *',
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
         }
       );
-
-      // Document - bottom left corner
-      gsap.fromTo('.obj-gm-2',
-        { x: -400, rotation: -20, opacity: 0 },
-        {
-          x: 0, rotation: 3, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'top 20%',
-            scrub: 1,
-          }
+      gsap.fromTo('.gm-image',
+        { opacity: 0, x: 100, scale: 1.1 },
+        { opacity: 1, x: 0, scale: 1, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
         }
       );
-
-      // Text
-      gsap.fromTo('.text-gm',
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1, y: 0,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'top 30%',
-            scrub: 1,
-          }
+      gsap.fromTo('.gm-doc',
+        { opacity: 0, y: 80, rotation: -10 },
+        { opacity: 1, y: 0, rotation: -5, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 1 }
         }
       );
     });
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="scene-stage scene-black" id="ghost-mountain" ref={sectionRef}>
-      <div className="scene-content">
-        <div className="layer layer-mid">
-          <div className="obj photo obj-gm-1" style={{ width: '200px', top: '10%', right: '5%' }}>
-            <img src={IMG_2} alt="Ghost Mountain" />
-            <div className="photo-cap">Border Region, 1979</div>
-          </div>
-
-          <div className="obj doc obj-gm-2" style={{ width: '160px', bottom: '10%', left: '5%' }}>
-            <div className="doc-header">Archive</div>
-            <strong>1975-1979</strong><br />
-            Thousands executed
+    <section className="editorial-section scene-black" id="ghost-mountain" ref={sectionRef}>
+      <div className="editorial-inner">
+        <div className="editorial-left">
+          <div className="gm-text">
+            <div className="section-label">The History</div>
+            <h2 className="section-title">Ghost Mountain</h2>
+            <div className="section-body">
+              <p>Phnum Khmoch, known as "Ghost Mountain," sits along the Thai-Cambodian border — a place where history and horror converge. During the Khmer Rouge regime (1975-1979), this remote region became a site of systematic violence.</p>
+              <p>The mountain's dense jungles concealed mass graves, execution sites, and forced labor camps. Thousands were brought here from across the country, their fates sealed by a regime that sought to erase an entire generation.</p>
+              <p>Today, the land still yields bones during the rainy season. The trees grow from burial sites. The earth remembers what the world tried to forget.</p>
+            </div>
           </div>
         </div>
-
-        <div className="layer layer-text">
-          <div className="scene-text text-gm" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '500px' }}>
-            <div className="scene-date">The History</div>
-            <h2 className="scene-title">Ghost Mountain</h2>
-            <div className="scene-body">
-              <p>Phnum Khmoch, known as "Ghost Mountain," sits along the Thai-Cambodian border. During the Khmer Rouge regime, this remote region became a site of systematic violence.</p>
-              <p>The mountain's dense jungles concealed mass graves and execution sites. Thousands were brought here, their fates sealed by a regime that sought to erase an entire generation.</p>
-            </div>
+        <div className="editorial-right">
+          <div className="gm-image">
+            <img src={IMG_2} alt="Ghost Mountain" />
+          </div>
+          <div className="gm-doc">
+            <div className="doc-header">Historical Record</div>
+            <strong>1975-1979</strong><br />
+            Border region<br />
+            Mass graves identified
           </div>
         </div>
       </div>
@@ -168,88 +120,63 @@ function GhostMountain() {
 }
 
 // ============================================
-// SECTION 3: KUOCH MENGLY (Red with floating objects)
+// SECTION 3: KUOCH MENGLY - Text left, image right
 // ============================================
 function KuochMengly() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
-
     const ctx = gsap.context(() => {
-      // Photo - top left corner
-      gsap.fromTo('.obj-km-1',
-        { scale: 2.5, opacity: 0, rotation: 10 },
-        {
-          scale: 1, opacity: 1, rotation: -3,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 70%',
-            end: 'top 30%',
-            scrub: 1,
-          }
+      gsap.fromTo('.km-text > *',
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
         }
       );
-
-      // Document - bottom right corner
-      gsap.fromTo('.obj-km-2',
-        { y: -400, rotation: 180, opacity: 0 },
-        {
-          y: 0, rotation: 0, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'top 20%',
-            scrub: 1,
-          }
+      gsap.fromTo('.km-image',
+        { opacity: 0, x: 100, scale: 1.1 },
+        { opacity: 1, x: 0, scale: 1, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
         }
       );
-
-      // Text
-      gsap.fromTo('.text-km',
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1, y: 0,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'top 30%',
-            scrub: 1,
-          }
+      gsap.fromTo('.km-record',
+        { opacity: 0, y: 80, rotation: 8 },
+        { opacity: 1, y: 0, rotation: 3, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 1 }
         }
       );
     });
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="scene-stage scene-red" id="kuoch-mengly" ref={sectionRef}>
-      <div className="scene-content">
-        <div className="layer layer-mid">
-          <div className="obj photo obj-km-1" style={{ width: '180px', top: '8%', left: '5%' }}>
-            <img src={IMG_3} alt="Kuoch Mengly" />
-            <div className="photo-cap">Kuoch Mengly</div>
-          </div>
-
-          <div className="obj doc obj-km-2" style={{ width: '150px', bottom: '8%', right: '5%' }}>
-            <div className="doc-header">Record</div>
-            <strong>ID: KM-1979</strong><br />
-            Escaped: 1979
+    <section className="editorial-section scene-red" id="kuoch-mengly" ref={sectionRef}>
+      <div className="editorial-inner">
+        <div className="editorial-left">
+          <div className="km-text">
+            <div className="section-label">A Survivor's Testimony</div>
+            <h2 className="section-title">Kuoch Mengly</h2>
+            <blockquote className="editorial-quote">
+              "They took us in the night. We walked for days through the jungle. Many did not return."
+            </blockquote>
+            <div className="section-body">
+              <p>Kuoch Mengly was just nineteen when the Khmer Rouge seized his village in Battambang province. Separated from his family, he was marched hundreds of kilometers to labor camps near the Thai border.</p>
+              <p>For three years, he endured forced labor, starvation, and the constant threat of execution. He witnessed massacres that haunt him to this day.</p>
+              <p>Against all odds, Mengly survived. He escaped across the border into Thailand in 1979, carrying with him the weight of memory and the responsibility to bear witness.</p>
+            </div>
           </div>
         </div>
-
-        <div className="layer layer-text">
-          <div className="scene-text text-km" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '500px' }}>
-            <div className="scene-date">A Survivor's Story</div>
-            <h2 className="scene-title">Kuoch Mengly</h2>
-            <blockquote className="scene-quote" style={{ margin: '20px 0' }}>
-              "They took us in the night. We walked for days through the jungle."
-            </blockquote>
-            <div className="scene-body">
-              <p>Kuoch Mengly was just nineteen when the Khmer Rouge seized his village. For three years, he endured forced labor, starvation, and execution threats.</p>
-              <p>Against all odds, he escaped across the border in 1979, carrying the weight of memory and the responsibility to bear witness.</p>
-            </div>
+        <div className="editorial-right">
+          <div className="km-image">
+            <img src={IMG_3} alt="Kuoch Mengly" />
+          </div>
+          <div className="km-record">
+            <div className="doc-header">Survivor Record</div>
+            <strong>ID: KM-1979</strong><br />
+            Age: 19 at capture<br />
+            Escaped: 1979<br />
+            Status: Survivor
           </div>
         </div>
       </div>
@@ -258,87 +185,61 @@ function KuochMengly() {
 }
 
 // ============================================
-// SECTION 4: MAKING OF (Green with floating objects)
+// SECTION 4: MAKING OF - Text left, image right
 // ============================================
 function MakingOf() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
-
     const ctx = gsap.context(() => {
-      // Photo - top right corner
-      gsap.fromTo('.obj-mo-1',
-        { y: 300, rotation: -15, opacity: 0 },
-        {
-          y: 0, rotation: 4, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 70%',
-            end: 'top 30%',
-            scrub: 1,
-          }
+      gsap.fromTo('.mo-text > *',
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
         }
       );
-
-      // Document - bottom left corner
-      gsap.fromTo('.obj-mo-2',
-        { x: -500, rotation: 25, opacity: 0 },
-        {
-          x: 0, rotation: -6, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'top 20%',
-            scrub: 1,
-          }
+      gsap.fromTo('.mo-image',
+        { opacity: 0, x: 100, scale: 1.1 },
+        { opacity: 1, x: 0, scale: 1, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
         }
       );
-
-      // Text
-      gsap.fromTo('.text-mo',
-        { opacity: 0, y: 60 },
-        {
-          opacity: 1, y: 0,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'top 30%',
-            scrub: 1,
-          }
+      gsap.fromTo('.mo-notes',
+        { opacity: 0, y: 80, rotation: -8 },
+        { opacity: 1, y: 0, rotation: -4, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 1 }
         }
       );
     });
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="scene-stage scene-green" id="making-of" ref={sectionRef}>
-      <div className="scene-content">
-        <div className="layer layer-mid">
-          <div className="obj photo obj-mo-1" style={{ width: '220px', top: '8%', right: '5%' }}>
-            <img src={IMG_4} alt="Behind the scenes" />
-            <div className="photo-cap">On location, 2023</div>
-          </div>
-
-          <div className="obj doc obj-mo-2" style={{ width: '150px', bottom: '8%', left: '5%' }}>
-            <div className="doc-header">Notes</div>
-            <strong>3 Years</strong><br />
-            12 locations<br />
-            47 interviews
+    <section className="editorial-section scene-green" id="making-of" ref={sectionRef}>
+      <div className="editorial-inner">
+        <div className="editorial-left">
+          <div className="mo-text">
+            <div className="section-label">Behind the Camera</div>
+            <h2 className="section-title">The Making Of</h2>
+            <div className="section-body">
+              <p><strong>Director's Vision</strong></p>
+              <p>Blood Border represents three years of immersive documentary work along the Cambodian-Thai border. Director [Director Name] worked closely with survivors, archaeologists, and historians to reconstruct the untold stories of the region's mass graves.</p>
+              <p>Filmed on location at actual killing field sites, the documentary combines archival footage, survivor testimonies, and contemporary archaeological evidence to create an unflinching portrait of historical amnesia and the quest for justice.</p>
+              <p>The film premiered at [Festival Name] to critical acclaim, praised for its unflinching approach to difficult history and its commitment to giving voice to those who survived.</p>
+            </div>
           </div>
         </div>
-
-        <div className="layer layer-text">
-          <div className="scene-text text-mo" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '500px' }}>
-            <div className="scene-date">Behind the Camera</div>
-            <h2 className="scene-title">The Making Of</h2>
-            <div className="scene-body">
-              <p><strong>Director's Vision</strong></p>
-              <p>Blood Border represents three years of immersive documentary work along the Cambodian-Thai border. Director [Director Name] worked closely with survivors and historians.</p>
-              <p>Filmed on location at actual killing field sites, the documentary combines archival footage, survivor testimonies, and archaeological evidence.</p>
-            </div>
+        <div className="editorial-right">
+          <div className="mo-image">
+            <img src={IMG_4} alt="Making of" />
+          </div>
+          <div className="mo-notes">
+            <div className="doc-header">Production Notes</div>
+            <strong>3 Years</strong> filming<br />
+            12 locations<br />
+            47 interviews<br />
+            200+ hours footage
           </div>
         </div>
       </div>
@@ -347,39 +248,27 @@ function MakingOf() {
 }
 
 // ============================================
-// SECTION 5: FESTIVALS (White - different layout)
+// SECTION 5: FESTIVALS - White background
 // ============================================
 function Festivals() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
-
     const ctx = gsap.context(() => {
       gsap.fromTo('.fest-item',
         { opacity: 0, y: 30 },
-        {
-          opacity: 1, y: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 70%',
-            end: 'top 30%',
-            scrub: 1,
-          }
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
         }
       );
     });
-
     return () => ctx.revert();
   }, []);
 
   return (
     <section className="festivals-section" id="festivals" ref={sectionRef}>
       <div className="festivals-header">Official Selections & Awards</div>
-      
       <div className="laurels-grid">
         <div className="laurel-item fest-item">
           <div className="laurel-circle">
@@ -389,9 +278,8 @@ function Festivals() {
             </svg>
           </div>
           <div className="laurel-text">Cannes</div>
-          <div className="laurel-subtext">2025</div>
+          <div className="laurel-subtext">Un Certain Regard · 2025</div>
         </div>
-
         <div className="laurel-item fest-item">
           <div className="laurel-circle">
             <svg className="laurel-svg" viewBox="0 0 100 100">
@@ -400,9 +288,8 @@ function Festivals() {
             </svg>
           </div>
           <div className="laurel-text">Berlinale</div>
-          <div className="laurel-subtext">2025</div>
+          <div className="laurel-subtext">Best Documentary · 2025</div>
         </div>
-
         <div className="laurel-item fest-item">
           <div className="laurel-circle">
             <svg className="laurel-svg" viewBox="0 0 100 100">
@@ -411,9 +298,8 @@ function Festivals() {
             </svg>
           </div>
           <div className="laurel-text">Sundance</div>
-          <div className="laurel-subtext">2025</div>
+          <div className="laurel-subtext">Jury Prize · 2025</div>
         </div>
-
         <div className="laurel-item fest-item">
           <div className="laurel-circle">
             <svg className="laurel-svg" viewBox="0 0 100 100">
@@ -422,121 +308,71 @@ function Festivals() {
             </svg>
           </div>
           <div className="laurel-text">IDFA</div>
-          <div className="laurel-subtext">2024</div>
+          <div className="laurel-subtext">Special Mention · 2024</div>
         </div>
       </div>
-
       <blockquote className="press-quote fest-item">
-        "A masterwork of tension and visual poetry."
+        "A masterwork of tension and visual poetry. Blood Border redefines the genre by turning history into a haunting, physical presence."
       </blockquote>
-      <div className="press-source fest-item">— Variety</div>
+      <div className="press-source fest-item">— Variety Magazine</div>
     </section>
   );
 }
 
 // ============================================
-// SECTION 6: CREDITS (Black with floating objects)
+// SECTION 6: CREDITS - Horizontal 3-row grid
 // ============================================
 function Credits() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
-
     const ctx = gsap.context(() => {
-      // Photo - top left corner
-      gsap.fromTo('.obj-cr-1',
-        { x: -500, rotation: -10, opacity: 0 },
-        {
-          x: 0, rotation: 5, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 70%',
-            end: 'top 30%',
-            scrub: 1,
-          }
-        }
-      );
-
-      // Photo - bottom right corner
-      gsap.fromTo('.obj-cr-2',
-        { x: 500, rotation: 15, opacity: 0 },
-        {
-          x: 0, rotation: -4, opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'top 20%',
-            scrub: 1,
-          }
-        }
-      );
-
-      // Text
-      gsap.fromTo('.text-cr',
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1, y: 0,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'top 30%',
-            scrub: 1,
-          }
+      gsap.fromTo('.credit-item',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
         }
       );
     });
-
     return () => ctx.revert();
   }, []);
 
+  const credits = [
+    { role: 'Director', name: '[Name]' },
+    { role: 'Producer', name: '[Name]' },
+    { role: 'Executive Producer', name: '[Name]' },
+    { role: 'Director of Photography', name: '[Name]' },
+    { role: 'Screenwriter', name: '[Name]' },
+    { role: 'Co-Writer', name: '[Name]' },
+    { role: 'Editor', name: '[Name]' },
+    { role: 'Sound Design', name: '[Name]' },
+    { role: 'Original Score', name: '[Name]' },
+    { role: 'Camera Operator', name: '[Name]' },
+    { role: 'Research Director', name: '[Name]' },
+    { role: 'Production Manager', name: '[Name]' },
+    { role: 'Colorist', name: '[Name]' },
+    { role: 'Sound Mixer', name: '[Name]' },
+    { role: 'Field Producer', name: '[Name]' },
+    { role: 'Translator', name: '[Name]' },
+    { role: 'Archival Research', name: '[Name]' },
+    { role: 'Post-Production', name: '[Name]' },
+  ];
+
   return (
-    <section className="scene-stage scene-black" id="credits" ref={sectionRef}>
-      <div className="scene-content">
-        <div className="layer layer-mid">
-          <div className="obj photo obj-cr-1" style={{ width: '160px', top: '8%', left: '5%' }}>
-            <img src={IMG_5} alt="Team" />
-            <div className="photo-cap">Production team</div>
+    <section className="credits-section" id="credits" ref={sectionRef}>
+      <div className="credits-header">The Team</div>
+      <div className="credits-grid">
+        {credits.map((c, i) => (
+          <div className="credit-item" key={i}>
+            <div className="credit-role">{c.role}</div>
+            <div className="credit-name">{c.name}</div>
           </div>
-
-          <div className="obj photo obj-cr-2" style={{ width: '150px', bottom: '8%', right: '5%' }}>
-            <img src={IMG_6} alt="Crew" />
-            <div className="photo-cap">Camera crew</div>
-          </div>
-        </div>
-
-        <div className="layer layer-text">
-          <div className="scene-text text-cr" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '600px' }}>
-            <div className="scene-date">The Team</div>
-            <h2 className="scene-title">Credits</h2>
-            <div className="credits-list">
-              <div className="credit-row">
-                <span className="credit-role">Director</span>
-                <span className="credit-name">[Name]</span>
-              </div>
-              <div className="credit-row">
-                <span className="credit-role">Producer</span>
-                <span className="credit-name">[Name]</span>
-              </div>
-              <div className="credit-row">
-                <span className="credit-role">Director of Photography</span>
-                <span className="credit-name">[Name]</span>
-              </div>
-              <div className="credit-row">
-                <span className="credit-role">Screenwriter</span>
-                <span className="credit-name">[Name]</span>
-              </div>
-              <div className="credit-row">
-                <span className="credit-role">Editor</span>
-                <span className="credit-name">[Name]</span>
-              </div>
-              <div className="credit-row">
-                <span className="credit-role">Sound Design</span>
-                <span className="credit-name">[Name]</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
+      </div>
+      <div className="credits-footer">
+        <p>In collaboration with the Documentation Center of Cambodia (DC-CAM)</p>
+        <p>Special thanks to all survivors who shared their stories</p>
       </div>
     </section>
   );
