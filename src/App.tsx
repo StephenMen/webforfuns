@@ -12,9 +12,9 @@ const IMG_4 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/7989
 const IMG_5 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC05464.JPG';
 const IMG_6 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07500.JPG';
 
-// Gun images for Ghost Mountain section
-const GUN_1 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/an-assault-rifle-displayed-against-a-stark-transparent-background-highlighting-its-features-and-design-intricacies-ak-47-assault-rifle-on-transparent-background-free-png.webp';
-const GUN_2 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/pngtree-toye-adeniran-ak-47-png-image_16090256.png';
+// Gun images for Ghost Mountain section (Wikimedia Commons - Public Domain)
+const GUN_1 = 'https://upload.wikimedia.org/wikipedia/commons/6/65/AK-47.png';
+const GUN_2 = 'https://upload.wikimedia.org/wikipedia/commons/5/57/AK-47_type_II_noBG.png';
 
 // ============================================
 // NAVIGATION
@@ -101,6 +101,24 @@ function GhostMountain() {
           scrollTrigger: { trigger: sectionRef.current, start: 'top 55%', end: 'top 20%', scrub: 1 }
         }
       );
+      gsap.fromTo('.gm-extra-img-1',
+        { opacity: 0, scale: 0.8, rotation: 15 },
+        { opacity: 1, scale: 1, rotation: -8, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 50%', end: 'top 15%', scrub: 1 }
+        }
+      );
+      gsap.fromTo('.gm-extra-img-2',
+        { opacity: 0, x: 100, rotation: -20 },
+        { opacity: 1, x: 0, rotation: 5, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 1 }
+        }
+      );
+      gsap.fromTo('.gm-bullet-casing',
+        { opacity: 0, y: 150, rotation: 45 },
+        { opacity: 1, y: 0, rotation: -15, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 45%', end: 'top 10%', scrub: 1 }
+        }
+      );
     });
     return () => ctx.revert();
   }, []);
@@ -124,7 +142,7 @@ function GhostMountain() {
             <img src={GUN_1} alt="AK-47" className="gm-gun-img" />
           </div>
           <div className="gm-image">
-            <img src={IMG_2} alt="Ghost Mountain" />
+            <img src={IMG_2} alt="Ghost Mountain" className="framed-image" />
           </div>
           <div className="gm-doc">
             <div className="doc-header">Historical Record</div>
@@ -135,6 +153,13 @@ function GhostMountain() {
           <div className="gm-gun-2">
             <img src={GUN_2} alt="AK-47" className="gm-gun-img" />
           </div>
+          <div className="gm-extra-img-1">
+            <img src={IMG_5} alt="Evidence" className="framed-image" />
+          </div>
+          <div className="gm-extra-img-2">
+            <img src={IMG_6} alt="Archive" className="framed-image" />
+          </div>
+          <div className="gm-bullet-casing"></div>
         </div>
       </div>
     </section>
@@ -191,7 +216,7 @@ function KuochMengly() {
         </div>
         <div className="editorial-right">
           <div className="km-image">
-            <img src={IMG_3} alt="Kuoch Mengly" />
+            <img src={IMG_3} alt="Kuoch Mengly" className="framed-image" />
           </div>
           <div className="km-record">
             <div className="doc-header">Survivor Record</div>
@@ -254,7 +279,7 @@ function MakingOf() {
         </div>
         <div className="editorial-right">
           <div className="mo-image">
-            <img src={IMG_4} alt="Making of" />
+            <img src={IMG_4} alt="Making of" className="framed-image" />
           </div>
           <div className="mo-notes">
             <div className="doc-header">Production Notes</div>
