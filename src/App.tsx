@@ -81,7 +81,7 @@ function Hero() {
 }
 
 // ============================================
-// SECTION 2: GHOST MOUNTAIN HISTORY
+// SECTION 2: GHOST MOUNTAIN - Full bleed with overlay
 // ============================================
 function GhostMountain() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -90,34 +90,33 @@ function GhostMountain() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo('.gm-text',
-        { opacity: 0, y: 60 },
+      gsap.fromTo('.ghost-content > *',
+        { opacity: 0, x: -50 },
         {
           opacity: 1,
-          y: 0,
+          x: 0,
           duration: 1,
           stagger: 0.2,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 70%',
-            end: 'top 30%',
+            end: 'top 20%',
             scrub: 1,
           }
         }
       );
 
-      gsap.fromTo('.gm-image',
-        { scale: 1.2, opacity: 0 },
+      gsap.fromTo('.ghost-bg',
+        { scale: 1.1 },
         {
           scale: 1,
-          opacity: 1,
           duration: 1.5,
-          ease: 'power3.out',
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'top 20%',
+            start: 'top bottom',
+            end: 'bottom top',
             scrub: 1,
           }
         }
@@ -128,21 +127,16 @@ function GhostMountain() {
   }, []);
 
   return (
-    <section className="content-section scene-black" id="ghost-mountain" ref={sectionRef}>
-      <div className="content-inner">
-        <div className="content-grid">
-          <div className="content-text">
-            <div className="section-label gm-text">The History</div>
-            <h2 className="section-title gm-text">Ghost Mountain</h2>
-            <div className="section-body gm-text">
-              <p>Phnum Khmoch, known as "Ghost Mountain," sits along the Thai-Cambodian border — a place where history and horror converge. During the Khmer Rouge regime (1975-1979), this remote region became a site of systematic violence.</p>
-              <p>The mountain's dense jungles concealed mass graves, execution sites, and forced labor camps. Thousands were brought here from across the country, their fates sealed by a regime that sought to erase an entire generation.</p>
-              <p>Today, the land still yields bones during the rainy season. The trees grow from burial sites. The earth remembers what the world tried to forget.</p>
-            </div>
-          </div>
-          <div className="content-image gm-image">
-            <img src={IMG_2} alt="Ghost Mountain" />
-          </div>
+    <section className="ghost-section" id="ghost-mountain" ref={sectionRef}>
+      <img src={IMG_2} alt="" className="ghost-bg" />
+      <div className="ghost-overlay"></div>
+      <div className="ghost-content">
+        <div className="section-label">The History</div>
+        <h2 className="section-title">Ghost Mountain</h2>
+        <div className="section-body">
+          <p>Phnum Khmoch, known as "Ghost Mountain," sits along the Thai-Cambodian border — a place where history and horror converge. During the Khmer Rouge regime (1975-1979), this remote region became a site of systematic violence.</p>
+          <p>The mountain's dense jungles concealed mass graves, execution sites, and forced labor camps. Thousands were brought here from across the country, their fates sealed by a regime that sought to erase an entire generation.</p>
+          <p>Today, the land still yields bones during the rainy season. The trees grow from burial sites. The earth remembers what the world tried to forget.</p>
         </div>
       </div>
     </section>
@@ -214,25 +208,21 @@ function KuochMengly() {
   }, []);
 
   return (
-    <section className="content-section scene-red" id="kuoch-mengly" ref={sectionRef}>
-      <div className="content-inner">
-        <div className="content-grid reverse">
-          <div className="content-image km-image">
-            <img src={IMG_3} alt="Kuoch Mengly" />
-          </div>
-          <div className="content-text">
-            <div className="section-label km-text">A Survivor's Testimony</div>
-            <h2 className="section-title km-text">Kuoch Mengly</h2>
-            <blockquote className="km-quote">
-              "They took us in the night. We walked for days through the jungle. Many did not return."
-            </blockquote>
-            <div className="section-body km-text">
-              <p>Kuoch Mengly was just nineteen when the Khmer Rouge seized his village in Battambang province. Separated from his family, he was marched hundreds of kilometers to labor camps near the Thai border.</p>
-              <p>For three years, he endured forced labor, starvation, and the constant threat of execution. He witnessed massacres that haunts him to this day — entire families erased in a single night.</p>
-              <p>Against all odds, Mengly survived. He escaped across the border into Thailand in 1979, carrying with him the weight of memory and the responsibility to bear witness.</p>
-              <p>His story is one of thousands — but it is his voice that breaks the silence.</p>
-            </div>
-          </div>
+    <section className="mengly-section" id="kuoch-mengly" ref={sectionRef}>
+      <div className="mengly-inner">
+        <div className="section-label">A Survivor's Testimony</div>
+        <h2 className="section-title">Kuoch Mengly</h2>
+        <blockquote className="mengly-quote">
+          "They took us in the night. We walked for days through the jungle. Many did not return."
+        </blockquote>
+        <div className="mengly-image">
+          <img src={IMG_3} alt="Kuoch Mengly" />
+        </div>
+        <div className="mengly-body">
+          <p>Kuoch Mengly was just nineteen when the Khmer Rouge seized his village in Battambang province. Separated from his family, he was marched hundreds of kilometers to labor camps near the Thai border.</p>
+          <p>For three years, he endured forced labor, starvation, and the constant threat of execution. He witnessed massacres that haunts him to this day — entire families erased in a single night.</p>
+          <p>Against all odds, Mengly survived. He escaped across the border into Thailand in 1979, carrying with him the weight of memory and the responsibility to bear witness.</p>
+          <p>His story is one of thousands — but it is his voice that breaks the silence.</p>
         </div>
       </div>
     </section>
@@ -240,7 +230,7 @@ function KuochMengly() {
 }
 
 // ============================================
-// SECTION 4: MAKING OF
+// SECTION 4: MAKING OF - Cinematic horizontal
 // ============================================
 function MakingOf() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -249,24 +239,23 @@ function MakingOf() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo('.mo-image',
-        { scale: 1.3, opacity: 0 },
+      gsap.fromTo('.making-hero img',
+        { scale: 1.1 },
         {
           scale: 1,
-          opacity: 1,
           duration: 1.5,
-          ease: 'power3.out',
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
-            end: 'top 30%',
+            start: 'top bottom',
+            end: 'center center',
             scrub: 1,
           }
         }
       );
 
-      gsap.fromTo('.mo-text',
-        { opacity: 0, y: 50 },
+      gsap.fromTo('.making-hero-text > *',
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
@@ -274,9 +263,26 @@ function MakingOf() {
           stagger: 0.2,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: sectionRef.current,
+            trigger: '.making-hero',
             start: 'top 60%',
             end: 'top 20%',
+            scrub: 1,
+          }
+        }
+      );
+
+      gsap.fromTo('.making-body > *',
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.making-body-section',
+            start: 'top 80%',
+            end: 'top 40%',
             scrub: 1,
           }
         }
@@ -287,22 +293,21 @@ function MakingOf() {
   }, []);
 
   return (
-    <section className="content-section scene-green" id="making-of" ref={sectionRef}>
-      <div className="content-inner">
-        <div className="content-grid">
-          <div className="content-text">
-            <div className="section-label mo-text">Behind the Camera</div>
-            <h2 className="section-title mo-text">The Making Of</h2>
-            <div className="section-body mo-text">
-              <p><strong>Director's Vision</strong></p>
-              <p>Blood Border represents three years of immersive documentary work along the Cambodian-Thai border. Director [Director Name] worked closely with survivors, archaeologists, and historians to reconstruct the untold stories of the region's mass graves.</p>
-              <p>Filmed on location at actual killing field sites, the documentary combines archival footage, survivor testimonies, and contemporary archaeological evidence to create an unflinching portrait of historical amnesia and the quest for justice.</p>
-              <p>The film premiered at [Festival Name] to critical acclaim, praised for its unflinching approach to difficult history and its commitment to giving voice to those who survived.</p>
-            </div>
-          </div>
-          <div className="content-image mo-image">
-            <img src={IMG_4} alt="Making of" />
-          </div>
+    <section className="making-section" id="making-of" ref={sectionRef}>
+      <div className="making-hero">
+        <img src={IMG_4} alt="Making of" />
+        <div className="making-hero-overlay"></div>
+        <div className="making-hero-text">
+          <div className="section-label">Behind the Camera</div>
+          <h2 className="section-title">The Making Of</h2>
+        </div>
+      </div>
+      <div className="making-body-section">
+        <div className="making-body">
+          <p><strong>Director's Vision</strong></p>
+          <p>Blood Border represents three years of immersive documentary work along the Cambodian-Thai border. Director [Director Name] worked closely with survivors, archaeologists, and historians to reconstruct the untold stories of the region's mass graves.</p>
+          <p>Filmed on location at actual killing field sites, the documentary combines archival footage, survivor testimonies, and contemporary archaeological evidence to create an unflinching portrait of historical amnesia and the quest for justice.</p>
+          <p>The film premiered at [Festival Name] to critical acclaim, praised for its unflinching approach to difficult history and its commitment to giving voice to those who survived.</p>
         </div>
       </div>
     </section>

@@ -584,101 +584,351 @@ body::before {
 }
 
 /* ============================================
-   CONTENT SECTIONS - New layout
+   SECTION 2: GHOST MOUNTAIN - Full bleed image with overlay
    ============================================ */
-.content-section {
+.ghost-section {
+  position: relative;
   min-height: 100vh;
-  padding: 120px 60px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: var(--c-black);
+  color: var(--c-white);
 }
 
-.content-inner {
-  max-width: 1200px;
+.ghost-bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  filter: grayscale(70%) contrast(1.2);
 }
 
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
+.ghost-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.6) 50%, transparent 100%);
 }
 
-.content-grid.reverse {
-  direction: rtl;
+.ghost-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  padding: 120px 80px;
 }
 
-.content-grid.reverse > * {
-  direction: ltr;
-}
-
-.content-text {
+/* ============================================
+   SECTION 3: KUOCH MENGLY - Centered testimonial
+   ============================================ */
+.mengly-section {
+  background: #3a0505;
+  color: var(--c-white);
+  padding: 140px 60px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
 }
 
-.content-image {
+.mengly-inner {
+  max-width: 900px;
+  text-align: center;
+}
+
+.mengly-quote {
+  font-family: var(--font-print);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 60px;
+  opacity: 0.9;
+  position: relative;
+  padding: 0 40px;
+}
+
+.mengly-quote::before {
+  content: '"';
+  position: absolute;
+  top: -40px;
+  left: 0;
+  font-size: 6rem;
+  opacity: 0.2;
+  font-family: var(--font-print);
+  line-height: 1;
+}
+
+.mengly-image {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 60px;
   position: relative;
 }
 
-.content-image img {
+.mengly-image img {
   width: 100%;
   height: auto;
-  filter: grayscale(60%) contrast(1.1);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  filter: grayscale(50%) contrast(1.1);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7);
 }
 
-.section-label {
+.mengly-image::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  pointer-events: none;
+}
+
+.mengly-body {
   font-family: var(--font-typewriter);
-  font-size: 0.7rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  opacity: 0.5;
-  margin-bottom: 8px;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  opacity: 0.85;
+  text-align: left;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-.section-title {
-  font-family: var(--font-print);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.1;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
+.mengly-body p {
+  margin-bottom: 20px;
 }
 
-.section-body {
+/* ============================================
+   SECTION 4: MAKING OF - Cinematic horizontal
+   ============================================ */
+.making-section {
+  background: var(--c-green);
+  color: var(--c-white);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.making-hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+}
+
+.making-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(1.1);
+}
+
+.making-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(22,43,32,0.9) 100%);
+}
+
+.making-hero-text {
+  position: absolute;
+  bottom: 60px;
+  left: 80px;
+  z-index: 2;
+}
+
+.making-body-section {
+  padding: 80px;
+  max-width: 800px;
+}
+
+.making-body {
   font-family: var(--font-typewriter);
   font-size: 0.95rem;
   line-height: 1.9;
   opacity: 0.85;
 }
 
-.section-body p {
-  margin-bottom: 16px;
+.making-body p {
+  margin-bottom: 20px;
 }
 
-.section-body strong {
+.making-body strong {
   color: var(--c-white);
   font-weight: 600;
 }
 
-/* Scene backgrounds */
-.scene-black { background: var(--c-black); color: var(--c-white); }
-.scene-red { background: #3a0505; color: var(--c-white); }
-.scene-green { background: var(--c-green); color: var(--c-white); }
+/* ============================================
+   SECTION 5: FESTIVALS - White background
+   ============================================ */
+.festivals-section {
+  background-color: #f5f5f0;
+  color: #1a1a1a;
+  padding: 120px 60px;
+  text-align: center;
+}
 
-/* Blockquote style */
-.km-quote {
+.festivals-header {
   font-family: var(--font-print);
-  font-size: clamp(1.3rem, 2.5vw, 2rem);
-  font-style: italic;
+  font-size: 2rem;
+  letter-spacing: 4px;
+  margin-bottom: 80px;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.laurels-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.laurel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.85;
+  transition: all 0.4s ease;
+  width: 180px;
+}
+
+.laurel-item:hover {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+.laurel-circle {
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.laurel-svg {
+  width: 60px;
+  height: 60px;
+  fill: currentColor;
+  color: #333;
+}
+
+.laurel-text {
+  font-family: var(--font-typewriter);
+  font-size: 0.75rem;
   line-height: 1.4;
-  opacity: 0.8;
-  margin: 20px 0;
-  border-left: 3px solid rgba(255,255,255,0.3);
-  padding-left: 24px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 8px;
+  color: #1a1a1a;
+}
+
+.laurel-subtext {
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  color: #666;
+  margin-top: 6px;
+  letter-spacing: 1px;
+}
+
+.press-quote {
+  max-width: 700px;
+  margin: 80px auto 0;
+  font-family: var(--font-print);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: #555;
+}
+
+.press-source {
+  font-family: var(--font-typewriter);
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 24px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* ============================================
+   SECTION 6: CREDITS - Dark with grid
+   ============================================ */
+.credits-section {
+  background: var(--c-black);
+  color: var(--c-white);
+  padding: 120px 60px;
+  text-align: center;
+}
+
+.credits-header {
+  font-family: var(--font-print);
+  font-size: 2.5rem;
+  margin-bottom: 80px;
+  letter-spacing: 2px;
+}
+
+.credits-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.credit-item {
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.3s ease;
+}
+
+.credit-item:hover {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.02);
+}
+
+.credit-role {
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 10px;
+}
+
+.credit-name {
+  font-family: var(--font-print);
+  font-size: 1.3rem;
+  color: var(--c-white);
+}
+
+.credits-footer {
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-family: var(--font-typewriter);
+  font-size: 0.85rem;
+  opacity: 0.6;
+  line-height: 1.8;
+}
+
+/* Common section styles */
+.section-label {
+  font-family: var(--font-typewriter);
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-print);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
 }
 
 /* ============================================
@@ -743,11 +993,27 @@ body::before {
   .nav-bar { padding: 16px 24px; }
   .nav-links { gap: 16px; }
   .nav-links a { font-size: 0.6rem; }
-  .content-section { padding: 80px 24px; }
-  .content-grid { grid-template-columns: 1fr; gap: 40px; }
-  .content-grid.reverse { direction: ltr; }
-  .credits-section { padding: 80px 24px; }
-  .credits-grid { grid-template-columns: 1fr; }
+  
+  .ghost-content { padding: 80px 24px; }
+  
+  .mengly-section { padding: 80px 24px; }
+  .mengly-quote { padding: 0 20px; }
+  
+  .making-hero { height: 50vh; }
+  .making-hero-text { left: 24px; bottom: 40px; }
+  .making-body-section { padding: 40px 24px; }
+  
   .festivals-section { padding: 80px 24px; }
   .laurels-grid { gap: 40px; }
+  .laurel-item { width: 140px; }
+  .laurel-circle { width: 100px; height: 100px; }
+  .laurel-svg { width: 50px; height: 50px; }
+  
+  .credits-section { padding: 80px 24px; }
+  .credits-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .credit-item { padding: 16px; }
+}
+
+@media (max-width: 480px) {
+  .credits-grid { grid-template-columns: 1fr; }
 }
