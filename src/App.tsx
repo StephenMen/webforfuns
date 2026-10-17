@@ -4,13 +4,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Using generated placeholder images (will display in preview)
-const IMG_1 = 'https://image.qwenlm.ai/generated-images/683fa63b-4a5a-495b-ac64-e324451cb143/_result.png'; // Hero - jungle with figure
-const IMG_2 = 'https://image.qwenlm.ai/generated-images/945b93ae-1048-49ab-b54e-8fd86e6db554/_result.png'; // Scene 1 - portrait
-const IMG_3 = 'https://image.qwenlm.ai/generated-images/3eb0a29d-4689-4ff4-9fc9-87d2a7327eea/_result.png'; // Scene 2 - abandoned building
-const IMG_4 = 'https://image.qwenlm.ai/generated-images/73382d87-2bae-41df-a133-abe235446a99/_result.png'; // Scene 3 - journalists
-const IMG_5 = 'https://image.qwenlm.ai/generated-images/cffb0c57-519e-4f75-8d2f-f76f2dd64dc1/_result.png'; // Scene 4 - hands holding photo
-const IMG_6 = 'https://image.qwenlm.ai/generated-images/17f35ab2-4187-44e2-a43b-cd9d790b1ce4/_result.png'; // Scene 4 - ruins
+// Your actual images from GitHub
+const IMG_1 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC00488.JPG';
+const IMG_2 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC00722.JPG';
+const IMG_3 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC00914.JPG';
+const IMG_4 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC01007.JPG';
+const IMG_5 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC05464.JPG';
+const IMG_6 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07500.JPG';
 
 // ============================================
 // NAVIGATION
