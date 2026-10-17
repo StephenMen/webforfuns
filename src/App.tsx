@@ -4,13 +4,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Cinematic film stills
+// Your uploaded images
 const IMAGES = {
-  hero: 'https://image.qwenlm.ai/generated-images/683fa63b-4a5a-495b-ac64-e324451cb143/_result.png',
-  portrait: 'https://image.qwenlm.ai/generated-images/945b93ae-1048-49ab-b54e-8fd86e6db554/_result.png',
-  ruins: 'https://image.qwenlm.ai/generated-images/3eb0a29d-4689-4ff4-9fc9-87d2a7327eea/_result.png',
-  journalists: 'https://image.qwenlm.ai/generated-images/73382d87-2bae-41df-a133-abe235446a99/_result.png',
-  hands: 'https://image.qwenlm.ai/generated-images/cffb0c57-519e-4f75-8d2f-f76f2dd64dc1/_result.png',
+  hero: '/images/DSC00488.JPG',
+  gallery1: '/images/DSC00722.JPG',
+  gallery2: '/images/DSC00914.JPG',
+  gallery3: '/images/DSC01007.JPG',
+  gallery4: '/images/DSC05464.JPG',
+  gallery5: '/images/DSC07500.JPG',
 };
 
 // ============================================
@@ -222,19 +223,19 @@ function Gallery() {
           <img src={IMAGES.hero} alt="Film still" />
         </div>
         <div className="gallery-item">
-          <img src={IMAGES.portrait} alt="Film still" />
+          <img src={IMAGES.gallery1} alt="Film still" />
         </div>
         <div className="gallery-item">
-          <img src={IMAGES.ruins} alt="Film still" />
+          <img src={IMAGES.gallery2} alt="Film still" />
         </div>
         <div className="gallery-item">
-          <img src={IMAGES.journalists} alt="Film still" />
+          <img src={IMAGES.gallery3} alt="Film still" />
         </div>
         <div className="gallery-item">
-          <img src={IMAGES.hands} alt="Film still" />
+          <img src={IMAGES.gallery4} alt="Film still" />
         </div>
         <div className="gallery-item">
-          <img src={IMAGES.hero} alt="Film still" style={{ objectPosition: 'center 70%' }} />
+          <img src={IMAGES.gallery5} alt="Film still" />
         </div>
       </div>
     </section>
@@ -318,7 +319,7 @@ function Trailer() {
       <div className="trailer-container">
         <div className="trailer-placeholder">
           <img 
-            src={IMAGES.ruins} 
+            src={IMAGES.gallery5} 
             alt="" 
             style={{ 
               position: 'absolute', 
