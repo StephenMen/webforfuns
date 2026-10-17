@@ -321,21 +321,16 @@ body::before {
   opacity: 1;
   transform: translateY(-5px);
 }
-.laurel-circle {
-  width: 120px;
-  height: 120px;
-  border: 2px solid rgba(0,0,0,0.2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.laurel-img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
   margin-bottom: 16px;
+  filter: brightness(0) contrast(1.2);
+  transition: transform 0.3s ease;
 }
-.laurel-svg {
-  width: 60px;
-  height: 60px;
-  fill: currentColor;
-  color: #333;
+.laurel-item:hover .laurel-img {
+  transform: scale(1.05);
 }
 .laurel-text {
   font-family: var(--font-typewriter);

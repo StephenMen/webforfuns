@@ -247,6 +247,12 @@ function MakingOf() {
   );
 }
 
+// Festival laurel wreath images
+const LAUREL_CANNES = 'https://image.qwenlm.ai/generated-images/950cd4cd-6aef-4d1c-a7e3-2b5c90b49f1f/_result.png';
+const LAUREL_BERLINALE = 'https://image.qwenlm.ai/generated-images/ee826230-12a7-4b1e-8aaf-e112a1b59944/_result.png';
+const LAUREL_SUNDANCE = 'https://image.qwenlm.ai/generated-images/2f8bf4e3-aa52-4e6a-8427-51518557c085/_result.png';
+const LAUREL_IDFA = 'https://image.qwenlm.ai/generated-images/9038fe11-20ba-46da-bd67-324a54df7f47/_result.png';
+
 // ============================================
 // SECTION 5: FESTIVALS - White background
 // ============================================
@@ -271,44 +277,16 @@ function Festivals() {
       <div className="festivals-header">Official Selections & Awards</div>
       <div className="laurels-grid">
         <div className="laurel-item fest-item">
-          <div className="laurel-circle">
-            <svg className="laurel-svg" viewBox="0 0 100 100">
-              <path d="M50 10 C30 10 20 30 20 50 C20 70 30 90 50 90 C70 90 80 70 80 50 C80 30 70 10 50 10" fill="none" stroke="currentColor" strokeWidth="2"/>
-              <circle cx="50" cy="50" r="5" fill="currentColor"/>
-            </svg>
-          </div>
-          <div className="laurel-text">Cannes</div>
-          <div className="laurel-subtext">Un Certain Regard · 2025</div>
+          <img src={LAUREL_CANNES} alt="Cannes Film Festival" className="laurel-img" />
         </div>
         <div className="laurel-item fest-item">
-          <div className="laurel-circle">
-            <svg className="laurel-svg" viewBox="0 0 100 100">
-              <path d="M50 10 C30 10 20 30 20 50 C20 70 30 90 50 90 C70 90 80 70 80 50 C80 30 70 10 50 10" fill="none" stroke="currentColor" strokeWidth="2"/>
-              <path d="M35 35 L65 35 M35 65 L65 65" stroke="currentColor" strokeWidth="1.5"/>
-            </svg>
-          </div>
-          <div className="laurel-text">Berlinale</div>
-          <div className="laurel-subtext">Best Documentary · 2025</div>
+          <img src={LAUREL_BERLINALE} alt="Berlinale" className="laurel-img" />
         </div>
         <div className="laurel-item fest-item">
-          <div className="laurel-circle">
-            <svg className="laurel-svg" viewBox="0 0 100 100">
-              <path d="M50 10 C30 10 20 30 20 50 C20 70 30 90 50 90 C70 90 80 70 80 50 C80 30 70 10 50 10" fill="none" stroke="currentColor" strokeWidth="2"/>
-              <circle cx="50" cy="50" r="15" fill="none" stroke="currentColor" strokeWidth="1.5"/>
-            </svg>
-          </div>
-          <div className="laurel-text">Sundance</div>
-          <div className="laurel-subtext">Jury Prize · 2025</div>
+          <img src={LAUREL_SUNDANCE} alt="Sundance Film Festival" className="laurel-img" />
         </div>
         <div className="laurel-item fest-item">
-          <div className="laurel-circle">
-            <svg className="laurel-svg" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="2"/>
-              <path d="M50 25 L50 75 M25 50 L75 50" stroke="currentColor" strokeWidth="1.5"/>
-            </svg>
-          </div>
-          <div className="laurel-text">IDFA</div>
-          <div className="laurel-subtext">Special Mention · 2024</div>
+          <img src={LAUREL_IDFA} alt="IDFA Amsterdam" className="laurel-img" />
         </div>
       </div>
       <blockquote className="press-quote fest-item">
