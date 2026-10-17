@@ -407,8 +407,7 @@ body::before {
   height: 160px;
   z-index: 4;
   transform: rotate(-15deg);
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 8px 25px rgba(0,0,0,0.6)) brightness(1.1) contrast(1.1);
+  filter: drop-shadow(0 8px 25px rgba(0,0,0,0.6));
   pointer-events: none;
 }
 
@@ -416,6 +415,14 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  /* Remove white background using blend mode */
+  background: transparent;
+  mix-blend-mode: multiply;
+}
+
+/* Alternative: if multiply doesn't work well, use this */
+.gm-plate-artifact {
+  isolation: isolate;
 }
 
 /* Bullet casing - removed, now part of artifacts */

@@ -1,8 +1,26 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Positioning tool state
+const usePositioningTool = () => {
+  const [enabled, setEnabled] = useState(false);
+  const [positions, setPositions] = useState<Record<string, { x: number; y: number; rotation: number }>>({});
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        setEnabled(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
+  return { enabled, positions, setPositions };
+};
 
 // Your actual images from GitHub
 const IMG_1 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07512.JPG';
@@ -422,12 +440,139 @@ function Footer() {
 }
 
 // ============================================
+// POSITIONING PANEL
+// ============================================
+function PositioningPanel() {
+  const [visible, setVisible] = useState(false);
+  const [platePos, setPlatePos] = useState({
+    bottom: -40,
+    left: 30,
+    rotation: -15,
+    scale: 1
+  });
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        setVisible(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
+  useEffect(() => {
+    const plate = document.querySelector('.gm-plate-artifact') as HTMLElement;
+    if (plate) {
+      plate.style.bottom = `${platePos.bottom}px`;
+      plate.style.left = `${platePos.left}%`;
+      plate.style.transform = `rotate(${platePos.rotation}deg) scale(${platePos.scale})`;
+    }
+  }, [platePos]);
+
+  if (!visible) return null;
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: '80px',
+      right: '20px',
+      background: 'rgba(0,0,0,0.95)',
+      color: '#fff',
+      padding: '20px',
+      borderRadius: '8px',
+      zIndex: 10000,
+      fontFamily: 'monospace',
+      fontSize: '12px',
+      minWidth: '250px',
+      boxShadow: '0 10px 40px rgba(0,0,0,0.5)'
+    }}>
+      <div style={{ marginBottom: '15px', borderBottom: '1px solid #333', paddingBottom: '10px' }}>
+        <strong>Positioning Tool</strong>
+        <div style={{ fontSize: '10px', color: '#888', marginTop: '5px' }}>Press Ctrl+P to toggle</div>
+      </div>
+      
+      <div style={{ marginBottom: '15px' }}>
+        <div style={{ marginBottom: '5px', color: '#888' }}>Shattered Plate</div>
+        
+        <label style={{ display: 'block', marginBottom: '8px' }}>
+          Bottom: {platePos.bottom}px
+          <input
+            type="range"
+            min="-200"
+            max="200"
+            value={platePos.bottom}
+            onChange={(e) => setPlatePos(prev => ({ ...prev, bottom: Number(e.target.value) }))}
+            style={{ width: '100%', marginTop: '4px' }}
+          />
+        </label>
+
+        <label style={{ display: 'block', marginBottom: '8px' }}>
+          Left: {platePos.left}%
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={platePos.left}
+            onChange={(e) => setPlatePos(prev => ({ ...prev, left: Number(e.target.value) }))}
+            style={{ width: '100%', marginTop: '4px' }}
+          />
+        </label>
+
+        <label style={{ display: 'block', marginBottom: '8px' }}>
+          Rotation: {platePos.rotation}°
+          <input
+            type="range"
+            min="-180"
+            max="180"
+            value={platePos.rotation}
+            onChange={(e) => setPlatePos(prev => ({ ...prev, rotation: Number(e.target.value) }))}
+            style={{ width: '100%', marginTop: '4px' }}
+          />
+        </label>
+
+        <label style={{ display: 'block', marginBottom: '8px' }}>
+          Scale: {platePos.scale.toFixed(2)}
+          <input
+            type="range"
+            min="0.5"
+            max="2"
+            step="0.05"
+            value={platePos.scale}
+            onChange={(e) => setPlatePos(prev => ({ ...prev, scale: Number(e.target.value) }))}
+            style={{ width: '100%', marginTop: '4px' }}
+          />
+        </label>
+      </div>
+
+      <div style={{ 
+        background: '#1a1a1a', 
+        padding: '10px', 
+        borderRadius: '4px',
+        fontSize: '10px',
+        lineHeight: '1.6'
+      }}>
+        <div style={{ color: '#888', marginBottom: '5px' }}>Current CSS:</div>
+        <code style={{ color: '#4ec9b0' }}>
+          bottom: {platePos.bottom}px;<br/>
+          left: {platePos.left}%;<br/>
+          transform: rotate({platePos.rotation}deg)<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scale({platePos.scale.toFixed(2)});
+        </code>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
 // MAIN APP
 // ============================================
 export default function App() {
   return (
     <>
       <Navigation />
+      <PositioningPanel />
       <Hero />
       <GhostMountain />
       <KuochMengly />
