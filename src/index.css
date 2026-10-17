@@ -326,7 +326,6 @@ body::before {
   height: 160px;
   object-fit: contain;
   margin-bottom: 16px;
-  filter: brightness(0) contrast(1.2);
   transition: transform 0.3s ease;
 }
 .laurel-item:hover .laurel-img {
