@@ -80,7 +80,7 @@ function Hero() {
 }
 
 // ============================================
-// SCENE 1: THE VOID (Black) - Pinned
+// SCENE 1: THE VOID (Black)
 // ============================================
 function Scene1() {
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -89,69 +89,76 @@ function Scene1() {
     if (!sceneRef.current) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sceneRef.current,
-          start: 'top top',
-          end: '+=2000',
-          pin: true,
-          pinSpacing: false,
-          scrub: 1,
-          anticipatePin: 1,
-        }
-      });
-
-      // Background watermark drifts
-      tl.fromTo('.wm-1', 
+      // Watermark
+      gsap.fromTo('.wm-1',
         { x: -200, opacity: 0 },
-        { x: 100, opacity: 1, duration: 1, ease: 'none' },
-        0
+        {
+          x: 0,
+          opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 80%',
+            end: 'top 20%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Photo 1 - flies in from top-right, rotates
-      tl.fromTo('.obj-1-1',
+      // Photo - flies in from top-right
+      gsap.fromTo('.obj-1-1',
         { x: 400, y: -300, rotation: 45, opacity: 0, scale: 0.5 },
-        { x: 0, y: 0, rotation: -8, opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' },
-        0.2
+        {
+          x: 0, y: 0, rotation: -8, opacity: 1, scale: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 70%',
+            end: 'top 30%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Document - slides in from left
-      tl.fromTo('.obj-1-2',
+      // Document - slides from left
+      gsap.fromTo('.obj-1-2',
         { x: -500, rotation: -30, opacity: 0 },
-        { x: 0, rotation: 5, opacity: 1, duration: 1.5, ease: 'power3.out' },
-        0.5
+        {
+          x: 0, rotation: 5, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 60%',
+            end: 'top 20%',
+            scrub: 1,
+          }
+        }
       );
 
       // Metal artifact - drops in
-      tl.fromTo('.obj-1-3',
+      gsap.fromTo('.obj-1-3',
         { y: -400, rotation: 180, opacity: 0 },
-        { y: 0, rotation: 0, opacity: 1, duration: 1, ease: 'bounce.out' },
-        0.8
+        {
+          y: 0, rotation: 0, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 50%',
+            end: 'top 10%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Text - fades in between objects
-      tl.fromTo('.text-1',
+      // Text - fades in
+      gsap.fromTo('.text-1',
         { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' },
-        1
+        {
+          opacity: 1, y: 0,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 60%',
+            end: 'top 30%',
+            scrub: 1,
+          }
+        }
       );
-
-      // Exit - everything flies away
-      tl.to('.obj-1-1', {
-        x: -600, y: 200, rotation: -90, opacity: 0, duration: 1
-      }, 2);
-      
-      tl.to('.obj-1-2', {
-        x: 500, rotation: 45, opacity: 0, duration: 1
-      }, 2.2);
-      
-      tl.to('.obj-1-3', {
-        y: 500, opacity: 0, duration: 1
-      }, 2.1);
-      
-      tl.to('.text-1', {
-        opacity: 0, y: -50, duration: 0.8
-      }, 2.3);
     });
 
     return () => ctx.revert();
@@ -160,12 +167,10 @@ function Scene1() {
   return (
     <section className="scene-stage scene-black" id="scene-1" ref={sceneRef}>
       <div className="scene-content">
-        {/* Background layer */}
         <div className="layer layer-bg">
           <div className="watermark wm-1" style={{ top: '20%', left: '10%' }}>FORGETTING</div>
         </div>
 
-        {/* Mid layer - objects */}
         <div className="layer layer-mid">
           <div className="obj photo obj-1-1" style={{ width: '280px', top: '15%', right: '15%' }}>
             <img src={IMG_2} alt="Archive" />
@@ -186,7 +191,6 @@ function Scene1() {
           <div className="obj metal obj-1-3" style={{ width: '80px', height: '80px', borderRadius: '50%', bottom: '25%', right: '30%' }}></div>
         </div>
 
-        {/* Text layer */}
         <div className="layer layer-text">
           <div className="scene-text text-1" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center' }}>
             <div className="scene-date">1975 — 1976</div>
@@ -205,7 +209,7 @@ function Scene1() {
 }
 
 // ============================================
-// SCENE 2: THE BLOOD (Red) - Pinned
+// SCENE 2: THE BLOOD (Red)
 // ============================================
 function Scene2() {
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -214,58 +218,70 @@ function Scene2() {
     if (!sceneRef.current) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sceneRef.current,
-          start: 'top top',
-          end: '+=2000',
-          pin: true,
-          pinSpacing: false,
-          scrub: 1,
-          anticipatePin: 1,
-        }
-      });
-
-      // Watermark
-      tl.fromTo('.wm-2',
+      gsap.fromTo('.wm-2',
         { x: 300, opacity: 0 },
-        { x: -100, opacity: 1, duration: 1 },
-        0
+        {
+          x: 0, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 80%',
+            end: 'top 20%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Portrait - zooms in dramatically
-      tl.fromTo('.obj-2-1',
+      gsap.fromTo('.obj-2-1',
         { scale: 3, opacity: 0, rotation: 15 },
-        { scale: 1, opacity: 1, rotation: -5, duration: 1.5, ease: 'power4.out' },
-        0.2
+        {
+          scale: 1, opacity: 1, rotation: -5,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 70%',
+            end: 'top 30%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Mine artifact - spins in
-      tl.fromTo('.obj-2-2',
+      gsap.fromTo('.obj-2-2',
         { rotation: -360, scale: 0, opacity: 0 },
-        { rotation: 0, scale: 1, opacity: 1, duration: 1.2, ease: 'back.out(1.7)' },
-        0.5
+        {
+          rotation: 0, scale: 1, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 60%',
+            end: 'top 20%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Document - slides from right
-      tl.fromTo('.obj-2-3',
+      gsap.fromTo('.obj-2-3',
         { x: 600, rotation: 20, opacity: 0 },
-        { x: 0, rotation: -8, opacity: 1, duration: 1.5, ease: 'power3.out' },
-        0.7
+        {
+          x: 0, rotation: -8, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 50%',
+            end: 'top 10%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Text
-      tl.fromTo('.text-2',
+      gsap.fromTo('.text-2',
         { opacity: 0, x: -100 },
-        { opacity: 1, x: 0, duration: 1, ease: 'power3.out' },
-        1.2
+        {
+          opacity: 1, x: 0,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 60%',
+            end: 'top 30%',
+            scrub: 1,
+          }
+        }
       );
-
-      // Exit
-      tl.to('.obj-2-1', { scale: 0, rotation: 90, opacity: 0, duration: 1 }, 2.2);
-      tl.to('.obj-2-2', { scale: 3, opacity: 0, duration: 1 }, 2.3);
-      tl.to('.obj-2-3', { x: -600, opacity: 0, duration: 1 }, 2.4);
-      tl.to('.text-2', { opacity: 0, x: 100, duration: 0.8 }, 2.5);
     });
 
     return () => ctx.revert();
@@ -320,7 +336,7 @@ function Scene2() {
 }
 
 // ============================================
-// SCENE 3: THE JUNGLE (Green) - Pinned
+// SCENE 3: THE JUNGLE (Green)
 // ============================================
 function Scene3() {
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -329,66 +345,83 @@ function Scene3() {
     if (!sceneRef.current) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sceneRef.current,
-          start: 'top top',
-          end: '+=2000',
-          pin: true,
-          pinSpacing: false,
-          scrub: 1,
-          anticipatePin: 1,
-        }
-      });
-
-      // Watermark
-      tl.fromTo('.wm-3',
+      gsap.fromTo('.wm-3',
         { y: 200, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
-        0
+        {
+          y: 0, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 80%',
+            end: 'top 20%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Jungle photo - drifts in slowly
-      tl.fromTo('.obj-3-1',
+      gsap.fromTo('.obj-3-1',
         { y: 400, rotation: -10, opacity: 0 },
-        { y: 0, rotation: 3, opacity: 1, duration: 2, ease: 'power2.out' },
-        0.2
+        {
+          y: 0, rotation: 3, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 70%',
+            end: 'top 30%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Map document - floats in
-      tl.fromTo('.obj-3-2',
+      gsap.fromTo('.obj-3-2',
         { x: -400, y: 200, rotation: 15, opacity: 0 },
-        { x: 0, y: 0, rotation: -5, opacity: 1, duration: 1.8, ease: 'power2.out' },
-        0.5
+        {
+          x: 0, y: 0, rotation: -5, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 60%',
+            end: 'top 20%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Bullet casing - drops
-      tl.fromTo('.obj-3-3',
+      gsap.fromTo('.obj-3-3',
         { y: -500, rotation: 90, opacity: 0 },
-        { y: 0, rotation: 0, opacity: 1, duration: 1.2, ease: 'power4.out' },
-        0.8
+        {
+          y: 0, rotation: 0, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 50%',
+            end: 'top 10%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Field report
-      tl.fromTo('.obj-3-4',
+      gsap.fromTo('.obj-3-4',
         { x: 500, rotation: -20, opacity: 0 },
-        { x: 0, rotation: 8, opacity: 1, duration: 1.5, ease: 'power3.out' },
-        1
+        {
+          x: 0, rotation: 8, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 55%',
+            end: 'top 15%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Text
-      tl.fromTo('.text-3',
+      gsap.fromTo('.text-3',
         { opacity: 0, y: 80 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' },
-        1.3
+        {
+          opacity: 1, y: 0,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 60%',
+            end: 'top 30%',
+            scrub: 1,
+          }
+        }
       );
-
-      // Exit - everything drifts away
-      tl.to('.obj-3-1', { y: -400, opacity: 0, duration: 1.5 }, 2.2);
-      tl.to('.obj-3-2', { x: -500, opacity: 0, duration: 1.5 }, 2.3);
-      tl.to('.obj-3-3', { y: 500, opacity: 0, duration: 1 }, 2.4);
-      tl.to('.obj-3-4', { x: 600, opacity: 0, duration: 1.5 }, 2.5);
-      tl.to('.text-3', { opacity: 0, duration: 1 }, 2.6);
     });
 
     return () => ctx.revert();
@@ -445,7 +478,7 @@ function Scene3() {
 }
 
 // ============================================
-// SCENE 4: THE EVIDENCE (White) - Pinned
+// SCENE 4: THE EVIDENCE (White)
 // ============================================
 function Scene4() {
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -454,58 +487,70 @@ function Scene4() {
     if (!sceneRef.current) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sceneRef.current,
-          start: 'top top',
-          end: '+=2000',
-          pin: true,
-          pinSpacing: false,
-          scrub: 1,
-          anticipatePin: 1,
-        }
-      });
-
-      // Watermark
-      tl.fromTo('.wm-4',
+      gsap.fromTo('.wm-4',
         { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.5, ease: 'power3.out' },
-        0
+        {
+          scale: 1, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 80%',
+            end: 'top 20%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Photo 1 - slides in
-      tl.fromTo('.obj-4-1',
+      gsap.fromTo('.obj-4-1',
         { x: -500, rotation: -15, opacity: 0 },
-        { x: 0, rotation: 4, opacity: 1, duration: 1.5, ease: 'power3.out' },
-        0.3
+        {
+          x: 0, rotation: 4, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 70%',
+            end: 'top 30%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Document - drops in
-      tl.fromTo('.obj-4-2',
+      gsap.fromTo('.obj-4-2',
         { y: -400, rotation: 20, opacity: 0 },
-        { y: 0, rotation: -6, opacity: 1, duration: 1.3, ease: 'power4.out' },
-        0.6
+        {
+          y: 0, rotation: -6, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 60%',
+            end: 'top 20%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Photo 2 - flies in from right
-      tl.fromTo('.obj-4-3',
+      gsap.fromTo('.obj-4-3',
         { x: 600, scale: 0.5, opacity: 0 },
-        { x: 0, scale: 1, rotation: -3, opacity: 1, duration: 1.5, ease: 'power3.out' },
-        0.9
+        {
+          x: 0, scale: 1, rotation: -3, opacity: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 50%',
+            end: 'top 10%',
+            scrub: 1,
+          }
+        }
       );
 
-      // Text
-      tl.fromTo('.text-4',
+      gsap.fromTo('.text-4',
         { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 1, ease: 'power3.out' },
-        1.2
+        {
+          opacity: 1, scale: 1,
+          scrollTrigger: {
+            trigger: sceneRef.current,
+            start: 'top 60%',
+            end: 'top 30%',
+            scrub: 1,
+          }
+        }
       );
-
-      // Exit
-      tl.to('.obj-4-1', { x: 600, opacity: 0, duration: 1.5 }, 2.3);
-      tl.to('.obj-4-2', { y: 500, opacity: 0, duration: 1.3 }, 2.4);
-      tl.to('.obj-4-3', { x: -600, opacity: 0, duration: 1.5 }, 2.5);
-      tl.to('.text-4', { opacity: 0, scale: 1.1, duration: 1 }, 2.6);
     });
 
     return () => ctx.revert();
