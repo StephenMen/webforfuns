@@ -87,34 +87,22 @@ function GhostMountain() {
           scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 1 }
         }
       );
-      gsap.fromTo('.gm-mine',
-        { opacity: 0, scale: 0.5, rotation: 45 },
-        { opacity: 1, scale: 1, rotation: -10, duration: 1.2, ease: 'power3.out',
+      gsap.fromTo('.polaroid-1',
+        { opacity: 0, y: 100, rotation: -15 },
+        { opacity: 1, y: 0, rotation: -3, duration: 1.2, ease: 'power3.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 65%', end: 'top 28%', scrub: 1 }
         }
       );
-      gsap.fromTo('.gm-bullet',
-        { opacity: 0, y: -100, rotation: -30 },
-        { opacity: 1, y: 0, rotation: 25, duration: 1, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 55%', end: 'top 20%', scrub: 1 }
-        }
-      );
-      gsap.fromTo('.gm-plate',
-        { opacity: 0, scale: 0.3, rotation: 60 },
-        { opacity: 1, scale: 1, rotation: 15, duration: 1.1, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 50%', end: 'top 15%', scrub: 1 }
-        }
-      );
-      gsap.fromTo('.gm-shell',
-        { opacity: 0, x: -80, rotation: 45 },
-        { opacity: 1, x: 0, rotation: -35, duration: 0.9, ease: 'power3.out',
+      gsap.fromTo('.polaroid-2',
+        { opacity: 0, x: 150, rotation: 20 },
+        { opacity: 1, x: 0, rotation: 5, duration: 1.1, ease: 'power3.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 1 }
         }
       );
-      gsap.fromTo('.gm-wire',
-        { opacity: 0, x: -100 },
-        { opacity: 1, x: 0, duration: 1.3, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 58%', end: 'top 22%', scrub: 1 }
+      gsap.fromTo('.polaroid-3',
+        { opacity: 0, y: 150, rotation: -10 },
+        { opacity: 1, y: 0, rotation: -2, duration: 1.3, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 55%', end: 'top 20%', scrub: 1 }
         }
       );
       gsap.fromTo('.gm-extra-img-1',
@@ -149,49 +137,27 @@ function GhostMountain() {
           </div>
         </div>
         <div className="editorial-right">
-          <div className="gm-image">
-            <img src={IMG_2} alt="Ghost Mountain" className="framed-image" />
+          <div className="gm-photo-stack">
+            <div className="polaroid polaroid-1">
+              <img src={IMG_2} alt="Ghost Mountain" />
+              <div className="polaroid-caption">Phnum Khmoch · 1979</div>
+              <div className="tape tape-top"></div>
+            </div>
+            <div className="polaroid polaroid-2">
+              <img src={IMG_5} alt="Evidence" />
+              <div className="polaroid-caption">Border region · Recovered</div>
+              <div className="tape tape-corner"></div>
+            </div>
+            <div className="polaroid polaroid-3">
+              <img src={IMG_6} alt="Archive" />
+              <div className="polaroid-caption">Mass grave site · 1980</div>
+            </div>
           </div>
           <div className="gm-doc">
             <div className="doc-header">Historical Record</div>
             <strong>1975-1979</strong><br />
             Border region<br />
             Mass graves identified
-          </div>
-          <div className="gm-extra-img-1">
-            <img src={IMG_5} alt="Evidence" className="framed-image" />
-          </div>
-          <div className="gm-extra-img-2">
-            <img src={IMG_6} alt="Archive" className="framed-image" />
-          </div>
-          {/* CSS/SVG Artifacts */}
-          <div className="gm-artifact gm-mine">
-            <svg viewBox="0 0 100 100" className="mine-svg">
-              <circle cx="50" cy="50" r="35" fill="#2a2a2a" stroke="#1a1a1a" strokeWidth="2"/>
-              <circle cx="50" cy="50" r="25" fill="#3a3a3a"/>
-              <circle cx="50" cy="50" r="8" fill="#1a1a1a"/>
-              <line x1="50" y1="15" x2="50" y2="85" stroke="#1a1a1a" strokeWidth="1" opacity="0.3"/>
-              <line x1="15" y1="50" x2="85" y2="50" stroke="#1a1a1a" strokeWidth="1" opacity="0.3"/>
-            </svg>
-          </div>
-          <div className="gm-artifact gm-bullet">
-            <div className="bullet-body"></div>
-            <div className="bullet-tip"></div>
-          </div>
-          <div className="gm-artifact gm-plate">
-            <div className="plate-shard plate-shard-1"></div>
-            <div className="plate-shard plate-shard-2"></div>
-            <div className="plate-shard plate-shard-3"></div>
-          </div>
-          <div className="gm-artifact gm-shell">
-            <div className="shell-body"></div>
-          </div>
-          <div className="gm-artifact gm-wire">
-            <svg viewBox="0 0 100 100" className="wire-svg">
-              <path d="M 10,50 Q 30,20 50,50 T 90,50" stroke="#4a4a4a" strokeWidth="2" fill="none"/>
-              <circle cx="10" cy="50" r="3" fill="#3a3a3a"/>
-              <circle cx="90" cy="50" r="3" fill="#3a3a3a"/>
-            </svg>
           </div>
         </div>
       </div>
