@@ -30,8 +30,8 @@ const IMG_4 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/7989
 const IMG_5 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC05464.JPG';
 const IMG_6 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07500.JPG';
 
-// Shattered plate asset
-const PLATE_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Shattered%20Vintage%20Blue%20Floral%20Plate.png';
+// Shattered plate asset (transparent version)
+const PLATE_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Shattered_Vintage_Blue_Floral_Plate-removebg-preview.png';
 
 // ============================================
 // NAVIGATION
