@@ -83,15 +83,11 @@ function Trailer() {
     <section className="trailer-section" ref={sectionRef}>
       <h2 className="trailer-title">Official Trailer</h2>
       <div className="trailer-container">
-        <div className="trailer-placeholder">
-          <div className="trailer-play">
-            <svg viewBox="0 0 24 24">
-              <polygon points="5,3 19,12 5,21" />
-            </svg>
-          </div>
-        </div>
-        {/* Replace this with your actual trailer embed */}
-        {/* <iframe src="YOUR_YOUTUBE_EMBED_URL" allowFullScreen></iframe> */}
+        <iframe 
+          src="https://www.youtube.com/embed/54PskZgTbgg?rel=0&modestbranding=1" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowFullScreen>
+        </iframe>
       </div>
     </section>
   );
