@@ -196,38 +196,38 @@ body {
 }
 
 .section-label {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   letter-spacing: 4px;
   text-transform: uppercase;
   opacity: 0.5;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .section-title {
   font-family: var(--font-print);
-  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-size: clamp(2.5rem, 3.5vw, 3.5rem);
   line-height: 1.1;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   letter-spacing: 1px;
 }
 
 .section-body {
-  font-size: 0.85rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.8;
   opacity: 0.85;
 }
 
 .section-body p {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .editorial-quote {
   font-family: var(--font-print);
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   font-style: italic;
   line-height: 1.5;
   opacity: 0.8;
-  margin: 10px 0 20px;
+  margin: 15px 0 25px;
   border-left: 2px solid currentColor;
   padding-left: 20px;
 }
@@ -252,7 +252,10 @@ body {
   background: var(--c-black);
   color: var(--c-white);
   position: relative;
-  padding: 100px 60px 60px;
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .gm-stage {
