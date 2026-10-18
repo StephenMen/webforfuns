@@ -193,26 +193,6 @@ body::before {
   margin-bottom: 24px;
   letter-spacing: 2px;
   text-shadow: 0 4px 30px rgba(0,0,0,0.8);
-  position: relative;
-  display: inline-block;
-}
-
-.hero-title-base {
-  color: #ffffff;
-  display: block;
-}
-
-.hero-title-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  color: #8b0000;
-  clip-path: inset(0 0 100% 0);
-  text-shadow: 
-    0 4px 30px rgba(139, 0, 0, 0.6),
-    0 0 40px rgba(139, 0, 0, 0.4),
-    0 0 60px rgba(139, 0, 0, 0.2);
 }
 
 .hero-sub {
