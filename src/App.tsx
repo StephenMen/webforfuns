@@ -93,20 +93,55 @@ function Trailer() {
   );
 }
 
-// Ghost Mountain - Two-page section with horizontal slide
+// Ghost Mountain - Two-page section with cinematic slide
 function GhostMountain() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
+  const page1Ref = useRef<HTMLDivElement>(null);
+  const page2Ref = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(0);
 
   const goToPage = (pageIndex: number) => {
-    if (!sliderRef.current) return;
+    if (!page1Ref.current || !page2Ref.current) return;
     
-    gsap.to(sliderRef.current, {
-      x: `-${pageIndex * 100}%`,
-      duration: 1,
-      ease: 'power3.inOut'
-    });
+    if (pageIndex === 1) {
+      // Slide page 1 out to left, page 2 in from right
+      gsap.to(page1Ref.current, {
+        x: '-120%',
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power3.inOut'
+      });
+      
+      gsap.fromTo(page2Ref.current,
+        { x: '100%', opacity: 0 },
+        { 
+          x: '0%', 
+          opacity: 1, 
+          duration: 1.2, 
+          ease: 'power3.inOut',
+          delay: 0.2
+        }
+      );
+    } else {
+      // Slide page 2 out to right, page 1 in from left
+      gsap.to(page2Ref.current, {
+        x: '120%',
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power3.inOut'
+      });
+      
+      gsap.fromTo(page1Ref.current,
+        { x: '-100%', opacity: 0 },
+        { 
+          x: '0%', 
+          opacity: 1, 
+          duration: 1.2, 
+          ease: 'power3.inOut',
+          delay: 0.2
+        }
+      );
+    }
     
     setCurrentPage(pageIndex);
   };
@@ -114,42 +149,20 @@ function GhostMountain() {
   useEffect(() => {
     if (!sectionRef.current) return;
     const ctx = gsap.context(() => {
-      // Krama animations
-      gsap.fromTo('.krama-left',
-        { opacity: 0, x: -200, scaleX: 0.3, rotation: -15 },
+      // Initial entrance animations for page 1
+      gsap.fromTo('.page-1-content > *',
+        { opacity: 0, y: 40 },
         { 
-          opacity: 0.85, x: 0, scaleX: 1, rotation: -15,
-          duration: 1, ease: 'power2.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
-        }
-      );
-      
-      gsap.fromTo('.krama-right',
-        { opacity: 0, x: 200, scaleX: 0.3, rotation: 15 },
-        { 
-          opacity: 0.85, x: 0, scaleX: 1, rotation: 15,
-          duration: 1, ease: 'power2.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
-        }
-      );
-
-      // Page 1 content animations
-      gsap.fromTo('.page-1 .gm-text > *',
-        { opacity: 0, x: -60 },
-        { opacity: 1, x: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
-        }
-      );
-      gsap.fromTo('.page-1 .gm-image',
-        { opacity: 0, x: 100, scale: 1.1 },
-        { opacity: 1, x: 0, scale: 1, duration: 1.2, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
-        }
-      );
-      gsap.fromTo('.page-1 .gm-doc',
-        { opacity: 0, y: 80, rotation: -10 },
-        { opacity: 1, y: 0, rotation: -5, duration: 1, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 1 }
+          opacity: 1, y: 0, 
+          duration: 1, 
+          stagger: 0.15, 
+          ease: 'power3.out',
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 70%', 
+            end: 'top 30%', 
+            scrub: 1 
+          }
         }
       );
     });
@@ -157,99 +170,93 @@ function GhostMountain() {
   }, []);
 
   return (
-    <section className="editorial-section scene-black" id="ghost-mountain" ref={sectionRef} style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="krama-left">
-        <img src={KRAMA_IMG} alt="Krama" />
-      </div>
-      <div className="krama-right">
-        <img src={KRAMA_IMG} alt="Krama" />
-      </div>
-      
-      {/* Slider wrapper - clips the overflow */}
-      <div className="gm-slider-wrapper">
-        {/* Slider track - contains both pages */}
-        <div className="gm-slider-track" ref={sliderRef}>
-          {/* Page 1: Ghost Mountain History */}
-          <div className="gm-slider-page page-1">
-            <div className="editorial-inner">
-              <div className="editorial-left">
-                <div className="gm-text">
-                  <div className="section-label">The History</div>
-                  <h2 className="section-title">Ghost Mountain</h2>
-                  <div className="section-body">
-                    <p>Phnum Khmoch, known as "Ghost Mountain," sits along the Thai-Cambodian border — a place where history and horror converge. During the Khmer Rouge regime (1975-1979), this remote region became a site of systematic violence.</p>
-                    <p>The mountain's dense jungles concealed mass graves, execution sites, and forced labor camps. Thousands were brought here from across the country, their fates sealed by a regime that sought to erase an entire generation.</p>
-                    <p>Today, the land still yields bones during the rainy season. The trees grow from burial sites. The earth remembers what the world tried to forget.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="editorial-right">
-                <div className="gm-image">
-                  <img src={IMG_2} alt="Ghost Mountain" className="framed-image" />
-                </div>
-                <div className="gm-doc">
-                  <div className="doc-header">Historical Record</div>
-                  <strong>1975-1979</strong><br />
-                  Border region<br />
-                  Mass graves identified
-                </div>
+    <section className="gm-section" id="ghost-mountain" ref={sectionRef}>
+      {/* Page 1: Ghost Mountain History with Krama */}
+      <div className="gm-page gm-page-1" ref={page1Ref}>
+        <div className="gm-krama gm-krama-left">
+          <img src={KRAMA_IMG} alt="" />
+        </div>
+        <div className="gm-krama gm-krama-right">
+          <img src={KRAMA_IMG} alt="" />
+        </div>
+        
+        <div className="editorial-inner page-1-content">
+          <div className="editorial-left">
+            <div className="gm-text">
+              <div className="section-label">The History</div>
+              <h2 className="section-title">Ghost Mountain</h2>
+              <div className="section-body">
+                <p>Phnum Khmoch, known as "Ghost Mountain," sits along the Thai-Cambodian border — a place where history and horror converge. During the Khmer Rouge regime (1975-1979), this remote region became a site of systematic violence.</p>
+                <p>The mountain's dense jungles concealed mass graves, execution sites, and forced labor camps. Thousands were brought here from across the country, their fates sealed by a regime that sought to erase an entire generation.</p>
+                <p>Today, the land still yields bones during the rainy season. The trees grow from burial sites. The earth remembers what the world tried to forget.</p>
               </div>
             </div>
           </div>
-
-          {/* Page 2: Synopsis */}
-          <div className="gm-slider-page page-2">
-            <div className="editorial-inner">
-              <div className="editorial-left">
-                <div className="gm-text">
-                  <div className="section-label">Film Synopsis</div>
-                  <h2 className="section-title">Blood Border</h2>
-                  <div className="section-body">
-                    <p>In the shadow of the Thai-Cambodian border lies Phnum Khmoch — Ghost Mountain — where the earth still holds secrets buried for decades. <em>Blood Border</em> is a harrowing documentary that unearths the untold story of a second killing field, hidden from the world's gaze.</p>
-                    <p>Through intimate survivor testimonies, archaeological discoveries, and haunting archival footage, the film follows investigators as they excavate mass graves and piece together evidence of systematic atrocities committed during the final days of the Khmer Rouge regime.</p>
-                    <p>As bones emerge from the jungle floor and witnesses break decades of silence, the documentary reveals not just a historical tragedy, but an ongoing quest for justice that continues to shape Cambodia's fragile present.</p>
-                    <p style={{ marginTop: '20px', fontStyle: 'italic', opacity: 0.7 }}>A film about memory, evidence, and the weight of what the world chose to forget.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="editorial-right">
-                <div className="gm-image">
-                  <img src={IMG_5} alt="Film still" className="framed-image" />
-                </div>
-                <div className="gm-doc">
-                  <div className="doc-header">Film Details</div>
-                  <strong>Documentary</strong><br />
-                  Runtime: 95 min<br />
-                  Language: Khmer/English<br />
-                  Year: 2025
-                </div>
-              </div>
+          <div className="editorial-right">
+            <div className="gm-image">
+              <img src={IMG_2} alt="Ghost Mountain" className="framed-image" />
+            </div>
+            <div className="gm-doc">
+              <div className="doc-header">Historical Record</div>
+              <strong>1975-1979</strong><br />
+              Border region<br />
+              Mass graves identified
             </div>
           </div>
         </div>
       </div>
 
-      {/* Page indicator + navigation */}
-      <div className="gm-page-nav">
+      {/* Page 2: Synopsis */}
+      <div className="gm-page gm-page-2" ref={page2Ref} style={{ opacity: 0, position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+        <div className="editorial-inner">
+          <div className="editorial-left">
+            <div className="gm-text">
+              <div className="section-label">Film Synopsis</div>
+              <h2 className="section-title">Blood Border</h2>
+              <div className="section-body">
+                <p>In the shadow of the Thai-Cambodian border lies Phnum Khmoch — Ghost Mountain — where the earth still holds secrets buried for decades. <em>Blood Border</em> is a harrowing documentary that unearths the untold story of a second killing field, hidden from the world's gaze.</p>
+                <p>Through intimate survivor testimonies, archaeological discoveries, and haunting archival footage, the film follows investigators as they excavate mass graves and piece together evidence of systematic atrocities committed during the final days of the Khmer Rouge regime.</p>
+                <p>As bones emerge from the jungle floor and witnesses break decades of silence, the documentary reveals not just a historical tragedy, but an ongoing quest for justice that continues to shape Cambodia's fragile present.</p>
+                <p style={{ marginTop: '20px', fontStyle: 'italic', opacity: 0.7 }}>A film about memory, evidence, and the weight of what the world chose to forget.</p>
+              </div>
+            </div>
+          </div>
+          <div className="editorial-right">
+            <div className="gm-image">
+              <img src={IMG_5} alt="Film still" className="framed-image" />
+            </div>
+            <div className="gm-doc">
+              <div className="doc-header">Film Details</div>
+              <strong>Documentary</strong><br />
+              Runtime: 95 min<br />
+              Language: Khmer/English<br />
+              Year: 2025
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="gm-nav">
         <button 
-          className={`gm-page-btn ${currentPage === 0 ? 'active' : ''}`}
+          className={`gm-nav-btn ${currentPage === 0 ? 'active' : ''}`}
           onClick={() => goToPage(0)}
         >
-          <span className="gm-page-num">01</span>
-          <span className="gm-page-label">History</span>
+          <span className="gm-nav-num">01</span>
+          <span className="gm-nav-label">History</span>
         </button>
-        <div className="gm-page-divider"></div>
+        <div className="gm-nav-divider"></div>
         <button 
-          className={`gm-page-btn ${currentPage === 1 ? 'active' : ''}`}
+          className={`gm-nav-btn ${currentPage === 1 ? 'active' : ''}`}
           onClick={() => goToPage(1)}
         >
-          <span className="gm-page-num">02</span>
-          <span className="gm-page-label">Synopsis</span>
+          <span className="gm-nav-num">02</span>
+          <span className="gm-nav-label">Synopsis</span>
         </button>
       </div>
 
-      {/* Arrow */}
-      <button className="gm-slide-arrow" onClick={() => goToPage(currentPage === 0 ? 1 : 0)}>
+      {/* Arrow button */}
+      <button className="gm-arrow-btn" onClick={() => goToPage(currentPage === 0 ? 1 : 0)}>
         {currentPage === 0 ? (
           <>
             <span>Read Synopsis</span>
