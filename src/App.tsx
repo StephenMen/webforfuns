@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import LocomotiveScroll from 'locomotive-scroll';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,12 +44,12 @@ function Hero() {
   }, []);
 
   return (
-    <section className="hero" ref={heroRef} data-scroll-section>
-      <img src={IMG_1} alt="" className="hero-bg parallax-slow" data-scroll data-scroll-speed="-2" />
+    <section className="hero" ref={heroRef}>
+      <img src={IMG_1} alt="" className="hero-bg parallax-slow" />
       <div className="hero-content">
-        <h1 className="hero-title" data-scroll data-scroll-speed="1">BLOOD BORDER</h1>
-        <p className="hero-sub" data-scroll data-scroll-speed="0.5">Cambodia's Second Killing Field</p>
-        <div className="hero-year" data-scroll data-scroll-speed="0.3">A Documentary Film</div>
+        <h1 className="hero-title">BLOOD BORDER</h1>
+        <p className="hero-sub">Cambodia's Second Killing Field</p>
+        <div className="hero-year">A Documentary Film</div>
       </div>
       <div className="scroll-indicator">Scroll to Explore ↓</div>
     </section>
@@ -81,9 +80,9 @@ function Trailer() {
   }, []);
 
   return (
-    <section className="trailer-section" ref={sectionRef} data-scroll-section>
-      <h2 className="trailer-title" data-scroll data-scroll-speed="1">Official Trailer</h2>
-      <div className="trailer-container" data-scroll data-scroll-speed="0.5">
+    <section className="trailer-section" ref={sectionRef}>
+      <h2 className="trailer-title">Official Trailer</h2>
+      <div className="trailer-container">
         <iframe 
           src="https://www.youtube.com/embed/54PskZgTbgg?rel=0&modestbranding=1" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -161,18 +160,18 @@ function GhostMountain() {
   }, []);
 
   return (
-    <section className="editorial-section scene-black" id="ghost-mountain" ref={sectionRef} data-scroll-section style={{ position: 'relative', overflow: 'visible' }}>
-      <div className="krama-left" data-scroll data-scroll-speed="-1">
+    <section className="editorial-section scene-black" id="ghost-mountain" ref={sectionRef} style={{ position: 'relative', overflow: 'visible' }}>
+      <div className="krama-left">
         <img src={KRAMA_IMG} alt="Krama" />
       </div>
-      <div className="krama-right" data-scroll data-scroll-speed="-1">
+      <div className="krama-right">
         <img src={KRAMA_IMG} alt="Krama" />
       </div>
       <div className="editorial-inner">
         <div className="editorial-left">
           <div className="gm-text">
-            <div className="section-label" data-scroll data-scroll-speed="0.5">The History</div>
-            <h2 className="section-title" data-scroll data-scroll-speed="1">Ghost Mountain</h2>
+            <div className="section-label">The History</div>
+            <h2 className="section-title">Ghost Mountain</h2>
             <div className="section-body">
               <p>Phnum Khmoch, known as "Ghost Mountain," sits along the Thai-Cambodian border — a place where history and horror converge. During the Khmer Rouge regime (1975-1979), this remote region became a site of systematic violence.</p>
               <p>The mountain's dense jungles concealed mass graves, execution sites, and forced labor camps. Thousands were brought here from across the country, their fates sealed by a regime that sought to erase an entire generation.</p>
@@ -181,10 +180,10 @@ function GhostMountain() {
           </div>
         </div>
         <div className="editorial-right">
-          <div className="gm-image" data-scroll data-scroll-speed="2">
+          <div className="gm-image">
             <img src={IMG_2} alt="Ghost Mountain" className="framed-image" />
           </div>
-          <div className="gm-doc" data-scroll data-scroll-speed="1.5">
+          <div className="gm-doc">
             <div className="doc-header">Historical Record</div>
             <strong>1975-1979</strong><br />
             Border region<br />
@@ -226,13 +225,13 @@ function KuochMengly() {
   }, []);
 
   return (
-    <section className="editorial-section scene-red" id="kuoch-mengly" ref={sectionRef} data-scroll-section>
+    <section className="editorial-section scene-red" id="kuoch-mengly" ref={sectionRef}>
       <div className="editorial-inner">
         <div className="editorial-left">
           <div className="km-text">
-            <div className="section-label" data-scroll data-scroll-speed="0.5">A Survivor's Testimony</div>
-            <h2 className="section-title" data-scroll data-scroll-speed="1">Kuoch Mengly</h2>
-            <blockquote className="editorial-quote" data-scroll data-scroll-speed="0.8">
+            <div className="section-label">A Survivor's Testimony</div>
+            <h2 className="section-title">Kuoch Mengly</h2>
+            <blockquote className="editorial-quote">
               "They took us in the night. We walked for days through the jungle. Many did not return."
             </blockquote>
             <div className="section-body">
@@ -243,10 +242,10 @@ function KuochMengly() {
           </div>
         </div>
         <div className="editorial-right">
-          <div className="km-image" data-scroll data-scroll-speed="2">
+          <div className="km-image">
             <img src={IMG_3} alt="Kuoch Mengly" className="framed-image" />
           </div>
-          <div className="km-record" data-scroll data-scroll-speed="1.5">
+          <div className="km-record">
             <div className="doc-header">Survivor Record</div>
             <strong>ID: KM-1979</strong><br />
             Age: 19 at capture<br />
@@ -289,12 +288,12 @@ function MakingOf() {
   }, []);
 
   return (
-    <section className="editorial-section scene-green" id="making-of" ref={sectionRef} data-scroll-section>
+    <section className="editorial-section scene-green" id="making-of" ref={sectionRef}>
       <div className="editorial-inner">
         <div className="editorial-left">
           <div className="mo-text">
-            <div className="section-label" data-scroll data-scroll-speed="0.5">Behind the Camera</div>
-            <h2 className="section-title" data-scroll data-scroll-speed="1">The Making Of</h2>
+            <div className="section-label">Behind the Camera</div>
+            <h2 className="section-title">The Making Of</h2>
             <div className="section-body">
               <p><strong>Director's Vision</strong></p>
               <p>Blood Border represents three years of immersive documentary work along the Cambodian-Thai border. Director [Director Name] worked closely with survivors, archaeologists, and historians to reconstruct the untold stories of the region's mass graves.</p>
@@ -304,10 +303,10 @@ function MakingOf() {
           </div>
         </div>
         <div className="editorial-right">
-          <div className="mo-image" data-scroll data-scroll-speed="2">
+          <div className="mo-image">
             <img src={IMG_4} alt="Making of" className="framed-image" />
           </div>
-          <div className="mo-notes" data-scroll data-scroll-speed="1.5">
+          <div className="mo-notes">
             <div className="doc-header">Production Notes</div>
             <strong>3 Years</strong> filming<br />
             12 locations<br />
@@ -338,8 +337,8 @@ function Festivals() {
   }, []);
 
   return (
-    <section className="festivals-section" id="festivals" ref={sectionRef} data-scroll-section>
-      <div className="festivals-header" data-scroll data-scroll-speed="1">Official Selections & Awards</div>
+    <section className="festivals-section" id="festivals" ref={sectionRef}>
+      <div className="festivals-header">Official Selections & Awards</div>
       <div className="laurels-grid">
         <div className="laurel-item fest-item">
           <img src={LAUREL} alt="Cannes Film Festival" className="laurel-img" />
@@ -401,8 +400,8 @@ function Credits() {
   ];
 
   return (
-    <section className="credits-section" id="credits" ref={sectionRef} data-scroll-section>
-      <div className="credits-header" data-scroll data-scroll-speed="1">The Team</div>
+    <section className="credits-section" id="credits" ref={sectionRef}>
+      <div className="credits-header">The Team</div>
       <div className="credits-grid">
         {credits.map((c, i) => (
           <div className="credit-item" key={i}>
@@ -422,68 +421,17 @@ function Credits() {
 // Footer
 function Footer() {
   return (
-    <footer className="site-footer" data-scroll-section>
-      <p data-scroll data-scroll-speed="0.5">© 2025 BLOOD BORDER PROJECT. ALL RIGHTS RESERVED.</p>
-      <p data-scroll data-scroll-speed="0.3">SOURCES: NATIONAL ARCHIVES OF CAMBODIA / ECCC RECORDS / DC-CAM</p>
+    <footer className="site-footer">
+      <p>© 2025 BLOOD BORDER PROJECT. ALL RIGHTS RESERVED.</p>
+      <p>SOURCES: NATIONAL ARCHIVES OF CAMBODIA / ECCC RECORDS / DC-CAM</p>
     </footer>
   );
 }
 
 // Main App
 export default function App() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const locoScrollRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (!scrollRef.current) return;
-
-    // Initialize Locomotive Scroll
-    const scrollEl = scrollRef.current;
-    locoScrollRef.current = new LocomotiveScroll({
-      el: scrollEl,
-      smooth: true,
-      multiplier: 0.8,
-      lerp: 0.08,
-      smartphone: {
-        smooth: true,
-      },
-      tablet: {
-        smooth: true,
-      },
-    } as any);
-
-    // Update ScrollTrigger on Locomotive scroll
-    locoScrollRef.current.on('scroll', ScrollTrigger.update);
-
-    ScrollTrigger.scrollerProxy(scrollEl, {
-      scrollTop(value) {
-        return arguments.length
-          ? locoScrollRef.current.scrollTo(value, { duration: 0, disableLerp: true })
-          : locoScrollRef.current.scroll.instance.scroll.y;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-      pinType: scrollEl.style.transform ? 'transform' : 'fixed',
-    });
-
-    ScrollTrigger.addEventListener('refresh', () => locoScrollRef.current.update());
-    ScrollTrigger.refresh();
-
-    return () => {
-      if (locoScrollRef.current) {
-        locoScrollRef.current.destroy();
-      }
-    };
-  }, []);
-
   return (
-    <div data-scroll-container ref={scrollRef}>
+    <>
       <Navigation />
       <Hero />
       <Trailer />
@@ -493,6 +441,6 @@ export default function App() {
       <Festivals />
       <Credits />
       <Footer />
-    </div>
+    </>
   );
 }
