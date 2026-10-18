@@ -93,100 +93,111 @@ function Trailer() {
   );
 }
 
-// Ghost Mountain - Two-page section with cinematic slide
+// Ghost Mountain - Two-page section with krama sweep transition
 function GhostMountain() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const page1Ref = useRef<HTMLDivElement>(null);
   const page2Ref = useRef<HTMLDivElement>(null);
+  const kramaLeftRef = useRef<HTMLDivElement>(null);
+  const kramaRightRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(0);
 
   const goToPage = (pageIndex: number) => {
-    if (!page1Ref.current || !page2Ref.current) return;
+    if (!page1Ref.current || !page2Ref.current || !kramaLeftRef.current || !kramaRightRef.current) return;
     
     if (pageIndex === 1) {
-      // Slide page 1 out to left
-      gsap.to(page1Ref.current, {
-        x: '-120%',
+      // Left krama fades out
+      gsap.to(kramaLeftRef.current, {
         opacity: 0,
-        duration: 1.2,
-        ease: 'power3.inOut',
+        x: -100,
+        duration: 0.6,
+        ease: 'power2.in'
+      });
+      
+      // Right krama becomes full width and sweeps left across screen
+      gsap.to(kramaRightRef.current, {
+        width: '100vw',
+        left: 0,
+        right: 'auto',
+        duration: 0.4,
+        ease: 'power2.out',
+        onComplete: () => {
+          // Now sweep it off screen to the left
+          gsap.to(kramaRightRef.current, {
+            x: '-100vw',
+            duration: 1.2,
+            ease: 'power3.inOut'
+          });
+        }
+      });
+      
+      // Fade out page 1
+      gsap.to(page1Ref.current, {
+        opacity: 0,
+        x: -100,
+        duration: 0.8,
+        ease: 'power2.in',
         onComplete: () => {
           if (page1Ref.current) page1Ref.current.style.display = 'none';
         }
       });
       
-      // Show page 2 and slide it in from right
-      if (page2Ref.current) {
-        page2Ref.current.style.display = 'block';
-        page2Ref.current.classList.add('visible');
-        
-        gsap.fromTo(page2Ref.current,
-          { x: '100%', opacity: 0 },
-          { 
-            x: '0%', 
-            opacity: 1, 
-            duration: 1.2, 
-            ease: 'power3.inOut',
-            delay: 0.2,
-            onComplete: () => {
-              // Animate content inside page 2
-              gsap.fromTo('.page-2-content > * > *',
-                { opacity: 0, y: 30 },
-                { 
-                  opacity: 1, 
-                  y: 0, 
-                  duration: 0.8, 
-                  stagger: 0.1,
-                  ease: 'power3.out'
-                }
-              );
+      // Show page 2 after krama sweep
+      setTimeout(() => {
+        if (page2Ref.current) {
+          page2Ref.current.style.display = 'flex';
+          gsap.fromTo(page2Ref.current,
+            { opacity: 0, y: 30 },
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 1, 
+              ease: 'power3.out'
             }
-          }
-        );
-      }
+          );
+        }
+      }, 1000);
     } else {
-      // Slide page 2 out to right
+      // Reset krama positions
+      gsap.set(kramaRightRef.current, {
+        width: '180px',
+        left: 'auto',
+        right: 0,
+        x: 0
+      });
+      
+      gsap.to(kramaLeftRef.current, {
+        opacity: 0.85,
+        x: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+      
+      // Hide page 2
       gsap.to(page2Ref.current, {
-        x: '120%',
         opacity: 0,
-        duration: 1.2,
-        ease: 'power3.inOut',
+        duration: 0.6,
+        ease: 'power2.in',
         onComplete: () => {
-          if (page2Ref.current) {
-            page2Ref.current.style.display = 'none';
-            page2Ref.current.classList.remove('visible');
-          }
+          if (page2Ref.current) page2Ref.current.style.display = 'none';
         }
       });
       
-      // Show page 1 and slide it in from left
-      if (page1Ref.current) {
-        page1Ref.current.style.display = 'block';
-        
-        gsap.fromTo(page1Ref.current,
-          { x: '-100%', opacity: 0 },
-          { 
-            x: '0%', 
-            opacity: 1, 
-            duration: 1.2, 
-            ease: 'power3.inOut',
-            delay: 0.2,
-            onComplete: () => {
-              // Animate content inside page 1
-              gsap.fromTo('.page-1-content > * > *',
-                { opacity: 0, y: 30 },
-                { 
-                  opacity: 1, 
-                  y: 0, 
-                  duration: 0.8, 
-                  stagger: 0.1,
-                  ease: 'power3.out'
-                }
-              );
+      // Show page 1
+      setTimeout(() => {
+        if (page1Ref.current) {
+          page1Ref.current.style.display = 'flex';
+          gsap.fromTo(page1Ref.current,
+            { opacity: 0, x: -100 },
+            { 
+              opacity: 1, 
+              x: 0,
+              duration: 0.8, 
+              ease: 'power3.out'
             }
-          }
-        );
-      }
+          );
+        }
+      }, 600);
     }
     
     setCurrentPage(pageIndex);
@@ -195,22 +206,47 @@ function GhostMountain() {
   useEffect(() => {
     if (!sectionRef.current) return;
     
-    // Add krama animation classes after a short delay
-    setTimeout(() => {
-      const kramaLeft = document.querySelector('.gm-krama-left');
-      const kramaRight = document.querySelector('.gm-krama-right');
-      if (kramaLeft) kramaLeft.classList.add('animate-in');
-      if (kramaRight) kramaRight.classList.add('animate-in');
-    }, 300);
-    
     const ctx = gsap.context(() => {
-      // Initial entrance animations for page 1
+      // Krama scroll animations
+      gsap.fromTo(kramaLeftRef.current,
+        { opacity: 0, x: -150 },
+        { 
+          opacity: 0.85, 
+          x: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 80%', 
+            end: 'top 40%', 
+            scrub: 1 
+          }
+        }
+      );
+      
+      gsap.fromTo(kramaRightRef.current,
+        { opacity: 0, x: 150 },
+        { 
+          opacity: 0.85, 
+          x: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 80%', 
+            end: 'top 40%', 
+            scrub: 1 
+          }
+        }
+      );
+
+      // Page 1 content animations
       gsap.fromTo('.page-1-content > *',
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 50 },
         { 
           opacity: 1, y: 0, 
           duration: 1, 
-          stagger: 0.15, 
+          stagger: 0.2, 
           ease: 'power3.out',
           scrollTrigger: { 
             trigger: sectionRef.current, 
@@ -226,15 +262,16 @@ function GhostMountain() {
 
   return (
     <section className="gm-section" id="ghost-mountain" ref={sectionRef}>
-      {/* Page 1: Ghost Mountain History with Krama */}
+      {/* Krama elements */}
+      <div className="gm-krama gm-krama-left" ref={kramaLeftRef}>
+        <img src={KRAMA_IMG} alt="" />
+      </div>
+      <div className="gm-krama gm-krama-right" ref={kramaRightRef}>
+        <img src={KRAMA_IMG} alt="" />
+      </div>
+
+      {/* Page 1: Ghost Mountain History */}
       <div className="gm-page gm-page-1" ref={page1Ref}>
-        <div className="gm-krama gm-krama-left">
-          <img src={KRAMA_IMG} alt="" />
-        </div>
-        <div className="gm-krama gm-krama-right">
-          <img src={KRAMA_IMG} alt="" />
-        </div>
-        
         <div className="editorial-inner page-1-content">
           <div className="editorial-left">
             <div className="gm-text">
