@@ -276,7 +276,7 @@ body {
   background: var(--c-black);
   color: var(--c-white);
   position: relative;
-  padding: 80px 60px 120px;
+  padding: 40px 60px 80px;
   display: flex;
   align-items: center;
   justify-content: center;
