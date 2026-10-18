@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -315,13 +316,12 @@ function QuoteSection() {
         {
           opacity: 1,
           ease: 'none',
-          stagger: 0.1,
+          stagger: 0.05,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top top',
-            end: '+=1600',
-            scrub: true,
-            pin: true,
+            start: 'top 80%',
+            end: 'bottom 20%',
+            scrub: 1,
           }
         }
       );
@@ -505,6 +505,26 @@ function Footer() {
 
 // Main App
 export default function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.8,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 1.5,
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <>
       <Navigation />
