@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -93,15 +93,21 @@ function Trailer() {
   );
 }
 
-// Ghost Mountain - Two-page horizontal slider
+// Ghost Mountain - Horizontal scroll section
 function GhostMountain() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || !sliderRef.current) return;
+    
     const ctx = gsap.context(() => {
+      const slider = sliderRef.current!;
+      const pages = slider.querySelectorAll('.gm-page');
+      
+      // Calculate total scroll distance
+      const totalWidth = slider.scrollWidth - window.innerWidth;
+      
       // Krama animations - horizontal unfold on scroll
       gsap.fromTo('.krama-left',
         { opacity: 0, x: -200, scaleX: 0.3, rotation: -15 },
@@ -114,8 +120,8 @@ function GhostMountain() {
           ease: 'power2.out',
           scrollTrigger: { 
             trigger: sectionRef.current, 
-            start: 'top 70%', 
-            end: 'top 30%', 
+            start: 'top top', 
+            end: '+=500',
             scrub: 1 
           }
         }
@@ -132,49 +138,93 @@ function GhostMountain() {
           ease: 'power2.out',
           scrollTrigger: { 
             trigger: sectionRef.current, 
-            start: 'top 70%', 
-            end: 'top 30%', 
+            start: 'top top', 
+            end: '+=500',
             scrub: 1 
           }
         }
       );
 
-      gsap.fromTo('.gm-text > *',
+      // Horizontal scroll animation
+      gsap.to(slider, {
+        x: -totalWidth,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: `+=${totalWidth}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+
+      // Animate page 1 content
+      gsap.fromTo('.page-1 .gm-text > *',
         { opacity: 0, x: -60 },
         { opacity: 1, x: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', end: 'top 40%', scrub: 1 }
         }
       );
-      gsap.fromTo('.gm-image',
+      
+      gsap.fromTo('.page-1 .gm-image',
         { opacity: 0, x: 100, scale: 1.1 },
         { opacity: 1, x: 0, scale: 1, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', end: 'top 40%', scrub: 1 }
+        }
+      );
+      
+      gsap.fromTo('.page-1 .gm-doc',
+        { opacity: 0, y: 80, rotation: -10 },
+        { opacity: 1, y: 0, rotation: -5, duration: 1, ease: 'power3.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
         }
       );
-      gsap.fromTo('.gm-doc',
+
+      // Animate page 2 content
+      gsap.fromTo('.page-2 .gm-text > *',
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
+          scrollTrigger: { 
+            trigger: sectionRef.current,
+            start: () => `top+=${totalWidth * 0.5} top`,
+            end: () => `top+=${totalWidth * 0.8} top`,
+            scrub: 1 
+          }
+        }
+      );
+      
+      gsap.fromTo('.page-2 .gm-image',
+        { opacity: 0, x: 100, scale: 1.1 },
+        { opacity: 1, x: 0, scale: 1, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { 
+            trigger: sectionRef.current,
+            start: () => `top+=${totalWidth * 0.5} top`,
+            end: () => `top+=${totalWidth * 0.8} top`,
+            scrub: 1 
+          }
+        }
+      );
+      
+      gsap.fromTo('.page-2 .gm-doc',
         { opacity: 0, y: 80, rotation: -10 },
         { opacity: 1, y: 0, rotation: -5, duration: 1, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 1 }
+          scrollTrigger: { 
+            trigger: sectionRef.current,
+            start: () => `top+=${totalWidth * 0.6} top`,
+            end: () => `top+=${totalWidth * 0.9} top`,
+            scrub: 1 
+          }
         }
       );
     });
+    
     return () => ctx.revert();
   }, []);
 
-  const goToPage = (pageIndex: number) => {
-    if (!sliderRef.current) return;
-    
-    gsap.to(sliderRef.current, {
-      x: `-${pageIndex * 100}%`,
-      duration: 1.2,
-      ease: 'power3.inOut'
-    });
-    
-    setCurrentPage(pageIndex);
-  };
-
   return (
-    <section className="editorial-section scene-black" id="ghost-mountain" ref={sectionRef} style={{ position: 'relative', overflow: 'hidden' }}>
+    <section className="gm-horizontal-section" id="ghost-mountain" ref={sectionRef}>
       <div className="krama-left">
         <img src={KRAMA_IMG} alt="Krama" />
       </div>
@@ -185,7 +235,7 @@ function GhostMountain() {
       {/* Horizontal slider container */}
       <div className="gm-slider" ref={sliderRef}>
         {/* Page 1: Ghost Mountain */}
-        <div className="gm-page">
+        <div className="gm-page page-1">
           <div className="editorial-inner">
             <div className="editorial-left">
               <div className="gm-text">
@@ -213,7 +263,7 @@ function GhostMountain() {
         </div>
 
         {/* Page 2: Synopsis */}
-        <div className="gm-page">
+        <div className="gm-page page-2">
           <div className="editorial-inner">
             <div className="editorial-left">
               <div className="gm-text">
@@ -242,36 +292,6 @@ function GhostMountain() {
           </div>
         </div>
       </div>
-
-      {/* Navigation dots */}
-      <div className="gm-nav">
-        <button 
-          className={`gm-nav-dot ${currentPage === 0 ? 'active' : ''}`}
-          onClick={() => goToPage(0)}
-          aria-label="Go to Ghost Mountain page"
-        />
-        <button 
-          className={`gm-nav-dot ${currentPage === 1 ? 'active' : ''}`}
-          onClick={() => goToPage(1)}
-          aria-label="Go to Synopsis page"
-        />
-      </div>
-
-      {/* Arrow navigation */}
-      {currentPage === 0 && (
-        <button className="gm-arrow gm-arrow-right" onClick={() => goToPage(1)} aria-label="Next page">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </button>
-      )}
-      {currentPage === 1 && (
-        <button className="gm-arrow gm-arrow-left" onClick={() => goToPage(0)} aria-label="Previous page">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-        </button>
-      )}
     </section>
   );
 }
