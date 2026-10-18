@@ -36,18 +36,54 @@ function Hero() {
 
   useEffect(() => {
     if (!heroRef.current) return;
+    
+    // Initial entrance animation
     const tl = gsap.timeline();
     tl.from('.hero-title', { opacity: 0, y: 100, duration: 1.5, ease: 'power4.out' })
       .from('.hero-sub', { opacity: 0, y: 50, duration: 1, ease: 'power3.out' }, '-=1')
       .from('.hero-year', { opacity: 0, scale: 0.8, duration: 1, ease: 'power3.out' }, '-=0.5')
       .from('.scroll-indicator', { opacity: 0, duration: 1 }, '-=0.5');
+
+    // Scroll-triggered bloody text reveal
+    const ctx = gsap.context(() => {
+      // Pin the hero section and animate the text color transition
+      gsap.to('.hero-title-overlay', {
+        clipPath: 'inset(0 0 100% 0)',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: '+=600',
+          scrub: 1,
+          pin: true,
+        }
+      });
+
+      // Fade out other elements as text turns bloody
+      gsap.to('.hero-sub, .hero-year, .scroll-indicator', {
+        opacity: 0,
+        y: -30,
+        ease: 'power2.in',
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: '+=400',
+          scrub: 1,
+        }
+      });
+    });
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <section className="hero" ref={heroRef}>
       <img src={IMG_1} alt="" className="hero-bg parallax-slow" />
       <div className="hero-content">
-        <h1 className="hero-title">BLOOD BORDER</h1>
+        <h1 className="hero-title">
+          <span className="hero-title-base">BLOOD BORDER</span>
+          <span className="hero-title-overlay">BLOOD BORDER</span>
+        </h1>
         <p className="hero-sub">Cambodia's Second Killing Field</p>
         <div className="hero-year">A Documentary Film</div>
       </div>
