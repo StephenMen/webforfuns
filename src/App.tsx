@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -505,26 +504,6 @@ function Footer() {
 
 // Main App
 export default function App() {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    lenis.on('scroll', ScrollTrigger.update);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
   return (
     <>
       <Navigation />
