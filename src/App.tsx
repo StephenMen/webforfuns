@@ -104,43 +104,89 @@ function GhostMountain() {
     if (!page1Ref.current || !page2Ref.current) return;
     
     if (pageIndex === 1) {
-      // Slide page 1 out to left, page 2 in from right
+      // Slide page 1 out to left
       gsap.to(page1Ref.current, {
         x: '-120%',
         opacity: 0,
         duration: 1.2,
-        ease: 'power3.inOut'
+        ease: 'power3.inOut',
+        onComplete: () => {
+          if (page1Ref.current) page1Ref.current.style.display = 'none';
+        }
       });
       
-      gsap.fromTo(page2Ref.current,
-        { x: '100%', opacity: 0 },
-        { 
-          x: '0%', 
-          opacity: 1, 
-          duration: 1.2, 
-          ease: 'power3.inOut',
-          delay: 0.2
-        }
-      );
+      // Show page 2 and slide it in from right
+      if (page2Ref.current) {
+        page2Ref.current.style.display = 'block';
+        page2Ref.current.classList.add('visible');
+        
+        gsap.fromTo(page2Ref.current,
+          { x: '100%', opacity: 0 },
+          { 
+            x: '0%', 
+            opacity: 1, 
+            duration: 1.2, 
+            ease: 'power3.inOut',
+            delay: 0.2,
+            onComplete: () => {
+              // Animate content inside page 2
+              gsap.fromTo('.page-2-content > * > *',
+                { opacity: 0, y: 30 },
+                { 
+                  opacity: 1, 
+                  y: 0, 
+                  duration: 0.8, 
+                  stagger: 0.1,
+                  ease: 'power3.out'
+                }
+              );
+            }
+          }
+        );
+      }
     } else {
-      // Slide page 2 out to right, page 1 in from left
+      // Slide page 2 out to right
       gsap.to(page2Ref.current, {
         x: '120%',
         opacity: 0,
         duration: 1.2,
-        ease: 'power3.inOut'
+        ease: 'power3.inOut',
+        onComplete: () => {
+          if (page2Ref.current) {
+            page2Ref.current.style.display = 'none';
+            page2Ref.current.classList.remove('visible');
+          }
+        }
       });
       
-      gsap.fromTo(page1Ref.current,
-        { x: '-100%', opacity: 0 },
-        { 
-          x: '0%', 
-          opacity: 1, 
-          duration: 1.2, 
-          ease: 'power3.inOut',
-          delay: 0.2
-        }
-      );
+      // Show page 1 and slide it in from left
+      if (page1Ref.current) {
+        page1Ref.current.style.display = 'block';
+        
+        gsap.fromTo(page1Ref.current,
+          { x: '-100%', opacity: 0 },
+          { 
+            x: '0%', 
+            opacity: 1, 
+            duration: 1.2, 
+            ease: 'power3.inOut',
+            delay: 0.2,
+            onComplete: () => {
+              // Animate content inside page 1
+              gsap.fromTo('.page-1-content > * > *',
+                { opacity: 0, y: 30 },
+                { 
+                  opacity: 1, 
+                  y: 0, 
+                  duration: 0.8, 
+                  stagger: 0.1,
+                  ease: 'power3.out'
+                }
+              );
+            }
+          }
+        );
+      }
     }
     
     setCurrentPage(pageIndex);
@@ -148,6 +194,15 @@ function GhostMountain() {
 
   useEffect(() => {
     if (!sectionRef.current) return;
+    
+    // Add krama animation classes after a short delay
+    setTimeout(() => {
+      const kramaLeft = document.querySelector('.gm-krama-left');
+      const kramaRight = document.querySelector('.gm-krama-right');
+      if (kramaLeft) kramaLeft.classList.add('animate-in');
+      if (kramaRight) kramaRight.classList.add('animate-in');
+    }, 300);
+    
     const ctx = gsap.context(() => {
       // Initial entrance animations for page 1
       gsap.fromTo('.page-1-content > *',
@@ -207,8 +262,8 @@ function GhostMountain() {
       </div>
 
       {/* Page 2: Synopsis */}
-      <div className="gm-page gm-page-2" ref={page2Ref} style={{ opacity: 0, position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-        <div className="editorial-inner">
+      <div className="gm-page gm-page-2" ref={page2Ref} style={{ display: 'none' }}>
+        <div className="editorial-inner page-2-content">
           <div className="editorial-left">
             <div className="gm-text">
               <div className="section-label">Film Synopsis</div>
