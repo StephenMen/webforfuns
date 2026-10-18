@@ -161,10 +161,34 @@ body {
   box-shadow: 0 30px 80px rgba(0,0,0,0.8);
 }
 
+.trailer-container {
+  position: relative;
+}
+
+.trailer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  cursor: pointer;
+  background: transparent;
+}
+
+.trailer-overlay.clicked {
+  pointer-events: none;
+}
+
 .trailer-container iframe {
   width: 100%;
   height: 100%;
   border: none;
+  pointer-events: none;
+}
+
+.trailer-overlay.clicked + iframe {
+  pointer-events: auto;
 }
 
 /* Editorial Sections */
@@ -252,7 +276,7 @@ body {
   background: var(--c-black);
   color: var(--c-white);
   position: relative;
-  padding: 60px;
+  padding: 80px 60px 120px;
   display: flex;
   align-items: center;
   justify-content: center;

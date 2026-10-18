@@ -61,6 +61,7 @@ function Hero() {
 // Trailer
 function Trailer() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [overlayClicked, setOverlayClicked] = useState(false);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -81,10 +82,18 @@ function Trailer() {
     return () => ctx.revert();
   }, []);
 
+  const handleOverlayClick = () => {
+    setOverlayClicked(true);
+  };
+
   return (
     <section className="trailer-section" ref={sectionRef}>
       <h2 className="trailer-title">Official Trailer</h2>
       <div className="trailer-container">
+        <div 
+          className={`trailer-overlay ${overlayClicked ? 'clicked' : ''}`}
+          onClick={handleOverlayClick}
+        ></div>
         <iframe 
           src="https://www.youtube.com/embed/54PskZgTbgg?rel=0&modestbranding=1" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
