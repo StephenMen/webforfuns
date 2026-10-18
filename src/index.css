@@ -20,6 +20,78 @@ html {
   overflow-x: hidden;
 }
 
+/* Locomotive Scroll */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+html.has-scroll-dragging {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-container] {
+  height: 100vh;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-section] {
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  height: 100%;
+}
+
+.c-scrollbar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 11px;
+  height: 100vh;
+  transform-origin: center right;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+}
+
+.c-scrollbar:hover {
+  transform: scaleX(1.45);
+}
+
+.c-scrollbar:hover,
+.has-scroll-scrolling .c-scrollbar,
+.has-scroll-dragging .c-scrollbar {
+  opacity: 1;
+}
+
+.c-scrollbar_thumb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(138, 3, 3, 0.6);
+  opacity: 0.5;
+  width: 7px;
+  border-radius: 10px;
+  margin: 2px;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.has-scroll-dragging .c-scrollbar_thumb {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
 body {
   font-family: var(--font-typewriter);
   background-color: var(--c-black);
@@ -95,6 +167,84 @@ body::before {
   object-fit: cover;
   opacity: 0.7;
   filter: grayscale(40%) contrast(1.1) brightness(0.9);
+  will-change: transform;
+}
+
+/* Cinematic parallax effects */
+.parallax-slow {
+  will-change: transform;
+}
+
+.parallax-medium {
+  will-change: transform;
+}
+
+.parallax-fast {
+  will-change: transform;
+}
+
+/* Enhanced image animations */
+.editorial-right img,
+.editorial-right > div > img {
+  will-change: transform, opacity;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease;
+}
+
+.editorial-right img:hover {
+  transform: scale(1.02) rotate(0.5deg);
+  filter: grayscale(40%) contrast(1.2) brightness(1.05);
+}
+
+/* Cinematic text animations */
+.section-title,
+.section-label {
+  will-change: transform, opacity;
+}
+
+/* Smooth section transitions */
+.editorial-section,
+.trailer-section,
+.festivals-section,
+.credits-section {
+  will-change: transform;
+}
+
+/* Enhanced krama animations */
+.krama-left,
+.krama-right {
+  will-change: transform, opacity;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Trailer cinematic effects */
+.trailer-container {
+  will-change: transform, opacity;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.6s ease;
+}
+
+.trailer-container:hover {
+  box-shadow: 0 40px 100px rgba(0,0,0,0.9);
+}
+
+/* Festival laurels hover effect */
+.laurel-img {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
+}
+
+.laurel-item:hover .laurel-img {
+  transform: scale(1.1) rotate(2deg);
+  filter: drop-shadow(0 10px 30px rgba(138, 3, 3, 0.4));
+}
+
+/* Credit items animation */
+.credit-item {
+  will-change: transform, opacity;
+  transition: transform 0.4s ease, background-color 0.3s ease;
+}
+
+.credit-item:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .hero-content {
