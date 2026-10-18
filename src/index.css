@@ -244,16 +244,14 @@ body {
   background: var(--c-black);
   color: var(--c-white);
   position: relative;
-  padding: 40px 60px 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 100px 60px 60px;
 }
 
 .gm-stage {
   position: relative;
   width: 100%;
-  height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .gm-page {
@@ -262,8 +260,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
 }
 
 .gm-page-1 {

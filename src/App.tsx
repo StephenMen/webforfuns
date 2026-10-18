@@ -319,10 +319,9 @@ function QuoteSection() {
           stagger: 0.05,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top top',
-            end: '+=100%',
+            start: 'top 80%',
+            end: 'bottom 20%',
             scrub: 1,
-            pin: true,
           }
         }
       );
