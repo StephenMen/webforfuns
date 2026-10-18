@@ -56,6 +56,47 @@ function Hero() {
   );
 }
 
+// Trailer
+function Trailer() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.trailer-title',
+        { opacity: 0, y: -50 },
+        { opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
+        }
+      );
+      gsap.fromTo('.trailer-container',
+        { opacity: 0, scale: 0.9, y: 50 },
+        { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 20%', scrub: 1 }
+        }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="trailer-section" ref={sectionRef}>
+      <h2 className="trailer-title">Official Trailer</h2>
+      <div className="trailer-container">
+        <div className="trailer-placeholder">
+          <div className="trailer-play">
+            <svg viewBox="0 0 24 24">
+              <polygon points="5,3 19,12 5,21" />
+            </svg>
+          </div>
+        </div>
+        {/* Replace this with your actual trailer embed */}
+        {/* <iframe src="YOUR_YOUTUBE_EMBED_URL" allowFullScreen></iframe> */}
+      </div>
+    </section>
+  );
+}
+
 // Ghost Mountain
 function GhostMountain() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -63,60 +104,42 @@ function GhostMountain() {
   useEffect(() => {
     if (!sectionRef.current) return;
     const ctx = gsap.context(() => {
-      // Krama animations - slide in from sides
+      // Krama animations - horizontal unfold on scroll
       gsap.fromTo('.krama-left',
-        { opacity: 0, x: -200, rotation: -15 },
+        { opacity: 0, x: -200, scaleX: 0.3, rotation: -15 },
         { 
           opacity: 0.85, 
-          x: 0, 
-          rotation: -8,
-          duration: 1.5, 
-          ease: 'power3.out',
+          x: 0,
+          scaleX: 1,
+          rotation: -15,
+          duration: 1,
+          ease: 'power2.out',
           scrollTrigger: { 
             trigger: sectionRef.current, 
-            start: 'top 80%', 
-            end: 'top 40%', 
+            start: 'top 70%', 
+            end: 'top 30%', 
             scrub: 1 
           }
         }
       );
       
       gsap.fromTo('.krama-right',
-        { opacity: 0, x: 200, rotation: 15 },
+        { opacity: 0, x: 200, scaleX: 0.3, rotation: 15 },
         { 
           opacity: 0.85, 
-          x: 0, 
-          rotation: 8,
-          duration: 1.5, 
-          ease: 'power3.out',
+          x: 0,
+          scaleX: 1,
+          rotation: 15,
+          duration: 1,
+          ease: 'power2.out',
           scrollTrigger: { 
             trigger: sectionRef.current, 
-            start: 'top 80%', 
-            end: 'top 40%', 
+            start: 'top 70%', 
+            end: 'top 30%', 
             scrub: 1 
           }
         }
       );
-
-      // Subtle floating animation for krama
-      gsap.to('.krama-left', {
-        y: 20,
-        rotation: -6,
-        duration: 4,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true
-      });
-
-      gsap.to('.krama-right', {
-        y: -20,
-        rotation: 6,
-        duration: 4.5,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-        delay: 0.5
-      });
 
       gsap.fromTo('.gm-text > *',
         { opacity: 0, x: -60 },
@@ -415,6 +438,7 @@ export default function App() {
     <>
       <Navigation />
       <Hero />
+      <Trailer />
       <GhostMountain />
       <KuochMengly />
       <MakingOf />
