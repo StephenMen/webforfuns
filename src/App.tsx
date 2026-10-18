@@ -63,6 +63,61 @@ function GhostMountain() {
   useEffect(() => {
     if (!sectionRef.current) return;
     const ctx = gsap.context(() => {
+      // Krama animations - slide in from sides
+      gsap.fromTo('.krama-left',
+        { opacity: 0, x: -200, rotation: -15 },
+        { 
+          opacity: 0.85, 
+          x: 0, 
+          rotation: -8,
+          duration: 1.5, 
+          ease: 'power3.out',
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 80%', 
+            end: 'top 40%', 
+            scrub: 1 
+          }
+        }
+      );
+      
+      gsap.fromTo('.krama-right',
+        { opacity: 0, x: 200, rotation: 15 },
+        { 
+          opacity: 0.85, 
+          x: 0, 
+          rotation: 8,
+          duration: 1.5, 
+          ease: 'power3.out',
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 80%', 
+            end: 'top 40%', 
+            scrub: 1 
+          }
+        }
+      );
+
+      // Subtle floating animation for krama
+      gsap.to('.krama-left', {
+        y: 20,
+        rotation: -6,
+        duration: 4,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true
+      });
+
+      gsap.to('.krama-right', {
+        y: -20,
+        rotation: 6,
+        duration: 4.5,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+        delay: 0.5
+      });
+
       gsap.fromTo('.gm-text > *',
         { opacity: 0, x: -60 },
         { opacity: 1, x: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
