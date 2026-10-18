@@ -11,14 +11,22 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: auto; overflow-x: hidden; }
+html {
+  scroll-behavior: auto;
+}
 
 body {
   font-family: var(--font-typewriter);
   background-color: var(--c-black);
   color: var(--c-white);
+  margin: 0;
+  min-height: 100%;
   overflow-x: hidden;
   cursor: crosshair;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 /* Navigation */

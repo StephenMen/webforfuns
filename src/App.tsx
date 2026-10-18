@@ -508,19 +508,31 @@ export default function App() {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t) => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
+      syncTouch: false,
     });
 
-    lenis.on('scroll', ScrollTrigger.update);
-
-    gsap.ticker.add((time) => {
+    const raf = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
 
+    const onScroll = () => {
+      ScrollTrigger.update();
+    };
+
+    lenis.on("scroll", onScroll);
+    gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    // Recalculate scroll positions after the page initializes.
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
+
     return () => {
+      gsap.ticker.remove(raf);
+      lenis.off("scroll", onScroll);
       lenis.destroy();
     };
   }, []);
