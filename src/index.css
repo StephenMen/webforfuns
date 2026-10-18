@@ -475,49 +475,131 @@ body::before {
   filter: grayscale(30%) contrast(1.1) brightness(0.9) drop-shadow(0 10px 30px rgba(0,0,0,0.5));
 }
 
-/* Ghost Mountain Horizontal Scroll Section */
-.gm-horizontal-section {
-  position: relative;
-  height: 100vh;
-  width: 100vw;
+/* Ghost Mountain Two-Page Slider */
+.gm-slider-wrapper {
+  width: 100%;
   overflow: hidden;
-  background: var(--c-black);
+  position: relative;
 }
 
-.gm-slider {
+.gm-slider-track {
   display: flex;
-  height: 100%;
-  width: 200vw;
+  width: 200%;
   will-change: transform;
 }
 
-.gm-page {
-  width: 100vw;
-  height: 100%;
+.gm-slider-page {
+  width: 50%;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 100px 60px;
 }
 
-.gm-page .editorial-inner {
-  max-width: 1400px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+/* Page navigation buttons */
+.gm-page-nav {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
   align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+
+.gm-page-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  font-family: var(--font-typewriter);
+}
+
+.gm-page-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.gm-page-btn.active {
+  color: rgba(255, 255, 255, 1);
+}
+
+.gm-page-num {
+  font-family: var(--font-print);
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.gm-page-label {
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.gm-page-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Slide arrow button */
+.gm-slide-arrow {
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 12px 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-typewriter);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.gm-slide-arrow:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: white;
+}
+
+.gm-slide-arrow svg {
+  width: 18px;
+  height: 18px;
 }
 
 @media (max-width: 768px) {
-  .gm-page {
-    padding: 80px 24px;
+  .gm-slider-page {
+    padding: 0 24px;
   }
   
-  .gm-page .editorial-inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .gm-page-nav {
+    bottom: 20px;
+    gap: 10px;
+  }
+  
+  .gm-page-btn {
+    padding: 8px 12px;
+  }
+  
+  .gm-page-num {
+    font-size: 1.2rem;
+  }
+  
+  .gm-slide-arrow {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 16px;
+    font-size: 0.65rem;
   }
 }
 
