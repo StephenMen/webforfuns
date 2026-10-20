@@ -823,13 +823,13 @@ blockquote.quote-text {
 }
 
 .mo-page-2 .mo-back-btn {
-  color: #1a1a1a;
-  border-color: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  border-color: #000000;
 }
 
 .mo-page-2 .mo-back-btn:hover {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.6);
+  background: #1a1a1a;
+  border-color: #1a1a1a;
 }
 
 .mo-page-2 .mo-step-video {
