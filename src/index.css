@@ -385,6 +385,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   align-items: center;
+  padding: 20px 0;
 }
 
 .editorial-left, .editorial-right {
@@ -454,7 +455,7 @@ body {
   background: var(--c-black);
   color: var(--c-white);
   position: relative;
-  padding: 60px 60px 80px;
+  padding: 40px 60px 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -465,7 +466,7 @@ body {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  height: 100%;
+  height: calc(100vh - 100px);
   display: flex;
   align-items: center;
 }
@@ -476,14 +477,20 @@ body {
   left: 0;
   width: 100%;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
 }
 
-.gm-page-1 {
+.gm-page-1,
+.gm-page-2,
+.gm-page-3 {
   position: absolute;
   top: 50%;
   left: 0;
   width: 100%;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
 }
 
 .gm-page-1 {
@@ -1126,8 +1133,8 @@ blockquote.quote-text {
   
   .framed-image { max-width: 100%; padding: 10px 10px 40px 10px; }
   
-  .gm-section { padding: 40px 20px 60px; min-height: 100vh; }
-  .gm-stage { max-width: 100%; }
+  .gm-section { padding: 30px 20px 50px; min-height: 100vh; }
+  .gm-stage { max-width: 100%; height: calc(100vh - 80px); }
   .gm-nav { bottom: 20px; gap: 10px; }
   .gm-nav-dot { width: 8px; height: 8px; }
   .gm-arrow-btn { bottom: 20px; right: 20px; padding: 10px 16px; font-size: 0.65rem; letter-spacing: 1px; }
