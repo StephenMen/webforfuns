@@ -120,12 +120,12 @@ function Hero() {
         >
           <span className="hero-title-base">BLOOD BORDER</span>
           <span 
-            className="hero-title-red"
+            className={`hero-title-red ${isHoveringTitle ? 'active' : ''}`}
             style={{
               opacity: isHoveringTitle ? 1 : 0,
-              maskImage: `radial-gradient(circle 150px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
-              WebkitMaskImage: `radial-gradient(circle 150px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
-              transition: 'opacity 0.3s ease'
+              maskImage: `radial-gradient(circle 200px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
+              WebkitMaskImage: `radial-gradient(circle 200px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
+              transition: 'opacity 0.4s ease'
             }}
           >
             BLOOD BORDER
