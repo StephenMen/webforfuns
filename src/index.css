@@ -603,17 +603,19 @@ blockquote.quote-text {
   gap: 60px;
   align-items: center;
   margin-bottom: 80px;
-  min-height: 400px;
 }
 
 .mo-step-image {
   position: relative;
-  max-width: 400px;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
 }
 
 .mo-step-image img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
   filter: grayscale(60%) contrast(1.1) brightness(0.9);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
