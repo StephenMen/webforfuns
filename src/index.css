@@ -934,12 +934,11 @@ blockquote.quote-text {
 }
 
 /* Buttons */
-.mo-watch-btn,
-.mo-back-btn {
+.mo-watch-btn {
   margin-top: 20px;
   padding: 15px 30px;
   background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   color: var(--c-white);
   font-family: var(--font-typewriter);
   font-size: 0.9rem;
@@ -950,14 +949,30 @@ blockquote.quote-text {
   align-self: flex-start;
 }
 
-.mo-watch-btn:hover,
-.mo-back-btn:hover {
+.mo-watch-btn:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 1);
   transform: translateX(5px);
 }
 
+.mo-back-btn {
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  color: #1a1a1a;
+  font-family: var(--font-typewriter);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
 .mo-back-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 1);
   transform: translateX(-5px);
 }
 
