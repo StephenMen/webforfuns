@@ -15,7 +15,7 @@ const IMG_6 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC0
 const LAUREL = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Sundance_Laurel-removebg-preview.png';
 const SOMBER_BOY = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Somber%20Boy%20in%20Worn%20Shirt.png';
 const GM_EXTRA_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/images%20(2).jpg';
-const QUOTE_BG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Untitled_design-removebg-preview.png';
+const QUOTE_BG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/1016(6).png';
 
 // Navigation
 function Navigation() {
