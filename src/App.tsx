@@ -159,8 +159,8 @@ function Trailer() {
           onClick={() => setOverlayClicked(true)}
         ></div>
         <iframe 
-          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fweb.facebook.com%2Fshare%2Fv%2F1JCZgsKtug%2F&show_text=false" 
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
+          src="https://www.youtube.com/embed/54PskZgTbgg?rel=0&modestbranding=1" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           allowFullScreen>
         </iframe>
       </div>
