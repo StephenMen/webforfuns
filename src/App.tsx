@@ -18,6 +18,7 @@ const GM_EXTRA_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/ma
 const QUOTE_BG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/1016(6).png';
 const KM_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/ghost-mountain.jpg?v=' + Date.now();
 const ACTOR_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/1016(7).png?v=' + Date.now();
+const GM_BG_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/The-Tuol-Sleng-Museum-documents-Pol-Pot-Regime-Phnom-Penh-Cambodia.png';
 
 // Navigation
 function Navigation() {
@@ -277,6 +278,9 @@ function GhostMountain() {
     <section className="gm-section" id="ghost-mountain" ref={sectionRef}>
       <div className="gm-stage">
         <div className="gm-page gm-page-1">
+          <div className="gm-page-bg">
+            <img src={GM_BG_IMG} alt="" />
+          </div>
           <div className="editorial-inner page-1-content">
             <div className="editorial-left">
               <div className="gm-text">
