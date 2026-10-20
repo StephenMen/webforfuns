@@ -90,8 +90,7 @@ function Hero() {
     const tl = gsap.timeline();
     tl.from('.hero-title', { opacity: 0, y: 100, duration: 1.5, ease: 'power4.out' })
       .from('.hero-sub', { opacity: 0, y: 50, duration: 1, ease: 'power3.out' }, '-=1')
-      .from('.hero-year', { opacity: 0, scale: 0.8, duration: 1, ease: 'power3.out' }, '-=0.5')
-      .from('.scroll-indicator', { opacity: 0, duration: 1 }, '-=0.5');
+      .from('.hero-year', { opacity: 0, scale: 0.8, duration: 1, ease: 'power3.out' }, '-=0.5');
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -144,7 +143,6 @@ function Hero() {
         <p className="hero-sub">Cambodia's Second Killing Field</p>
         <div className="hero-year">A Documentary Film</div>
       </div>
-      <div className="scroll-indicator">Scroll to Explore ↓</div>
     </section>
   );
 }
