@@ -359,13 +359,6 @@ function GhostMountain() {
               <div className="km-image">
                 <img src={KM_IMG} alt="Kuoch Mengly" className="framed-image" />
               </div>
-              <div className="km-record">
-                <div className="doc-header">Survivor Record</div>
-                <strong>ID: KM-1979</strong><br />
-                Age: 19 at capture<br />
-                Escaped: 1979<br />
-                Status: Survivor
-              </div>
             </div>
           </div>
         </div>

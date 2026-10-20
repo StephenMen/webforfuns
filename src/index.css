@@ -454,7 +454,7 @@ body {
   background: var(--c-black);
   color: var(--c-white);
   position: relative;
-  padding: 40px 60px 80px;
+  padding: 100px 60px 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1119,7 +1119,7 @@ blockquote.quote-text {
   
   .framed-image { max-width: 100%; padding: 10px 10px 40px 10px; }
   
-  .gm-section { padding: 60px 20px 100px; min-height: 100vh; }
+  .gm-section { padding: 80px 20px 100px; min-height: 100vh; }
   .gm-stage { max-width: 100%; }
   .gm-nav { bottom: 20px; gap: 10px; }
   .gm-nav-dot { width: 8px; height: 8px; }
@@ -1207,7 +1207,7 @@ blockquote.quote-text {
   .section-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
   .section-body { font-size: 0.8rem; }
   
-  .gm-section { padding: 50px 16px 90px; }
+  .gm-section { padding: 70px 16px 100px; }
   .gm-arrow-btn { padding: 8px 14px; font-size: 0.6rem; }
   
   .quote-section { padding: 50px 0; }
