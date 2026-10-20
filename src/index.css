@@ -587,17 +587,20 @@ blockquote.quote-text {
   transition: opacity 0.3s ease;
 }
 
-/* Making Of - Zig-zag Vertical */
+/* Making Of - Two Pages with Horizontal Transition */
 .mo-section {
   position: relative;
   background: #0a0a0a;
   color: var(--c-white);
   padding: 80px 0;
+  overflow: hidden;
 }
 
 .mo-header {
   text-align: center;
   margin-bottom: 60px;
+  position: relative;
+  z-index: 10;
 }
 
 .mo-header .section-label {
@@ -613,6 +616,17 @@ blockquote.quote-text {
   font-size: clamp(2.5rem, 4vw, 3.5rem);
   line-height: 1.1;
   letter-spacing: 0.5px;
+}
+
+.mo-pages-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.mo-page {
+  width: 100%;
+  position: relative;
 }
 
 .mo-steps {
@@ -645,6 +659,22 @@ blockquote.quote-text {
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 
+.mo-step-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: #111;
+  border: 2px solid #333;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.mo-step-video iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .mo-step-content {
   display: flex;
   flex-direction: column;
@@ -667,7 +697,8 @@ blockquote.quote-text {
 }
 
 /* Zig-zag alignment */
-.mo-step-left .mo-step-image {
+.mo-step-left .mo-step-image,
+.mo-step-left .mo-step-video {
   grid-column: 1;
   grid-row: 1;
 }
@@ -677,7 +708,8 @@ blockquote.quote-text {
   grid-row: 1;
 }
 
-.mo-step-right .mo-step-image {
+.mo-step-right .mo-step-image,
+.mo-step-right .mo-step-video {
   grid-column: 2;
   grid-row: 1;
 }
@@ -685,6 +717,34 @@ blockquote.quote-text {
 .mo-step-right .mo-step-content {
   grid-column: 1;
   grid-row: 1;
+}
+
+/* Buttons */
+.mo-watch-btn,
+.mo-back-btn {
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--c-white);
+  font-family: var(--font-typewriter);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.mo-watch-btn:hover,
+.mo-back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateX(5px);
+}
+
+.mo-back-btn:hover {
+  transform: translateX(-5px);
 }
 
 /* Video Section */
@@ -926,7 +986,9 @@ blockquote.quote-text {
   }
   
   .mo-step-left .mo-step-image,
-  .mo-step-right .mo-step-image {
+  .mo-step-left .mo-step-video,
+  .mo-step-right .mo-step-image,
+  .mo-step-right .mo-step-video {
     grid-column: 1;
     grid-row: 1;
   }

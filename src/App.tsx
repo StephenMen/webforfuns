@@ -419,9 +419,10 @@ function QuoteSection() {
   );
 }
 
-// Making Of - Zig-zag vertical
+// Making Of - Two pages with horizontal transition
 function MakingOf() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const steps = [
     {
@@ -449,6 +450,79 @@ function MakingOf() {
       align: 'right'
     }
   ];
+
+  const videos = [
+    {
+      title: 'Full Documentary',
+      description: 'Experience the complete story of Blood Border. A 95-minute journey through Cambodia\'s second killing field, featuring survivor testimonies, archaeological discoveries, and the ongoing quest for justice.',
+      videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
+      align: 'left'
+    },
+    {
+      title: 'Behind the Scenes',
+      description: 'Go behind the camera with our production team. See how we captured the raw emotion and historical significance of this important documentary.',
+      videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
+      align: 'right'
+    },
+    {
+      title: 'Behind the Scenes',
+      description: 'Exclusive footage from the field. Watch as our team works alongside survivors and archaeologists to uncover the truth.',
+      videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
+      align: 'left'
+    },
+    {
+      title: 'Behind the Scenes',
+      description: 'The post-production process. See how hours of footage were carefully edited into a powerful narrative that honors the victims and survivors.',
+      videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
+      align: 'right'
+    }
+  ];
+
+  const goToPage = (pageIndex: number) => {
+    const tl = gsap.timeline();
+    
+    if (pageIndex === 2) {
+      // Transition to page 2 (slide left)
+      tl.to('.mo-page-1', {
+        x: '-100%',
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          document.querySelector('.mo-page-1')?.setAttribute('style', 'display: none');
+        }
+      });
+      
+      tl.set('.mo-page-2', { display: 'block', x: '100%' })
+        .to('.mo-page-2', {
+          x: '0%',
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+    } else {
+      // Transition back to page 1 (slide right)
+      tl.to('.mo-page-2', {
+        x: '100%',
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          document.querySelector('.mo-page-2')?.setAttribute('style', 'display: none');
+        }
+      });
+      
+      tl.set('.mo-page-1', { display: 'block', x: '-100%' })
+        .to('.mo-page-1', {
+          x: '0%',
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+    }
+    
+    setCurrentPage(pageIndex);
+  };
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -485,31 +559,75 @@ function MakingOf() {
         <h2 className="section-title">The Making Of</h2>
       </div>
       
-      <div className="mo-steps">
-        {steps.map((step, i) => (
-          <div className={`mo-step mo-step-${step.align}`} key={i}>
-            <div className="mo-step-image">
-              <img src={step.image} alt={step.title} />
-            </div>
-            <div className="mo-step-content">
-              <h3 className="mo-step-title">{step.title}</h3>
-              <p className="mo-step-description">{step.description}</p>
-            </div>
+      <div className="mo-pages-container">
+        {/* Page 1 */}
+        <div className="mo-page mo-page-1">
+          <div className="mo-steps">
+            {steps.map((step, i) => (
+              <div className={`mo-step mo-step-${step.align}`} key={i}>
+                <div className="mo-step-image">
+                  <img src={step.image} alt={step.title} />
+                </div>
+                <div className="mo-step-content">
+                  <h3 className="mo-step-title">{step.title}</h3>
+                  <p className="mo-step-description">{step.description}</p>
+                  {i === 2 && (
+                    <button className="mo-watch-btn" onClick={() => goToPage(2)}>
+                      Watch Full Video →
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-        
-        <div className="mo-video-section">
-          <div className="mo-video-header">
-            <div className="section-label">Watch</div>
-            <h3 className="mo-video-title">Full Documentary</h3>
-            <p className="mo-video-subtitle">Experience the complete story</p>
-          </div>
-          <div className="mo-video-container">
-            <iframe 
-              src="https://www.youtube.com/embed/54PskZgTbgg?rel=0&modestbranding=1" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              allowFullScreen>
-            </iframe>
+        </div>
+
+        {/* Page 2 */}
+        <div className="mo-page mo-page-2" style={{ display: 'none' }}>
+          <div className="mo-steps">
+            {videos.map((video, i) => (
+              <div className={`mo-step mo-step-${video.align}`} key={i}>
+                {video.align === 'left' ? (
+                  <>
+                    <div className="mo-step-content">
+                      <h3 className="mo-step-title">{video.title}</h3>
+                      <p className="mo-step-description">{video.description}</p>
+                      {i === 2 && (
+                        <button className="mo-back-btn" onClick={() => goToPage(1)}>
+                          ← Back
+                        </button>
+                      )}
+                    </div>
+                    <div className="mo-step-video">
+                      <iframe 
+                        src={video.videoUrl} 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowFullScreen>
+                      </iframe>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="mo-step-video">
+                      <iframe 
+                        src={video.videoUrl} 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowFullScreen>
+                      </iframe>
+                    </div>
+                    <div className="mo-step-content">
+                      <h3 className="mo-step-title">{video.title}</h3>
+                      <p className="mo-step-description">{video.description}</p>
+                      {i === 2 && (
+                        <button className="mo-back-btn" onClick={() => goToPage(1)}>
+                          ← Back
+                        </button>
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
