@@ -35,8 +35,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  mix-blend-mode: difference;
+  background-color: #000;
   color: white;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-bar.hidden {
+  transform: translateY(-100%);
 }
 
 .nav-logo {

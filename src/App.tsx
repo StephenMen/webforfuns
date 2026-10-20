@@ -21,8 +21,30 @@ const ACTOR_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/
 
 // Navigation
 function Navigation() {
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        // Scrolling down
+        setIsHidden(true);
+      } else {
+        // Scrolling up
+        setIsHidden(false);
+      }
+      
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="nav-bar">
+    <nav className={`nav-bar ${isHidden ? 'hidden' : ''}`}>
       <div className="nav-logo">BLOOD_BORDER</div>
       <div className="nav-links">
         <a href="#ghost-mountain">Ghost Mountain</a>
