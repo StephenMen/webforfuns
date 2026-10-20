@@ -479,13 +479,25 @@ body {
   position: relative;
 }
 
+.gm-page-1 {
+  position: relative;
+}
+
+.gm-page-1 .editorial-right {
+  position: relative;
+}
+
 .gm-page-bg {
   position: absolute;
-  inset: -6% -24% 4% -24%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
   z-index: 1;
   overflow: hidden;
-  mask-image: radial-gradient(ellipse at 50% 45%, #000 18%, transparent 68%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 18%, transparent 68%);
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 20%, transparent 70%);
 }
 
 .gm-page-bg img {
@@ -496,11 +508,7 @@ body {
   opacity: 0.6;
 }
 
-.gm-page-1 {
-  position: relative;
-}
-
-.gm-page-1 .editorial-inner {
+.gm-page-1 .editorial-right .gm-archival-frame {
   position: relative;
   z-index: 2;
 }
