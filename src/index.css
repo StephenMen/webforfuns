@@ -101,6 +101,13 @@ body {
   margin-bottom: 24px;
   letter-spacing: 2px;
   text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.hero-title:hover {
+  color: #8b0000;
+  text-shadow: 0 4px 30px rgba(139, 0, 0, 0.6), 0 0 40px rgba(139, 0, 0, 0.4);
 }
 
 .hero-sub {
