@@ -66,7 +66,18 @@ function Hero() {
         }}
       />
       <div className="hero-content">
-        <h1 className="hero-title">BLOOD BORDER</h1>
+        <h1 className="hero-title">
+          <span className="hero-title-base">BLOOD BORDER</span>
+          <span 
+            className="hero-title-red"
+            style={{
+              maskImage: `radial-gradient(circle 150px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
+              WebkitMaskImage: `radial-gradient(circle 150px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
+            }}
+          >
+            BLOOD BORDER
+          </span>
+        </h1>
         <p className="hero-sub">Cambodia's Second Killing Field</p>
         <div className="hero-year">A Documentary Film</div>
       </div>
