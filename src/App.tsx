@@ -456,25 +456,25 @@ function MakingOf() {
       title: 'Full Documentary',
       description: 'Experience the complete story of Blood Border. A 95-minute journey through Cambodia\'s second killing field, featuring survivor testimonies, archaeological discoveries, and the ongoing quest for justice.',
       videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
-      align: 'left'
+      align: 'right'
     },
     {
       title: 'Behind the Scenes',
       description: 'Go behind the camera with our production team. See how we captured the raw emotion and historical significance of this important documentary.',
       videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
-      align: 'right'
+      align: 'left'
     },
     {
       title: 'Behind the Scenes',
       description: 'Exclusive footage from the field. Watch as our team works alongside survivors and archaeologists to uncover the truth.',
       videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
-      align: 'left'
+      align: 'right'
     },
     {
       title: 'Behind the Scenes',
       description: 'The post-production process. See how hours of footage were carefully edited into a powerful narrative that honors the victims and survivors.',
       videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
-      align: 'right'
+      align: 'left'
     }
   ];
 
@@ -571,7 +571,7 @@ function MakingOf() {
                 <div className="mo-step-content">
                   <h3 className="mo-step-title">{step.title}</h3>
                   <p className="mo-step-description">{step.description}</p>
-                  {i === 2 && (
+                  {i === 0 && (
                     <button className="mo-watch-btn" onClick={() => goToPage(2)}>
                       Watch Full Video →
                     </button>
@@ -589,40 +589,40 @@ function MakingOf() {
               <div className={`mo-step mo-step-${video.align}`} key={i}>
                 {video.align === 'left' ? (
                   <>
-                    <div className="mo-step-content">
-                      <h3 className="mo-step-title">{video.title}</h3>
-                      <p className="mo-step-description">{video.description}</p>
-                      {i === 2 && (
-                        <button className="mo-back-btn" onClick={() => goToPage(1)}>
-                          ← Back
-                        </button>
-                      )}
-                    </div>
                     <div className="mo-step-video">
                       <iframe 
                         src={video.videoUrl} 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         allowFullScreen>
                       </iframe>
+                    </div>
+                    <div className="mo-step-content">
+                      <h3 className="mo-step-title">{video.title}</h3>
+                      <p className="mo-step-description">{video.description}</p>
+                      {i === 0 && (
+                        <button className="mo-back-btn" onClick={() => goToPage(1)}>
+                          ← Back
+                        </button>
+                      )}
                     </div>
                   </>
                 ) : (
                   <>
+                    <div className="mo-step-content">
+                      <h3 className="mo-step-title">{video.title}</h3>
+                      <p className="mo-step-description">{video.description}</p>
+                      {i === 0 && (
+                        <button className="mo-back-btn" onClick={() => goToPage(1)}>
+                          ← Back
+                        </button>
+                      )}
+                    </div>
                     <div className="mo-step-video">
                       <iframe 
                         src={video.videoUrl} 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         allowFullScreen>
                       </iframe>
-                    </div>
-                    <div className="mo-step-content">
-                      <h3 className="mo-step-title">{video.title}</h3>
-                      <p className="mo-step-description">{video.description}</p>
-                      {i === 2 && (
-                        <button className="mo-back-btn" onClick={() => goToPage(1)}>
-                          ← Back
-                        </button>
-                      )}
                     </div>
                   </>
                 )}
