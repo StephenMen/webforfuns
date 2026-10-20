@@ -481,15 +481,14 @@ body {
 
 .gm-page-bg {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 120%;
+  top: 0;
+  right: -10%;
+  width: 60%;
+  height: 100%;
   z-index: 0;
   overflow: hidden;
-  mask-image: radial-gradient(ellipse at 50% 50%, #000 20%, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 20%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 70% 50%, #000 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 70% 50%, #000 20%, transparent 70%);
 }
 
 .gm-page-bg img {
