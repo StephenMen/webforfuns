@@ -36,6 +36,7 @@ function Navigation() {
 function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+  const [isHoveringTitle, setIsHoveringTitle] = useState(false);
 
   useEffect(() => {
     if (!heroRef.current) return;
@@ -53,6 +54,14 @@ function Hero() {
     setMousePos({ x, y });
   };
 
+  const handleTitleMouseEnter = () => {
+    setIsHoveringTitle(true);
+  };
+
+  const handleTitleMouseLeave = () => {
+    setIsHoveringTitle(false);
+  };
+
   return (
     <section className="hero" ref={heroRef} onMouseMove={handleMouseMove}>
       <img src={IMG_1} alt="" className="hero-bg hero-bg-color" />
@@ -66,13 +75,19 @@ function Hero() {
         }}
       />
       <div className="hero-content">
-        <h1 className="hero-title">
+        <h1 
+          className="hero-title" 
+          onMouseEnter={handleTitleMouseEnter}
+          onMouseLeave={handleTitleMouseLeave}
+        >
           <span className="hero-title-base">BLOOD BORDER</span>
           <span 
             className="hero-title-red"
             style={{
+              opacity: isHoveringTitle ? 1 : 0,
               maskImage: `radial-gradient(circle 150px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
               WebkitMaskImage: `radial-gradient(circle 150px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
+              transition: 'opacity 0.3s ease'
             }}
           >
             BLOOD BORDER
