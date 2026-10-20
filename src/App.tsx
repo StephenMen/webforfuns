@@ -459,21 +459,21 @@ function MakingOf() {
       align: 'right'
     },
     {
-      title: 'Behind the Scenes',
-      description: 'Go behind the camera with our production team. See how we captured the raw emotion and historical significance of this important documentary.',
-      videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
+      title: 'The Team',
+      description: 'Follow our dedicated crew as they navigate treacherous terrain and emotional interviews. From dawn to dusk, witness the relentless commitment that brought this story to light.',
+      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
       align: 'left'
     },
     {
-      title: 'Behind the Scenes',
-      description: 'Exclusive footage from the field. Watch as our team works alongside survivors and archaeologists to uncover the truth.',
-      videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
+      title: 'The Voices',
+      description: 'Intimate moments between our actors and real survivors. Watch as stories passed down through generations find new life on screen, bridging past and present.',
+      videoUrl: 'https://www.youtube.com/embed/9bZkp7q19f0',
       align: 'right'
     },
     {
-      title: 'Behind the Scenes',
-      description: 'The post-production process. See how hours of footage were carefully edited into a powerful narrative that honors the victims and survivors.',
-      videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
+      title: 'The Craft',
+      description: 'From 200 hours of raw footage to a cohesive 95-minute narrative. See how our editors, colorists, and sound designers crafted every frame to honor the truth.',
+      videoUrl: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
       align: 'left'
     }
   ];
