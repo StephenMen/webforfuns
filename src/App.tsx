@@ -17,6 +17,7 @@ const SOMBER_BOY = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main
 const GM_EXTRA_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/images%20(2).jpg';
 const QUOTE_BG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/1016(6).png';
 const KM_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/ghost-mountain.jpg?v=' + Date.now();
+const ACTOR_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/1016(7).png?v=' + Date.now();
 
 // Navigation
 function Navigation() {
@@ -412,7 +413,7 @@ function MakingOf() {
     {
       title: 'Actor & Actress',
       description: 'Powerful performances by survivors and actors who carried the weight of these stories with grace and authenticity. Their voices give life to the memories of those who suffered.',
-      image: IMG_3,
+      image: ACTOR_IMG,
       align: 'left'
     },
     {
