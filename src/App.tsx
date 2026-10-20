@@ -82,7 +82,8 @@ function Navigation() {
 function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-  const [isHoveringTitle, setIsHoveringTitle] = useState(false);
+  const [trail, setTrail] = useState<Array<{x: number, y: number, id: number}>>([]);
+  const trailIdRef = useRef(0);
 
   useEffect(() => {
     if (!heroRef.current) return;
@@ -98,11 +99,35 @@ function Hero() {
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     setMousePos({ x, y });
+    
+    // Add to trail
+    const newId = trailIdRef.current++;
+    setTrail(prev => [...prev.slice(-8), { x, y, id: newId }]);
+    
+    // Remove old trail points after delay
+    setTimeout(() => {
+      setTrail(prev => prev.filter(p => p.id !== newId));
+    }, 800);
   };
 
   return (
     <section className="hero" ref={heroRef} onMouseMove={handleMouseMove}>
       <img src={IMG_1} alt="" className="hero-bg hero-bg-color" />
+      {/* Trail layers */}
+      {trail.map((point, index) => (
+        <img 
+          key={point.id}
+          src={IMG_1} 
+          alt="" 
+          className="hero-bg hero-bg-bw hero-bg-trail"
+          style={{
+            maskImage: `radial-gradient(circle ${150 + index * 15}px at ${point.x}% ${point.y}%, black 0%, transparent 100%)`,
+            WebkitMaskImage: `radial-gradient(circle ${150 + index * 15}px at ${point.x}% ${point.y}%, black 0%, transparent 100%)`,
+            opacity: (index + 1) / trail.length * 0.6,
+          }}
+        />
+      ))}
+      {/* Main overlay */}
       <img 
         src={IMG_1} 
         alt="" 
@@ -113,23 +138,8 @@ function Hero() {
         }}
       />
       <div className="hero-content">
-        <h1 
-          className="hero-title" 
-          onMouseEnter={() => setIsHoveringTitle(true)}
-          onMouseLeave={() => setIsHoveringTitle(false)}
-        >
+        <h1 className="hero-title">
           <span className="hero-title-base">BLOOD BORDER</span>
-          <span 
-            className={`hero-title-red ${isHoveringTitle ? 'active' : ''}`}
-            style={{
-              opacity: isHoveringTitle ? 1 : 0,
-              maskImage: `radial-gradient(circle 200px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
-              WebkitMaskImage: `radial-gradient(circle 200px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
-              transition: 'opacity 0.4s ease'
-            }}
-          >
-            BLOOD BORDER
-          </span>
         </h1>
         <p className="hero-sub">Cambodia's Second Killing Field</p>
         <div className="hero-year">A Documentary Film</div>
