@@ -1,0 +1,782 @@
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Images
+const IMG_1 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07512.JPG';
+const IMG_2 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC00722.JPG';
+const IMG_3 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Master-for-Web-6.jpg';
+const IMG_4 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/798985908_1088092280301823_3849388321751906669_n%20(1).jpg';
+const IMG_5 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC05464.JPG';
+const IMG_6 = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/DSC07500.JPG';
+const LAUREL = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Sundance_Laurel-removebg-preview.png';
+const SOMBER_BOY = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Somber%20Boy%20in%20Worn%20Shirt.png';
+const GM_EXTRA_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/images%20(2).jpg';
+const QUOTE_BG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/1016(6).png';
+const KM_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/ghost-mountain.jpg?v=' + Date.now();
+const ACTOR_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/1016(7).png?v=' + Date.now();
+const GM_BG_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/The-Tuol-Sleng-Museum-documents-Pol-Pot-Regime-Phnom-Penh-Cambodia.png';
+
+// Navigation
+function Navigation() {
+  const [isHidden, setIsHidden] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+      
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  return (
+    <>
+      <nav className={`nav-bar ${isHidden ? 'hidden' : ''}`}>
+        <button className="nav-burger" aria-label="Menu" onClick={toggleMenu}>
+          <span className="burger-line"></span>
+          <span className="burger-line"></span>
+        </button>
+        <div className="nav-about">
+          <a href="#about">About Us</a>
+        </div>
+      </nav>
+      
+      <div className={`menu-overlay ${isMenuOpen ? 'active' : ''}`} onClick={closeMenu}>
+        <div className="menu-content" onClick={(e) => e.stopPropagation()}>
+          <ul className="menu-links">
+            <li><a href="#ghost-mountain" onClick={closeMenu}>Ghost Mountain</a></li>
+            <li><a href="#making-of" onClick={closeMenu}>Making Of</a></li>
+            <li><a href="#festivals" onClick={closeMenu}>Festivals</a></li>
+            <li><a href="#credits" onClick={closeMenu}>Credits</a></li>
+          </ul>
+          <div className="menu-close-hint">Click anywhere to close</div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+// Hero
+function Hero() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+  const [trail, setTrail] = useState<Array<{x: number, y: number, id: number}>>([]);
+  const trailIdRef = useRef(0);
+
+  useEffect(() => {
+    if (!heroRef.current) return;
+    const tl = gsap.timeline();
+    tl.from('.hero-title', { opacity: 0, y: 100, duration: 1.5, ease: 'power4.out' })
+      .from('.hero-sub', { opacity: 0, y: 50, duration: 1, ease: 'power3.out' }, '-=1')
+      .from('.hero-year', { opacity: 0, scale: 0.8, duration: 1, ease: 'power3.out' }, '-=0.5');
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePos({ x, y });
+    
+    // Add to trail
+    const newId = trailIdRef.current++;
+    setTrail(prev => [...prev.slice(-8), { x, y, id: newId }]);
+    
+    // Remove old trail points after delay
+    setTimeout(() => {
+      setTrail(prev => prev.filter(p => p.id !== newId));
+    }, 800);
+  };
+
+  return (
+    <section className="hero" ref={heroRef} onMouseMove={handleMouseMove}>
+      <img src={IMG_1} alt="" className="hero-bg hero-bg-color" />
+      {/* Trail layers */}
+      {trail.map((point, index) => (
+        <img 
+          key={point.id}
+          src={IMG_1} 
+          alt="" 
+          className="hero-bg hero-bg-bw hero-bg-trail"
+          style={{
+            maskImage: `radial-gradient(circle ${150 + index * 15}px at ${point.x}% ${point.y}%, black 0%, transparent 100%)`,
+            WebkitMaskImage: `radial-gradient(circle ${150 + index * 15}px at ${point.x}% ${point.y}%, black 0%, transparent 100%)`,
+            opacity: (index + 1) / trail.length * 0.6,
+          }}
+        />
+      ))}
+      {/* Main overlay */}
+      <img 
+        src={IMG_1} 
+        alt="" 
+        className="hero-bg hero-bg-bw"
+        style={{
+          maskImage: `radial-gradient(circle 250px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(circle 250px at ${mousePos.x}% ${mousePos.y}%, black 0%, transparent 100%)`,
+        }}
+      />
+      <div className="hero-content">
+        <h1 className="hero-title">
+          <span className="hero-title-base">BLOOD BORDER</span>
+        </h1>
+        <p className="hero-sub">Cambodia's Second Killing Field</p>
+        <div className="hero-year">A Documentary Film</div>
+      </div>
+    </section>
+  );
+}
+
+// Trailer
+function Trailer() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [overlayClicked, setOverlayClicked] = useState(false);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.trailer-title',
+        { opacity: 0, y: -50 },
+        { opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
+        }
+      );
+      gsap.fromTo('.trailer-container',
+        { opacity: 0, scale: 0.9, y: 50 },
+        { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 20%', scrub: 1 }
+        }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="trailer-section" ref={sectionRef}>
+      <h2 className="trailer-title">Official Trailer</h2>
+      <div className="trailer-container">
+        <div 
+          className={`trailer-overlay ${overlayClicked ? 'clicked' : ''}`}
+          onClick={() => setOverlayClicked(true)}
+        ></div>
+        <iframe 
+          src="https://www.youtube.com/embed/54PskZgTbgg?rel=0&modestbranding=1" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowFullScreen>
+        </iframe>
+      </div>
+    </section>
+  );
+}
+
+// Ghost Mountain
+function GhostMountain() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const goToPage = (pageIndex: number) => {
+    const tl = gsap.timeline();
+    const currentPageIndex = currentPage;
+    
+    ScrollTrigger.getAll().forEach((trigger: any) => {
+      if (trigger.vars.trigger === sectionRef.current) {
+        trigger.disable();
+      }
+    });
+    
+    tl.to(`.gm-page-${currentPageIndex + 1}`, {
+      opacity: 0,
+      x: pageIndex > currentPageIndex ? '-100%' : '100%',
+      duration: 0.8,
+      ease: 'power3.inOut',
+      onComplete: () => {
+        document.querySelector(`.gm-page-${currentPageIndex + 1}`)?.setAttribute('style', 'visibility: hidden');
+      }
+    });
+    
+    tl.set(`.gm-page-${pageIndex + 1}`, { visibility: 'visible' })
+      .fromTo(`.gm-page-${pageIndex + 1}`,
+        { opacity: 0, x: pageIndex > currentPageIndex ? '100%' : '-100%' },
+        { opacity: 1, x: '0%', duration: 0.8, ease: 'power3.out' }
+      );
+    
+    if (pageIndex === 1) {
+      tl.fromTo('.gm-boy-wrap',
+        { opacity: 0, scale: 0.9, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power3.out' },
+        '-=0.5'
+      )
+      .fromTo('.gm-boy',
+        { opacity: 0, scale: 1.1, filter: 'blur(10px)' },
+        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.2, ease: 'power2.out' },
+        '-=0.8'
+      )
+      .fromTo('.gm-boy-bg img',
+        { opacity: 0, scale: 1.2 },
+        { opacity: 0.6, scale: 1, duration: 1.5, ease: 'power2.out' },
+        '-=1'
+      )
+      .fromTo('.page-2-content .gm-text > *',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' },
+        '-=0.8'
+      );
+    } else if (pageIndex === 2) {
+      tl.fromTo('.km-image',
+        { opacity: 0, x: 100, scale: 1.1 },
+        { opacity: 1, x: 0, scale: 1, duration: 1.2, ease: 'power3.out' },
+        '-=0.5'
+      )
+      .fromTo('.km-record',
+        { opacity: 0, y: 80, rotation: 8 },
+        { opacity: 1, y: 0, rotation: 3, duration: 1, ease: 'power3.out' },
+        '-=0.8'
+      )
+      .fromTo('.page-3-content .gm-text > *',
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 1, stagger: 0.15, ease: 'power3.out' },
+        '-=1'
+      );
+    }
+    
+    tl.call(() => {
+      setTimeout(() => {
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.vars.trigger === sectionRef.current) {
+            trigger.enable();
+          }
+        });
+        ScrollTrigger.refresh();
+      }, 50);
+    });
+    
+    setCurrentPage(pageIndex);
+  };
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.page-1-content > *',
+        { opacity: 0, y: 50 },
+        { 
+          opacity: 1, y: 0, 
+          duration: 1, 
+          stagger: 0.15, 
+          ease: 'power3.out',
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="gm-section" id="ghost-mountain" ref={sectionRef}>
+      <div className="gm-stage">
+        <div className="gm-page gm-page-1">
+          <div className="editorial-inner page-1-content">
+            <div className="editorial-left">
+              <div className="gm-text">
+                <div className="section-label">The History</div>
+                <h2 className="section-title">Ghost Mountain</h2>
+                <div className="section-body">
+                  <p>Phnum Khmoch, known as "Ghost Mountain," sits along the Thai-Cambodian border — a place where history and horror converge. During the Khmer Rouge regime (1975-1979), this remote region became a site of systematic violence.</p>
+                  <p>The mountain's dense jungles concealed mass graves, execution sites, and forced labor camps. Thousands were brought here from across the country, their fates sealed by a regime that sought to erase an entire generation.</p>
+                  <p>Today, the land still yields bones during the rainy season. The trees grow from burial sites. The earth remembers what the world tried to forget.</p>
+                </div>
+              </div>
+            </div>
+            <div className="editorial-right">
+              <div className="gm-page-bg">
+                <img src={GM_BG_IMG} alt="" />
+              </div>
+              <div className="gm-archival-frame">
+                <img src={GM_EXTRA_IMG} alt="Ghost Mountain" />
+                <div className="gm-archival-label">Phnum Khmoch · 1979</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="gm-page gm-page-2" style={{ visibility: 'hidden' }}>
+          <div className="editorial-inner page-2-content">
+            <div className="editorial-left">
+              <div className="gm-text">
+                <div className="section-label">Film Synopsis</div>
+                <h2 className="section-title">Blood Border</h2>
+                <div className="section-body">
+                  <p>In the shadow of the Thai-Cambodian border lies Phnum Khmoch — Ghost Mountain — where the earth still holds secrets buried for decades. <em>Blood Border</em> is a harrowing documentary that unearths the untold story of a second killing field, hidden from the world's gaze.</p>
+                  <p>Through intimate survivor testimonies, archaeological discoveries, and haunting archival footage, the film follows investigators as they excavate mass graves and piece together evidence of systematic atrocities committed during the final days of the Khmer Rouge regime.</p>
+                  <p>As bones emerge from the jungle floor and witnesses break decades of silence, the documentary reveals not just a historical tragedy, but an ongoing quest for justice that continues to shape Cambodia's fragile present.</p>
+                </div>
+              </div>
+            </div>
+            <div className="editorial-right">
+              <div className="gm-boy-wrap">
+                <div className="gm-boy-bg">
+                  <img src={IMG_6} alt="" />
+                </div>
+                <img src={SOMBER_BOY} alt="Somber Boy" className="gm-boy" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="gm-page gm-page-3" style={{ visibility: 'hidden' }}>
+          <div className="editorial-inner page-3-content">
+            <div className="editorial-left">
+              <div className="gm-text">
+                <div className="section-label">The Storyteller</div>
+                <h2 className="section-title">Kuoch Mengly</h2>
+                <blockquote className="editorial-quote">
+                  "They took us in the night. We walked for days through the jungle. Many did not return."
+                </blockquote>
+                <div className="section-body">
+                  <p>Kuoch Mengly was just nineteen when the Khmer Rouge seized his village in Battambang province. Separated from his family, he was marched hundreds of kilometers to labor camps near the Thai border.</p>
+                  <p>For three years, he endured forced labor, starvation, and the constant threat of execution. He witnessed massacres that haunt him to this day.</p>
+                  <p>Against all odds, Mengly survived. He escaped across the border into Thailand in 1979, carrying with him the weight of memory and the responsibility to bear witness.</p>
+                </div>
+              </div>
+            </div>
+            <div className="editorial-right">
+              <div className="km-image">
+                <img src={KM_IMG} alt="Kuoch Mengly" className="framed-image" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="gm-nav">
+        <button className={`gm-nav-dot ${currentPage === 0 ? 'active' : ''}`} onClick={() => goToPage(0)} />
+        <button className={`gm-nav-dot ${currentPage === 1 ? 'active' : ''}`} onClick={() => goToPage(1)} />
+        <button className={`gm-nav-dot ${currentPage === 2 ? 'active' : ''}`} onClick={() => goToPage(2)} />
+      </div>
+
+      <button className="gm-arrow-btn" onClick={() => {
+        if (currentPage === 0) goToPage(1);
+        else if (currentPage === 1) goToPage(2);
+        else goToPage(0);
+      }}>
+        {currentPage === 0 ? 'Read Synopsis' : currentPage === 1 ? 'Meet Kuoch Mengly' : 'Back to History'}
+      </button>
+    </section>
+  );
+}
+
+// Quote Section
+function QuoteSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    
+    const ctx = gsap.context(() => {
+      const words = sectionRef.current!.querySelectorAll('.quote-word');
+      
+      gsap.to(words, {
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.05,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 70%',
+          toggleActions: 'play none none reverse',
+        }
+      });
+    }, sectionRef);
+    
+    return () => ctx.revert();
+  }, []);
+
+  const quoteText = "Today, the land still yields bones during the rainy season. The trees grow from burial sites. The earth remembers what the world tried to forget.";
+
+  return (
+    <section className="quote-section" ref={sectionRef}>
+      <div className="quote-bg">
+        <img src={QUOTE_BG} alt="" />
+      </div>
+      <div className="quote-inner">
+        <blockquote className="quote-text">
+          {quoteText.split(' ').map((word, i) => (
+            <span key={i} className="quote-word">{word} </span>
+          ))}
+        </blockquote>
+      </div>
+    </section>
+  );
+}
+
+// Making Of
+function MakingOf() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const steps = [
+    {
+      title: 'Director Vision',
+      description: 'A harrowing journey into the heart of darkness. Our director spent three years immersed in the stories of survivors, archaeologists, and historians, piecing together the untold history of Cambodia\'s second killing field through meticulous research and personal interviews.',
+      image: IMG_4,
+      align: 'left'
+    },
+    {
+      title: 'Team Dedications',
+      description: 'A dedicated team of filmmakers, researchers, and survivors worked tirelessly to bring this story to light. Their unwavering commitment to historical accuracy and emotional truth drives every single frame of this powerful documentary.',
+      image: IMG_5,
+      align: 'right'
+    },
+    {
+      title: 'Actor & Actress',
+      description: 'Powerful performances by survivors and actors who carried the weight of these stories with grace and authenticity. Their voices give life to the memories of those who suffered, bridging the gap between past and present.',
+      image: ACTOR_IMG,
+      align: 'left'
+    },
+    {
+      title: 'Post Production',
+      description: 'Meticulous editing, color grading, and sound design crafted over six months of intensive work. Every frame carefully composed to honor both the historical record and the survivors who entrusted us with their stories.',
+      image: IMG_6,
+      align: 'right'
+    }
+  ];
+
+  const videos = [
+    {
+      title: 'Full Documentary',
+      description: 'Experience the complete story of Blood Border. A comprehensive 95-minute journey through Cambodia\'s second killing field, featuring powerful survivor testimonies, groundbreaking archaeological discoveries, and the ongoing quest for justice and reconciliation.',
+      videoUrl: 'https://www.youtube.com/embed/54PskZgTbgg',
+      align: 'right'
+    },
+    {
+      title: 'The Team',
+      description: 'Follow our dedicated crew as they navigate treacherous terrain and conduct deeply emotional interviews. From dawn to dusk, witness the relentless commitment and passion that ultimately brought this important story to light.',
+      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      align: 'left'
+    },
+    {
+      title: 'The Voices',
+      description: 'Intimate and powerful moments between our actors and real survivors who lived through the horror. Watch as stories passed down through generations find new life on screen, creating a bridge between past and present.',
+      videoUrl: 'https://www.youtube.com/embed/9bZkp7q19f0',
+      align: 'right'
+    },
+    {
+      title: 'The Craft',
+      description: 'From over 200 hours of raw footage to a cohesive 95-minute narrative. See how our talented editors, colorists, and sound designers meticulously crafted every single frame to honor the truth and respect the survivors.',
+      videoUrl: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
+      align: 'left'
+    }
+  ];
+
+  const goToPage = (pageIndex: number) => {
+    const tl = gsap.timeline();
+    
+    if (pageIndex === 2) {
+      tl.to('.mo-page-1', {
+        x: '-100%',
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          document.querySelector('.mo-page-1')?.setAttribute('style', 'display: none');
+        }
+      });
+      
+      tl.set('.mo-page-2', { display: 'block', x: '100%' })
+        .to('.mo-page-2', {
+          x: '0%',
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+    } else {
+      tl.to('.mo-page-2', {
+        x: '100%',
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          document.querySelector('.mo-page-2')?.setAttribute('style', 'display: none');
+        }
+      });
+      
+      tl.set('.mo-page-1', { display: 'block', x: '-100%' })
+        .to('.mo-page-1', {
+          x: '0%',
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+    }
+    
+    setCurrentPage(pageIndex);
+  };
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    
+    const ctx = gsap.context(() => {
+      const stepElements = sectionRef.current!.querySelectorAll('.mo-step');
+      stepElements.forEach((step) => {
+        gsap.fromTo(step.querySelectorAll('.mo-step-content > *'),
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: step,
+              start: 'top 80%',
+              end: 'top 30%',
+              scrub: 1
+            }
+          }
+        );
+      });
+    });
+    
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="mo-section" id="making-of" ref={sectionRef}>
+      <div className="mo-header">
+        <div className="section-label">Behind the Camera</div>
+        <h2 className="section-title">The Making Of</h2>
+      </div>
+      
+      <div className="mo-pages-container">
+        <div className="mo-page mo-page-1">
+          <div className="mo-steps">
+            {steps.map((step, i) => (
+              <div className={`mo-step mo-step-${step.align}`} key={i}>
+                <div className="mo-step-image">
+                  <img src={step.image} alt={step.title} />
+                </div>
+                <div className="mo-step-content">
+                  <h3 className="mo-step-title">{step.title}</h3>
+                  <p className="mo-step-description">{step.description}</p>
+                  {i === 0 && (
+                    <button className="mo-watch-btn" onClick={() => goToPage(2)}>
+                      Watch Full Video →
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mo-page mo-page-2" style={{ display: 'none' }}>
+          <div className="mo-steps">
+            {videos.map((video, i) => (
+              <div className={`mo-step mo-step-${video.align}`} key={i}>
+                {video.align === 'left' ? (
+                  <>
+                    <div className="mo-step-video">
+                      <iframe 
+                        src={video.videoUrl} 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowFullScreen>
+                      </iframe>
+                    </div>
+                    <div className="mo-step-content">
+                      <h3 className="mo-step-title">{video.title}</h3>
+                      <p className="mo-step-description">{video.description}</p>
+                      {i === 0 && (
+                        <button className="mo-back-btn" onClick={() => goToPage(1)}>
+                          ← Back
+                        </button>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="mo-step-content">
+                      <h3 className="mo-step-title">{video.title}</h3>
+                      <p className="mo-step-description">{video.description}</p>
+                      {i === 0 && (
+                        <button className="mo-back-btn" onClick={() => goToPage(1)}>
+                          ← Back
+                        </button>
+                      )}
+                    </div>
+                    <div className="mo-step-video">
+                      <iframe 
+                        src={video.videoUrl} 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowFullScreen>
+                      </iframe>
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Festivals
+function Festivals() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.fest-item',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
+        }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="festivals-section" id="festivals" ref={sectionRef}>
+      <div className="festivals-header">Official Selections & Awards</div>
+      <div className="laurels-grid">
+        <div className="laurel-item fest-item">
+          <img src={LAUREL} alt="Cannes" className="laurel-img" />
+        </div>
+        <div className="laurel-item fest-item">
+          <img src={LAUREL} alt="Berlinale" className="laurel-img" />
+        </div>
+        <div className="laurel-item fest-item">
+          <img src={LAUREL} alt="Sundance" className="laurel-img" />
+        </div>
+        <div className="laurel-item fest-item">
+          <img src={LAUREL} alt="IDFA" className="laurel-img" />
+        </div>
+      </div>
+      <blockquote className="press-quote fest-item">
+        "A masterwork of tension and visual poetry."
+      </blockquote>
+      <div className="press-source fest-item">— Variety Magazine</div>
+    </section>
+  );
+}
+
+// Credits
+function Credits() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.credit-item',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', end: 'top 30%', scrub: 1 }
+        }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
+
+  const credits = [
+    { role: 'Director', name: '[Name]' },
+    { role: 'Producer', name: '[Name]' },
+    { role: 'Executive Producer', name: '[Name]' },
+    { role: 'Director of Photography', name: '[Name]' },
+    { role: 'Screenwriter', name: '[Name]' },
+    { role: 'Co-Writer', name: '[Name]' },
+    { role: 'Editor', name: '[Name]' },
+    { role: 'Sound Design', name: '[Name]' },
+    { role: 'Original Score', name: '[Name]' },
+    { role: 'Camera Operator', name: '[Name]' },
+    { role: 'Research Director', name: '[Name]' },
+    { role: 'Production Manager', name: '[Name]' },
+  ];
+
+  return (
+    <section className="credits-section" id="credits" ref={sectionRef}>
+      <div className="credits-header">The Team</div>
+      <div className="credits-grid">
+        {credits.map((c, i) => (
+          <div className="credit-item" key={i}>
+            <div className="credit-role">{c.role}</div>
+            <div className="credit-name">{c.name}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// Footer
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <p>© 2025 BLOOD BORDER PROJECT. ALL RIGHTS RESERVED.</p>
+      <p>SOURCES: NATIONAL ARCHIVES OF CAMBODIA / ECCC RECORDS / DC-CAM</p>
+    </footer>
+  );
+}
+
+// Main App
+export default function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 1.5,
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time: number) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  return (
+    <>
+      <Navigation />
+      <Hero />
+      <Trailer />
+      <GhostMountain />
+      <QuoteSection />
+      <MakingOf />
+      <Festivals />
+      <Credits />
+      <Footer />
+    </>
+  );
+}
