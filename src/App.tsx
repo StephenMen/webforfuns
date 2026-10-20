@@ -16,7 +16,7 @@ const LAUREL = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Sun
 const SOMBER_BOY = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/Somber%20Boy%20in%20Worn%20Shirt.png';
 const GM_EXTRA_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/images%20(2).jpg';
 const QUOTE_BG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/1016(6).png';
-const KM_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/ghost-mountain.jpg';
+const KM_IMG = 'https://raw.githubusercontent.com/StephenMen/webforfuns/main/ghost-mountain.jpg?v=' + Date.now();
 
 // Navigation
 function Navigation() {
